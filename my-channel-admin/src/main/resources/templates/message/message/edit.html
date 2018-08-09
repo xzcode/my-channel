@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- jdbclink code generator - 2018-07-03 14:20:20 -->
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/message/message'">
+	<ol class="breadcrumb">
+	  <li>留言管理</li>
+	  <li>留言列表</li>
+	  <li>处理</li>
+	</ol>
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/edit/save|}">
+		
+		
+
+
+
+	<div class="form-group hide">
+		<label for="uid" class="col-sm-1"> 自增主键 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="uid" name="uid"  required="required" maxlength="20" th:value="${editObj.uid}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="mobile" class="col-sm-1"> 手机号码 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" disabled="disabled"   required="required" maxlength="32" th:value="${editObj.mobile}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="username" class="col-sm-1"> 用户姓名 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" disabled="disabled"   maxlength="32" th:value="${editObj.username}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="content" class="col-sm-1"> 留言内容 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <textarea class="form-control" disabled="disabled" style="width:100%; height: 100px;"   maxlength="512" th:text="${editObj.content}"></textarea>
+	      
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="createDate" class="col-sm-1"> 创建时间 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  <input type="text" disabled="disabled" class="form-control"  th:value="${editObj.createDate != null ? #dates.format(editObj. createDate, 'yyyy-MM-dd HH:mm:ss') : ''}" />
+	  	  
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="remark" class="col-sm-1"> 备注信息 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+		  <textarea class="form-control" style="width:100%; height: 100px;" id="remark" name="remark"   maxlength="512" th:text="${editObj.remark}"></textarea>
+	      	
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="handleDate" class="col-sm-1"> 处理日期 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  <input type="text" readonly="readonly" disabled="disabled" id="handleDate"   class="form-control"  th:value="${editObj.handleDate != null ? #dates.format(editObj. handleDate, 'yyyy-MM-dd HH:mm:ss') : ''}" />
+	  	  
+	      <script type="text/javascript" th:inline="javascript">
+			    $(function(){
+			    	$("#handleDate").datetimepicker({
+					    language:  "zh-CN",
+					    weekStart: 1,
+					    todayBtn:  1,
+					    autoclose: 1,
+					    todayHighlight: 1,
+					    startView: 2, //'month',
+					    minView: 2,
+					    forceParse: 1,
+					    format: "yyyy-mm-dd hh:ii:ss"
+					});
+			    })
+		    </script>
+	      
+	      	
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="handled" class="col-sm-1"> 处理状态 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      	  <select id="handled" name="handled"  required="required" maxlength="1" class="form-control">
+		      	<option th:selected="${editObj.handled == 0 }" value="0">未处理</option>
+		      	<option th:selected="${editObj.handled == 1 }" value="1">处理中</option>
+		      	<option th:selected="${editObj.handled == 2 }" value="2">已处理</option>
+		      </select>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+	  
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-10">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+	    </div>
+	  </div>
+	  
+	</form>
+	
+
+</body>
+
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+
+		
+	
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+		
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+            
+            /*
+            var params = $form.serializeArray().map(x => {
+            	var v = x.value;
+            	if(x.name === 'price'){
+            		//console.log(parseInt(x.value * 100))
+            		v = parseInt(x.value * 100)
+                }
+            	return `${x.name}=${v}`;
+
+            }).join('&');
+            */
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                
+                if(result.success){
+            		Msg.success('操作成功!',null,function(){
+	            		location.href = referer;                		
+                	});
+				}else{
+					Msg.error('提示消息：操作失败!');
+					setTimeout(function(){
+						formValidationPlugin.disableSubmitButtons(false);
+					},1000);
+				}
+                
+            }, 'json');
+        });
+    
+	
+	
+	
+	
+	$(function(){
+		$('#updateDate').attr('disabled','disabled');
+		$('#createDate').attr('disabled','disabled');
+		//$('#updateUserName').attr('disabled','disabled');
+		//$('#createUserName').attr('disabled','disabled');
+	})
+/*]]>*/
+</script>
+
+</html>

@@ -1,0 +1,36 @@
+.error {
+	height: 663px;
+	width: 100%;
+}
+
+.container {
+	width: 1200px;
+	margin: 0 auto
+}
+/*
+.error a, .error h2, .error p {
+	margin-left: 764px
+}
+*/
+.error h2 {
+	font-size: 30px;
+	font-weight: 400;
+	color: #2f2f2f;
+	padding-top: 208px
+}
+
+.error p {
+	font-size: 16px;
+	color: #2f2f2f;
+	margin-bottom: 74px;
+	margin-top: 6px
+}
+
+.error a {
+	background: #267ad0;
+	border-radius: 4px;
+	text-align: center;
+	font-size: 14px;
+	color: #fff;
+	padding: 8px 14px
+}

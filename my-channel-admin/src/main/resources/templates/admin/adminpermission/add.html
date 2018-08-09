@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+>
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/admin/adminpermission'" style="padding: 10px;">
+	<ol class="breadcrumb">
+	 <!--  <li><a th:href="@{/home}"><i class="icon icon-home"></i>首页</a></li>
+	  <li>管理员权限</li>
+	  <li>添加</li> -->
+	</ol>
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/add/save|}">
+	<fieldset>
+		<legend>新增节点</legend>
+	
+	  <div class="form-group hide">
+	    <label for="username" class="col-sm-2">隐藏参数</label>
+	    <div class="col-md-4 col-sm-8">
+	      <input type="text" class="form-control" name="uid" id="uid"/>
+	      <input type="text" class="form-control" name="deep" id="deep"  required="required" th:value="${parent.deep + 1}"/>
+	      <input type="text" class="form-control" th:value="${parent.uid}" name="parentId" id="parentId"  required="required" />
+	    </div>
+	  </div>
+	 
+		<div class="form-group ">
+			<label for="permissionName" class="col-sm-2"> 权限名 : </label>
+			<div class="col-md-4 col-sm-8">
+			      <input type="text" class="form-control" name="permissionName" id="permissionName"   />
+		    </div>
+		</div>
+	
+		<div class="form-group">
+			<label for="parentId" class="col-sm-2"> 父权限名称 : </label>
+			<div class="col-md-4 col-sm-8">
+		      <span class="form-control" th:text="${parent.permissionName}"></span>
+		    </div>
+		</div>
+	 
+		<div class="form-group ">
+			<label for="permission" class="col-sm-2"> 权限编码 : </label>
+			<div class="col-md-4 col-sm-8">
+			      <input type="text" class="form-control" name="permission" id="permission"   />
+		    </div>
+		</div>
+		
+		
+	 
+		<div class="form-group ">
+			<label for="isMenu" class="col-sm-2"> 是否为菜单 : </label>
+			<div class="col-md-4 col-sm-8">
+			      <select name="isMenu" id="isMenu" class="form-control">
+			      	<option value="1">是</option>
+			      	<option value="0">否</option>
+			      </select>
+		    </div>
+		</div>
+		
+	 
+		<div class="form-group ">
+			<label for="urlPattern" class="col-sm-2"> 权限url : </label>
+			<div class="col-md-4 col-sm-8">
+			      <input type="text" class="form-control" name="urlPattern" id="urlPattern"   />
+		    </div>
+		</div>
+		
+	 
+		<div class="form-group ">
+			<label for="menuIcon" class="col-sm-2"> 图标标识 : </label>
+			<div class="col-md-4 col-sm-8">
+			      <input type="text" class="form-control" name="menuIcon" id="menuIcon"   />
+		    </div>
+		</div>
+		
+	 
+		<div class="form-group ">
+			<label for="sortOrder" class="col-sm-2"> 排序 : </label>
+			<div class="col-md-4 col-sm-8">
+			      <input type="text" class="form-control" name="sortOrder" id="sortOrder"   />
+		    </div>
+		</div>
+		
+		
+		<div class="form-group ">
+			<label for="remark" class="col-sm-2"> 备注 : </label>
+			<div class="col-md-4 col-sm-8">
+			      <input type="text" class="form-control" name="remark" id="remark"   />
+		    </div>
+		</div>
+				
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-8">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+	    </div>
+	  </div>
+	  </fieldset>
+	</form>
+	
+
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+		
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+	
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e, data) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+            	if(result.success){
+            		parent.Msg.success('操作成功!',null,function(){
+	            		parent.location.reload();                		
+                	});
+				}else{
+					parent.Msg.error('提示消息：操作失败!');
+					setTimeout(function(){
+						formValidationPlugin.disableSubmitButtons(false);
+					},1000);
+				}
+            }, 'json');
+        });
+    
+        
+        
+
+	
+	var options = {
+			file_data_name: 'file', //上传文件name，对应controller的字段名称
+			limitFilesCount: 1,//限制上传文件数
+			//removeUploaded: false,//上传成功后自动从界面上移除
+			deleteActionOnDone: function(file, doRemoveFile){doRemoveFile()},//删除上传成功的文件
+			filters:{
+			    // 只允许上传图片或图标（.ico）
+			    mime_types: [
+			        {title: '图片', extensions: 'jpg,gif,png'}
+			    ],
+			    // 最大上传文件为 1MB
+			    max_file_size: '4mb',
+			    // 不允许上传重复文件
+			    prevent_duplicates: true
+			},
+			multi_selection: false, // 多选文件
+			responseHandler: function(responseObject, file){
+				if(responseObject.status == 200){
+					var resp = JSON.parse(responseObject.response);
+					$("#avatar").attr('value',resp.data.url);
+				}
+			},
+			multipart_params: {} //	multipart 附加参数
+	};
+	
+	
+	$('#uploader').uploader(options);
+	var uploader = $('#uploader').data('zui.uploader');
+	
+	
+/*]]>*/
+</script>
+
+</html>

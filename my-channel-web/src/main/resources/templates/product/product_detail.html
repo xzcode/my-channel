@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	
+	<meta th:include="common :: head_common" th:remove="tag"/>
+	
+	<link rel="stylesheet" type="text/css" href=/static/guanwang_second/front/css/error.css?v=1529046969038>
+	
+
+</head>
+<body>
+
+
+<div th:include="common :: header_common" th:remove="tag"></div>
+
+
+	<section class="free_model clear">
+		<section class="pd_banner"
+			th:style="|background: url(${product.detailBgUrl}) center no-repeat;|"></section>
+		<section class="pd_content clear" id="character">
+			<div class="product_center">
+				<h2 th:text="${product.detailTitle}">标题</h2>
+				<p th:if="${product.detailShowUrl != null}">
+					<div  th:each="item,state : ${#strings.arraySplit(product.detailShowUrl,',')}" th:remove="tag">
+					<img 
+						th:src="${item}"
+						style="width: 151px; height: 150px;"
+						width="151" height="150"
+						border="0" vspace="0" />
+						&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+					</div>
+					
+				</p>
+				<div class="product_tx clear">
+					<dl>
+						<span class="edui-editor-imagescale-hand0"
+							style="box-sizing: border-box; position: absolute; width: 6px; height: 6px; overflow: hidden; font-size: 0px; display: block; cursor: nw-resize; top: 0px; margin-top: -4px; left: 0px; margin-left: -4px; color: rgb(51, 51, 51); font-family: &amp; #39; Helvetica Neue&amp;#39; , Helvetica , Arial, sans-serif; background-color: rgb(60, 157, 208);"></span>
+						<span class="edui-editor-imagescale-hand1"
+							style="box-sizing: border-box; position: absolute; width: 6px; height: 6px; overflow: hidden; font-size: 0px; display: block; cursor: n-resize; top: 0px; margin-top: -4px; left: 75.5px; margin-left: -4px; color: rgb(51, 51, 51); font-family: &amp; #39; Helvetica Neue&amp;#39; , Helvetica , Arial, sans-serif; background-color: rgb(60, 157, 208);"></span>
+						<div class="product_tx clear">
+							<dl>
+								<dt>产品介绍</dt>
+								<dd>
+									<div class="product_iterm" style="width: 100%">
+										<div>
+											<p th:each="item,state : ${@thHelper.lineSplit(product.detailIntroText)}" th:text="${item}">产品介绍</p>
+										</div>
+									</div>
+								</dd>
+							</dl>
+						</div>
+						<dt>产品特性</dt>
+						<dd>
+							<div class="product_iterm" th:each="item,state : ${@thHelper.lineSplit(product.detailPropsText)}">
+								<div th:text="${item}">产品特性</div>
+							</div>
+						</dd>
+					</dl>
+				</div>
+				<div class="product_parame clear">
+					<dl>
+						<dt>产品参数</dt>
+						<dd>
+							<div class="product_iterm">
+								<p th:each="item,state : ${@thHelper.lineSplit(product.detailParamsText)}" th:text="${item}">产品参数</p>
+							</div>
+							
+						</dd>
+					</dl>
+				</div>
+				<div class="product_parame clear">
+					<dl>
+						<dt>产品配件</dt>
+						<dd>
+							<div class="product_iterm">
+								<p th:each="item,state : ${@thHelper.lineSplit(product.detailPartsText)}" th:text="${item}">螺丝×2</p>
+							</div>
+						</dd>
+					</dl>
+				</div>
+			</div>
+		</section>
+	</section>
+
+
+
+	<div th:include="common :: footer_common" th:remove="tag"></div>
+
+<div th:include="common :: script_common" th:remove="tag"></div>
+
+</body>
+</html>

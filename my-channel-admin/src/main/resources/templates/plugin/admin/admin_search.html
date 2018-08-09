@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+>
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body th:with="baseReqPath='/admin/adminuser'">
+
+    
+    <div class="panel panel">
+	  <div class="panel-body">
+	    <form class="form-inline search-form">
+		  <div class="form-group ">
+		    <label for="keyword">搜索:</label>
+		    <input type="text" class="form-control" id="keyword" name="keyword" placeholder="帐号/姓名/手机 "/>
+		  </div>
+		  <div class="form-group " style="display: none;">
+		    <label for="keyword">隐藏字段:</label>
+		    <input type="hidden" class="form-control" id="pageNo" name="pageNo" th:value="${pager.pageNo}"/>
+		  </div>
+		  <button type="submit" class="btn btn-primary"><i class="icon icon-search"></i> 搜索</button>
+		  <button type="submit" class="btn" 
+		  onclick="
+		  	$('#keyword').val('');
+		  	$('#pageNo').val(1);
+		  "> 重置</button>
+		</form>
+	  </div>
+	</div>
+	
+	<!-- HTML 代码 -->
+	<table class="table datatable hide">
+	  <thead>
+	    <tr>
+	    
+	      <th data-width="100"> </th>
+	      <th data-width="100">#</th>
+	   	   
+		  <th data-width="100">
+				真实姓名 
+		  </th>
+	   
+		  <th data-width="100">
+				用户帐号 
+		  </th>
+	   	  <th data-width="100">
+				角色名称 
+		  </th>
+		  <th data-width="100">
+				手机号码 
+		  </th>
+		  
+	
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr th:each="item,state : ${pager.items}">
+	    
+	    	<td data-width="30" class="text-center">
+	    		<input type="radio" class="checkId" th:attr="data-id=${item.uid},data-realname=${item.realname}"/>
+	    	</td>
+	    	
+	    	<td th:text="${state.index + 1}"></td>
+	    	
+			<td th:text="${item.realname}"></td>
+	    	 
+			<td th:text="${item.username}"></td>
+		
+			<td th:text="${item.roleName}"></td>
+	    	 
+			<td th:text="${item.mobile}"></td>
+		
+	    </tr>
+	  </tbody>
+	</table>
+	
+	
+	<div th:replace="common :: pager_common_jdbclink (page=${pager})"></div>
+
+	<div style="width:100%; text-align: center; bottom: 0px;padding: 10px;position: fixed;">
+		<button style="margin: 0px 10px;" type="button" class="btn btn-primary ok-btn">确定</button>
+		<button style="margin: 0px 10px;" type="button" class="btn cancel-btn">取消</button>
+	</div>
+
+
+
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+	
+	var callback = [[${#httpServletRequest.getParameter('callback')}]];
+	
+	var cancel = [[${#httpServletRequest.getParameter('cancel')}]];
+	
+	console.log('get callback:', callback)
+	var datatable = $('table.datatable').datatable();
+	
+	$('.table-datatable tr').click(function(){
+		$('.table-datatable tr .checkId').attr("checked", false);
+		$(this).find('.checkId')[0].checked = true;
+	})
+	
+	$('.ok-btn').click(function(){
+		var checked = $('.checkId:checked');
+		if(checked.length > 0){
+		var name = checked.data('realname');
+		var id = checked.data('id');
+			window.parent[callback]({id:id,name:name});
+		}
+	});
+	
+	$('.cancel-btn').click(function(){
+		window.parent[cancel]();
+	});
+	
+	
+	
+/*]]>*/
+</script>
+
+</body>
+</html>

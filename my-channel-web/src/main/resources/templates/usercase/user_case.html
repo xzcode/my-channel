@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	
+	<meta th:include="common :: head_common" th:remove="tag"/>
+	
+    <link rel="stylesheet" type="text/css" href=/static/guanwang_second/front/css/other.css?v=1529046969038>
+	
+	<style type="text/css">
+	
+	.cc_container,.case_sec {
+		min-height: auto;
+	}
+	.cc_container .cc_item {
+        cursor: pointer;
+	}
+	.cc_container .cc_item:hover {
+        border-color: #a09f9f;
+	}
+	</style>
+</head>
+<body>
+
+<div th:include="common :: header_common" th:remove="tag"></div>
+
+<section class="case_banner">
+	<p>成功案例</p>
+</section>
+
+<section class="case_sec">
+	<div class="cc_container clear">
+	
+	
+		
+		<div th:each="item,state : ${list}" class="cc_item cc_one" style="cursor: pointer;" th:onclick="|window.open('/usercase/user_case_detail/${item.uid}.html', '_blank')|">
+			<img th:src="${item.coverUrl}" th:alt="${item.title}" style="object-fit: cover;">
+			<div class="ci_home_content" style="">
+				<p class="ci_title" th:text="${item.title}">案例标题</p>
+				<p class="ci_txt" th:text="${item.intro}">案例简介</p>
+			</div>
+		</div>
+		
+		
+	</div>
+</section>
+
+
+
+<div th:include="common :: footer_common" th:remove="tag"></div>
+
+<div th:include="common :: script_common" th:remove="tag"></div>
+
+<script>
+	!(function(){
+		var heights = [0,0,0,0,0,0,0,0,0];
+		var totalContainer = [0,0,0];
+		function init(){
+			for(var i = 0; i < totalContainer.length; i++){
+					totalContainer[i] = 0;
+			}
+			$(".cc_item").each(function(index){
+				var current = $(this)[0].offsetHeight + parseInt($(this).css("margin-top").replace('px', ''));
+				heights[index]=current;
+				switch(index%3){
+					case 0:
+						totalContainer[0] = current + totalContainer[0];
+						break;
+					case 1:
+						totalContainer[1] = current + totalContainer[1];
+						break;
+					case 2:
+						totalContainer[2] = current + totalContainer[2];
+						break;
+				}
+				if (totalContainer[0] >= totalContainer[1]  && totalContainer[0] >= totalContainer[2]){
+					$(".cc_container").height(totalContainer[0]);
+				}
+				if (totalContainer[1] >= totalContainer[0]  && totalContainer[1] >= totalContainer[2]){
+					$(".cc_container").height(totalContainer[1]);
+				}
+				if (totalContainer[2] >= totalContainer[0]  && totalContainer[2] >= totalContainer[0]){
+					$(".cc_container").height(totalContainer[2]);
+				}
+			});
+		}
+		function reviewAnimate(flag){
+			if (flag){
+				$(".cc_four").stop(true).animate({top:heights[0]+"px"},400);
+				$(".cc_five").stop(true).animate({top:heights[1]+"px"},400);
+				$(".cc_six").stop(true).animate({top:heights[2]+"px"},400);
+				$(".cc_seven").stop(true).animate({top:heights[0]+heights[3]+"px"},400);
+				$(".cc_eight").stop(true).animate({top:heights[1]+heights[4]+"px"},400);
+				$(".cc_nine").stop(true).animate({top:heights[2]+heights[5]+"px"},400);
+			} else{
+				$(".cc_four").css({top:heights[0]+"px"});
+				$(".cc_five").css({top:heights[1]+"px"});
+				$(".cc_six").css({top:heights[2]+"px"});
+				$(".cc_seven").css({top:heights[0]+heights[3]+"px"});
+				$(".cc_eight").css({top:heights[1]+heights[4]+"px"});
+				$(".cc_nine").css({top:heights[2]+heights[5]+"px"});
+			}
+		}
+		window.onload = function(){
+			init();
+			reviewAnimate(false);
+		};
+		$(".ci_home").click(function(){
+			var item = $(this).parent().parent();
+			item.removeClass('cc_message');
+			item.find(".ci_home_content").slideDown(400);
+			item.find(".ci_message_content").slideUp(400,function(){
+				init();
+				reviewAnimate(true);
+			});
+		});
+		$(".ci_message").click(function(){
+			var item = $(this).parent().parent();
+			item.addClass('cc_message');
+			item.find(".ci_home_content").slideUp(400);
+			item.find(".ci_message_content").slideDown(400,function(){
+				init();
+				reviewAnimate(true);
+			});
+		});
+	})(jQuery)
+</script>
+
+</body>
+</html>

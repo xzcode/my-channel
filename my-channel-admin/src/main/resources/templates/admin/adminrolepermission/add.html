@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- jdbclink code generator - 2018-05-16 17:44:39 -->
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/admin/adminrolepermission'">
+	<ol class="breadcrumb">
+	  <li>首页</li>
+	  <li>用户权限角色对应关系管理</li>
+	  <li>用户权限角色对应关系列表</li>
+	  <li>添加</li>
+	</ol>
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/add/save|}">
+		
+	  <div class="form-group hide">
+	    <label for="username" class="col-sm-1">隐藏参数</label>
+	    <div class="col-md-4 col-sm-10">
+	      <input type="text" class="form-control" name="uid" id="uid"/>
+	      <div class="help-block">any tips?</div>
+	    </div>
+	  </div>
+	
+	
+		
+		
+		
+		<div class="form-group ">
+		
+			<label for="roleId" class="col-sm-1">  : </label>
+			<div class="col-md-4 col-sm-10">
+			      <input type="text" class="form-control" id="roleId" name="roleId" required="required" maxlength="11" />
+		    </div>
+		</div>
+	
+		
+		
+		
+		<div class="form-group ">
+		
+			<label for="permissionId" class="col-sm-1">  : </label>
+			<div class="col-md-4 col-sm-10">
+			      <input type="text" class="form-control" id="permissionId" name="permissionId" required="required" maxlength="11" />
+		    </div>
+		</div>
+		
+		
+		<!--
+	  	<div class="form-group">
+		    <label class="col-sm-1">封面: </label>
+		    <div class="col-md-4 col-sm-10">
+		    
+		      <input name="urls" id="urls" type="hidden" />
+		      
+		      <div id='uploader' class="uploader" data-ride="uploader" ></div>
+		      
+		    </div>
+		    
+		    <script th:inline="javascript">
+		    /*<![CDATA[*/
+		    	
+		    	var masterpieceCoverUrl = $('#urls').val();
+		                	
+               	var uploader = UploaderOperation.initUploader({
+               		uploaderId: 'uploader',
+               		filesUrlInputId: 'masterpieceCoverUrl',
+               		staticFiles: [],
+   			    	limitFilesCount: 1,
+   			    });
+			   	
+			   	/*]]>*/
+		    </script>
+		  </div>
+	  -->
+	  
+	  
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-10">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+	    </div>
+	  </div>
+	</form>
+	
+
+</body>
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+		
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+	
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e, data) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+            	if(result.success){
+            		Msg.success('操作成功!',null,function(){
+	            		location.href = referer;                		
+                	});
+				}else{
+					Msg.error('提示消息：操作失败!');
+					setTimeout(function(){
+						formValidationPlugin.disableSubmitButtons(false);
+					},1000);
+				}
+            }, 'json');
+        });
+        
+    
+	
+/*]]>*/
+</script>
+</html>

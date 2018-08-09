@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+>
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/banner/bannerinfo'">
+	<ol class="breadcrumb">
+	  <li><a th:href="@{/home}"><i class="icon icon-home"></i>首页</a></li>
+	  <li>Banner管理</li>
+	  <li>Banner列表</li>
+	  <li>添加</li>
+	</ol>
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/add/save|}">
+		
+	  <div class="form-group hide">
+	    <label for="username" class="col-sm-1">隐藏参数</label>
+	    <div class="col-md-4 col-sm-10">
+	      <input type="text" class="form-control" name="uid" id="uid"/>
+	    </div>
+	  </div>
+	
+	   
+		<div class="form-group hide">
+			<label for="uid" class="col-sm-1"> 标识 : </label>
+			<div class="col-md-4 col-sm-10">
+			      <input type="text" class="form-control" name="uid" id="uid"  required="required" />
+			      <!-- <input type="text" class="form-control" name="pictureUrl" id="pictureUrl"/> -->
+		    </div>
+		</div>
+		
+		<!-- 
+		<div class="form-group">
+		    <label for="avatar" class="col-sm-1">轮播图片</label>
+		    <div class="col-md-4 col-sm-10">
+		      
+		      <div id='uploader' class="uploader" data-ride="uploader" th:attr="data-url=|${@uploadHelper.host + @uploadHelper.uploadUrl}|">
+			    <div class="uploader-message text-center">
+				  <div class="content"></div>
+				  <button type="button" class="close">×</button>
+				</div>
+				<div class="uploader-files file-list file-list-grid"></div>
+				<div>
+				  <hr class="divider"/>
+				  <button type="button" class="btn btn-link uploader-btn-browse"><i class="icon icon-plus"></i> 选择文件</button>
+				  <button type="button" class="btn btn-link uploader-btn-start"><i class="icon icon-cloud-upload"></i> 开始上传</button>
+				  <div class="uploader-status text-muted"></div>
+				</div>
+				</div>
+		      
+		    </div>
+		  </div> -->
+		  
+		  <div class="form-group">
+		    <label class="col-sm-1">轮播图片</label>
+		    <div class="col-md-4 col-sm-10">
+		    
+		      <input name="pictureUrl" id="pictureUrl" type="hidden" value="" />
+		      
+		      <div id='uploader' class="uploader" data-ride="uploader" ></div>
+		      
+		      <div class="help-block">最佳图片分辨率: 1920 x 700</div>
+		    </div>
+		    
+		    <script th:inline="javascript">
+		    /*<![CDATA[*/
+		                	
+               	var uploader = UploaderOperation.initUploader({
+               		uploaderId: 'uploader',
+               		filesUrlInputId: 'pictureUrl',
+   			    	//staticFiles: files,
+   			    	limitFilesCount: 1,
+   			    });
+			   	
+			   	/*]]>*/
+		    </script>
+		  </div>
+		
+  
+		<div class="form-group ">
+			<label for="linkType" class="col-sm-1"> 展示类型 : </label>
+			<div class="col-md-4 col-sm-10">
+			      	  <select name="linkType" id="linkType" class="form-control">
+				      	<option value="0">不跳转 </option>
+				      	<option value="1">外部链接</option>
+				      	<option value="2">自定义内容</option>
+				      </select>
+		    </div>
+		</div>
+		
+		
+		<div class="form-group custom" style="display: none;">
+			<label for="description" class="col-sm-1"> 自定义内容 : </label>
+			<div class="col-md-4 col-sm-8">
+		      	<textarea name="content" style="width: 100%; height: 300px;" id="content" ></textarea>
+		      	<script type="text/javascript" th:inline="javascript">
+		      	/*<![CDATA[*/
+				    $(function(){
+				    	
+				    	$('#linkType').on("change", function(e){
+							if(e.target.value == 2){
+								$(".custom").show();
+								$(".link").hide();
+							}else{
+								$(".custom").hide();
+								$(".link").show();
+							}
+						})
+				    	var ue = UE.getEditor('content', {
+							serverUrl: [[@{|${@uploadHelper.host}/files/ueditor/controller|}]],
+							initialFrameHeight: 300,
+							initialFrameWidth: '100%',
+							autoFloatEnabled: false,
+							scaleEnabled : true
+						});
+				    })
+				    /*]]>*/
+			    </script>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="sort" class="col-sm-1"> 排序 : </label>
+			<div class="col-md-4 col-sm-10">
+			      <input type="number" step="1" class="form-control" name="sort" id="sort"   />
+		    </div>
+		</div>
+		
+  
+		<div class="form-group link">
+			<label for="outLink" class="col-sm-1"> 外部链接地址 : </label>
+			<div class="col-md-4 col-sm-10">
+			      <input type="url" class="form-control" name="linkUrl" id="linkUrl"  maxlength="512"  />
+			      <div class="help-block">例如：https://www.baidu.com</div>
+		    </div>
+		</div>
+		
+  
+		<div class="form-group ">
+			<label for="remark" class="col-sm-1"> 说明 : </label>
+			<div class="col-md-4 col-sm-10">
+			      <input type="text" class="form-control" maxlength="255" name="remark" id="remark"   />
+		    </div>
+		</div>
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-10">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+	    </div>
+	  </div>
+	</form>
+	
+
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+	
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+	
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e, data) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+            	if(result.success){
+            		Msg.success('操作成功!', null, function(){
+	            		location.href = referer;                		
+                	});
+				}else{
+					Msg.error('提示消息：操作失败!');
+					setTimeout(function(){
+						formValidationPlugin.disableSubmitButtons(false);
+					},1000);
+				}
+            }, 'json');
+        });
+        
+	
+/*]]>*/
+</script>
+
+</html>

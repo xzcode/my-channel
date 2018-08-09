@@ -1,0 +1,24 @@
+server:
+  port: 8761
+  
+spring:
+  profiles: 
+    active: def
+  security:
+    user:
+      name: admin
+      password: 7461501b884a4e60a059d2fc43366677
+    
+
+
+eureka:
+  instance:
+    hostname: lh
+#  dashboard:
+#    path: /eurekawebui
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      

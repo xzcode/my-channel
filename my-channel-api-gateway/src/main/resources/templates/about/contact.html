@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<title>欧瑞博 - 专注智能家居，引领万物互联</title>
+	<meta name="Keywords" content="欧瑞博,欧瑞博官网,智能家居,智能家居公司,智能家居系统,智能家居加盟,智能家居控制系统" />
+	<meta name="description" content="ORVIBO欧瑞博是一家专注于智能家居产品和智能家居系统的创新型企业，提供智能家居整体解决方案，面向全国招募智能家居加盟商。" />
+
+</head>
+<body>
+
+
+<div th:include="common :: header_common" th:remove="tag"></div>
+
+
+
+                        <!-- 修改后的关于我们 -->
+                        <div class="contact_top_bg"></div>
+                        <div class="contact_message">
+        <div class="contact_message_content">
+        <h4 class="title">联系方式</h4>
+        <p class="underline"></p>
+        <div class="contact_company">
+            <h2 th:text="${@cachedDataHelper.getCompanyName()}">公司</h2>
+            <p class="first" th:text="${@cachedDataHelper.getCompanyAddress()}">地址:&nbsp&nbspxx市xx区xx大道xxx号xxx园xx栋xx楼</p>
+            <p class="second" th:text="|邮编:&nbsp&nbsp${@cachedDataHelper.getCompanyPostalCode()}|">邮编:&nbsp&nbsp</p>
+            <p class="third" th:text="|电话:&nbsp&nbsp${@cachedDataHelper.getCustomerServiceNumber()}&nbsp&nbsp${@cachedDataHelper.getCustomerServiceNumber2()}&nbsp&nbsp(${@cachedDataHelper.getWorkingTimeInfo()})|">电话:&nbsp&nbsp400-xxx-xxx&nbsp(周一到周日&nbsp9:00-21:00）</p>            
+            <p class="fourth">
+           	</p>
+        </div>
+        </div>
+    </div>
+    
+    
+ <div th:include="common :: footer_common" th:remove="tag"></div>
+
+<div th:include="common :: script_common" th:remove="tag"></div>
+
+
+                        </body>
+
+                        </html>

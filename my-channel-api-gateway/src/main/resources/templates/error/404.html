@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	
+	<meta th:include="common :: head_common" th:remove="tag"/>
+	
+	<link rel="stylesheet" type="text/css" href=/static/guanwang_second/front/css/error.css?v=1529046969038>
+	
+
+</head>
+<body>
+
+
+<div th:include="common :: header_common" th:remove="tag"></div>
+
+    
+<section class="error">
+	<div class="container">
+		<h2>404 - 你访问的页面打不开了！</h2>
+		<p>可能是网址输入错误或者被删除啦！</p>
+		<a href="/index.html">返回首页</a>
+	</div>
+</section>
+
+
+<div th:include="common :: footer_common" th:remove="tag"></div>
+
+<div th:include="common :: script_common" th:remove="tag"></div>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+
+server: 
+  host: localhost
+  port: 9099
+  appname: files-service
+  basepackage: com.xzcode.sfs.core
+  #上传文件临时目录
+  tmpdir: /app/${server.appname}/tmp
+  database: 
+    filePath: /app/${server.appname}/files.db
+    driverClassName: org.sqlite.JDBC
+    url: jdbc:sqlite:${server.database.filePath}
+    #username: 
+    #password: 
+    #url: jdbc:mysql://10.0.0.189:3306/beerpong?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: 
+    password: 
+
+spring: 
+  application:
+    name: ${server.appname}
+  profiles: 
+    active: dev 
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 6MB
+      max-request-size: 6MB
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+    suffix: .html
+    prefix: classpath:/templates/
+
+    
+xz:
+    jdbclink:
+      enabled: true
+      scanPackage: ${server.basepackage}.entity
+    sfs:
+      enabled: true
+      miniWH: 200
+      middleWH: 600
+      maxSize: 10485760
+      host: http://${server.host}:${server.port}
+      savePath: /app/files
+      urlPrefix: /upload/files
+      appkey: 8c4becb77cdc4b59817d737fd947317b
+    datasource: 
+      hikari: 
+         enabled: true
+         jdbcUrl: ${server.database.url}
+#         jdbcUrl: jdbc:mysql://10.0.0.189:3306/cartown?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+         username: ${server.database.username}
+         password: ${server.database.password}
+#mybatis
+mybatis:
+  type-aliases-package: ${server.basepackage}.entity
+  mapper-locations: classpath*:mappers/**/*.xml
+    
+    
+
+logging:
+  file: /app/logs/${server.appname}/${server.appname}.log
+  level: 
+    root: info

@@ -1,0 +1,37 @@
+	buildscript {
+	/*
+		ext {
+			springBootVersion = '2.0.3.RELEASE'
+		}
+	*/
+		repositories {
+			maven {url "${nexusPublicUrl}"}
+			mavenLocal()
+		}
+		dependencies {
+			classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		}
+	}
+	
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'org.springframework.boot'
+	
+	dependencies {
+
+		testCompile ('org.springframework.boot:spring-boot-starter-test')
+		
+		compile ("xzcode:xz-datasource-druid-autoconfig:1.0.2")
+		
+		compile ("xzcode:jdbc-link-autoconfig:${jdbclinkVersion}")
+		compile ("xzcode:jdbc-link-code-gen:${jdbclinkVersion}")
+		
+		compile 'mysql:mysql-connector-java'
+		
+		compile 'org.springframework.boot:spring-boot-starter-jdbc'
+		
+		compile group: 'org.jsoup', name: 'jsoup', version: '1.10.3'
+		
+		
+		
+		
+	}

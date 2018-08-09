@@ -1,0 +1,125 @@
+
+
+server:
+  port: 8080
+  basepackage: com.xzcode.product
+  appname: zjwl-web
+  tmpdir: /app/${server.appname}/tmp
+  database:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://common.host:8306/zjwl?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: 123456
+    
+https:
+  enabled: true
+  scheme: https
+  port: 8443
+  key-store: https/tomcat.p12
+  key-alias: tomcat
+  key-password: tomcat
+  key-store-password: tomcat
+  trust-store: https/tomcat.p12.crt
+  trust-store-password: tomcat
+
+spring: 
+  application:
+    name: ${server.appname}
+  security: 
+    basic: 
+      enabled: false
+  gson: 
+    date-format: yyyy-MM-dd HH:mm:ss
+  jackson: 
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  resources: 
+    add-mappings: true
+    static-locations: classpath:/static/,classpath:/public/
+  #国际化
+  messages: 
+    basename: i18n/messages
+    fallback-to-system-locale: false
+    cache-duration: 5
+    encoding: UTF-8
+  mvc: 
+    static-path-pattern: /**
+    pathmatch: 
+      use-suffix-pattern: true
+    view:
+      suffix: .html
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 2MB
+      max-request-size: 2MB
+  thymeleaf:
+    mode: HTML
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+    suffix: .html
+    prefix: classpath:/templates/
+  profiles:
+    active: dev
+  redis:
+    host: common.host
+    prot: 6379
+#    cluster:
+#      nodes: 192.168.211.134:7000,192.168.211.134:7001,192.168.211.134:7002
+#      maxRedirects: 6
+
+
+xz:
+  datasource: 
+    druid: 
+      enabled: true
+      driverClassName: ${server.database.driverClassName}
+      url: ${server.database.url}
+      username: ${server.database.username}
+      password: ${server.database.password}
+      initialSize: 1
+      minIdle: 1
+      maxActive: 100
+      maxWait: 10000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      # 空闲时检测
+      testWhileIdle: true
+      # 获取连接验证可用性
+      testOnBorrow: true
+      # 返还连接验证可用性
+      testOnReturn: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      # 验证连接有效与否的SQL，不同的数据配置不同
+      validationQuery: select 1
+  jdbclink:
+    enabled: true
+    scanPackage: ${server.basepackage}.common.entity
+     
+
+#mybatis
+mybatis:
+  type-aliases-package: ${server.basepackage}.common.entity
+  mapper-locations: classpath*:mappers/**/*.xml
+    
+
+logging:
+  file: /app/logs/${server.appname}/${server.appname}.log
+  level: 
+    root: info
+    com: 
+      xzcode: 
+        jdbclink: debug
+            
+ 
+
+upload:
+  host: http://10.0.0.189:9099
+#  host: http://localhost:9091
+  uploadUrl: /files/upload
+  deleteUrl: /files/delete

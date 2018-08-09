@@ -1,0 +1,103 @@
+
+buildscript {
+
+	repositories {
+		maven {url "${nexusPublicUrl}"}
+		mavenLocal()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		
+	}
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+
+version = "1.0.1"
+
+dependencies {
+	
+	compile 'org.springframework.boot:spring-boot-starter'
+	compile("org.springframework.boot:spring-boot-starter-web")
+	compile("org.springframework.boot:spring-boot-autoconfigure")
+	
+	compile "xzcode:jdbc-link-autoconfig:${jdbclinkVersion}"
+	
+	compile ('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2'){ 
+		exclude group:'org.springframework.boot'//,module:'commons-codec' //排除该group的依赖, group是必选项，module可选
+	}
+	
+	compile ("xzcode:xz-datasource-hikari-autoconfig:1.0.2")
+
+	compile ("xzcode:simple-files-server-autoconfig:1.0.4")
+
+		
+	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.20.1'
+	
+	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.45'
+	
+}
+
+
+
+		def docker_test_registy = "common.host:8085"
+	
+		def docker_prod_registy = "registry.cn-shenzhen.aliyuncs.com/zjwl1/zjwl-files-service"
+		
+		def docker_public_registy = "common.host:8091"
+		
+		
+	
+		/*******************docker build test - start*********************/
+		
+		task dockerBuildTest(type:Exec) {
+		  dependsOn build
+		  commandLine 'cmd', '/c', 'docker', 'build', 
+		  				"-f", "./src/main/resources/docker/DockerFile_test",
+		  				"--build-arg", "JAR_FILE=./build/libs/${jar.archiveName}",
+		  				"--tag", "${docker_test_registy}/${jar.baseName}:${version}",
+		  				"./"
+		}
+		
+		task dockerPushTest(type:Exec) {
+		  commandLine 'cmd', '/c', 'docker', 'push',"${docker_test_registy}/${jar.baseName}:${version}"
+		}
+		
+		task dockerBuildAndPushTest() {
+			dependsOn dockerBuildTest
+			dependsOn dockerPushTest
+			doLast {
+				println "Task dockerBuildAndPushTest completed !!"
+			}
+		}
+		
+		/*******************docker build test - end*********************/
+		
+		
+		/*******************docker build prod - start*********************/
+		
+		task dockerBuildProd(type:Exec) {
+		  dependsOn build
+		  commandLine 'cmd', '/c', 'docker', 'build', 
+		  				"-f", "./src/main/resources/docker/DockerFile_prod",
+		  				"--build-arg", "JAR_FILE=./build/libs/${jar.archiveName}",
+		  				"--tag", "${docker_prod_registy}:${version}",
+		  				"./"
+		}
+		
+		task dockerPushProd(type:Exec) {
+		  commandLine 'cmd', '/c', 'docker', 'push',"${docker_prod_registy}:${version}"
+		}
+		
+		task dockerBuildAndPushProd() {
+			dependsOn dockerBuildProd
+			dependsOn dockerPushProd
+			doLast {
+				println "Task dockerBuildAndPushProd completed !!"
+			}
+		}
+		
+		/*******************docker build prod - end*********************/
+		
+

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+>
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/admin/adminpermission'" style="padding: 10px;">
+	<ol class="breadcrumb">
+		<!-- <li>编辑 [ <span th:text="${editObj.permissionName}"></span> ]</li> -->
+	  <!--
+	  <li><a th:href="@{/home}"><i class="icon icon-home"></i>首页</a></li>
+	  <li>管理员权限</li>
+	  <li>编辑</li>
+	  -->
+	</ol> 
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/edit/save|}">
+		
+		<fieldset>
+		<legend>编辑节点</legend>
+		<div class="form-group hide">
+			<label for="uid" class="col-sm-2"> 自增主键 : </label>
+			<div class="col-md-4 col-sm-8">
+		      <input type="text" class="form-control" name="uid" id="uid"  required="required" th:value="${editObj.uid}"/>
+		      <input type="text" class="form-control" name="deep" id="deep"  required="required" th:value="${editObj.deep}"/>
+		      <input type="text" class="form-control" name="parentId" id="parentId"  required="required" th:value="${editObj.parentId}"/>
+		    </div>
+		</div>
+		
+		
+		<div class="form-group ">
+			<label for="permissionName" class="col-sm-2"> 权限名 : </label>
+			<div class="col-md-4 col-sm-8">
+		      <input type="text" class="form-control" name="permissionName" id="permissionName"   th:value="${editObj.permissionName}"/>
+		    </div>
+		</div>
+		
+		<div class="form-group">
+			<label for="parentId" class="col-sm-2"> 父权限名称 : </label>
+			<div class="col-md-4 col-sm-8">
+		      <span class="form-control" disabled="disabled" th:text="${parentObj.permissionName}"></span>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="permission" class="col-sm-2"> 权限编码 : </label>
+			<div class="col-md-4 col-sm-8">
+		      <input type="text" class="form-control" name="permission" id="permission"   th:value="${editObj.permission}"/>
+		    </div>
+		</div>
+		
+		
+		<div class="form-group ">
+			<label for="isMenu" class="col-sm-2"> 是否为菜单 : </label>
+			<div class="col-md-4 col-sm-8">
+			    <select class="form-control" name="isMenu" id="isMenu" th:field="${editObj.isMenu}">
+				     <option value="0">否</option>
+				     <option value="1">是</option>
+			    </select>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="urlPattern" class="col-sm-2"> 权限url : </label>
+			<div class="col-md-4 col-sm-8">
+		      <input type="text" class="form-control" name="urlPattern" id="urlPattern"   th:value="${editObj.urlPattern}"/>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="menuIcon" class="col-sm-2"> 图标标识 : </label>
+			<div class="col-md-4 col-sm-8">
+		      <input type="text" class="form-control" name="menuIcon" id="menuIcon"   th:value="${editObj.menuIcon}"/>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="sortOrder" class="col-sm-2"> 排序 : </label>
+			<div class="col-md-4 col-sm-8">
+		      <input type="text" class="form-control" name="sortOrder" id="sortOrder"   th:value="${editObj.sortOrder}"/>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="createDate" class="col-sm-2"> 创建日期 : </label>
+			<div class="col-md-4 col-sm-8">
+	  			<input type="text" disabled="disabled" class="form-control" name="createDate" id="createDate"   th:value="${#dates.format(editObj.createDate, 'yyyy-MM-dd HH:mm:ss')}"/>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="createBy" class="col-sm-2"> 创建人 : </label>
+			<div class="col-md-4 col-sm-8">
+		      <span  class="form-control" disabled="disabled" th:text="${createByUser}"></span>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="remark" class="col-sm-2"> 备注 : </label>
+			<div class="col-md-4 col-sm-8">
+		      <input type="text" class="form-control" name="remark" id="remark"   th:value="${editObj.remark}"/>
+		    </div>
+		</div>
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-8">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <!-- <button type="button" class="btn btn-default" onclick="history.back()">返回</button> -->
+	    </div>
+	  </div>
+	  </fieldset>
+	</form>
+	
+
+</body>
+
+
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+		
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                
+                if(result.success){
+                	parent.Msg.success('操作成功!',null,function(){
+	            		parent.location.reload();                		
+                	});
+				}else{
+					/*
+					new $.zui.Messager('提示消息：操作失败!', {
+					    type: 'danger' // 定义颜色主题
+					}).show();
+					*/
+					parent.Msg.error('提示消息：操作失败!');
+					formValidationPlugin.disableSubmitButtons(false);
+				}
+                
+            }, 'json');
+        });
+    
+	
+	
+	$(function(){
+		$('#updateDate').attr('disabled','disabled');
+		$('#createDate').attr('disabled','disabled');
+		//$('#updateUserName').attr('disabled','disabled');
+		//$('#createUserName').attr('disabled','disabled');
+	})
+/*]]>*/
+</script>
+
+</html>

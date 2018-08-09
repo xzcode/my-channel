@@ -1,0 +1,53 @@
+/*-------------------------------------
+sourcemuch css
+-------------------------------------*/
+
+body{
+	font-size: 12px;
+}
+iframe{
+	border: 0px;
+	margin: 0px;
+}
+.datatable .icon{
+	font-size: 12px;
+}
+
+.edit-form, .add-form{
+	margin-left: 10px;
+	text-align: left;
+}
+
+.invisible{
+	visibility: hidden;
+    /* height: 0px;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    width: 0px; */
+}
+
+ol.breadcrumb{
+	margin-bottom: 0px;
+}
+
+.breadcrumb .icon{
+	font-size: 14px;
+}
+
+.table .btn{
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+.content-frame body{
+	padding: 0px 10px;
+}
+
+.edit-form .form-group{
+	margin-right: 0px;
+} 
+
+.float_left {
+	float: left;
+}

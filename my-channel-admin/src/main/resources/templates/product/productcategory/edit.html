@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- jdbclink code generator - 2018-07-04 12:25:31 -->
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/product/productcategory'">
+	<ol class="breadcrumb">
+	  <li>产品分类信息管理</li>
+	  <li>产品分类信息列表</li>
+	  <li>编辑</li>
+	</ol>
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/edit/save|}">
+		
+		
+
+	
+
+	<div class="form-group hide">
+		<label for="uid" class="col-sm-1"> 自增主键 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="uid" name="uid"  required="required" maxlength="20" th:value="${editObj.uid}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+	
+
+	<div class="form-group ">
+		<label for="name" class="col-sm-1"> 分类名称 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="name" name="name"  required="required" maxlength="128" th:value="${editObj.name}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+	
+
+	<div class="form-group ">
+		<label for="remark" class="col-sm-1"> 分类说明 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+		  <textarea class="form-control" style="width:100%; height: 100px;" id="remark" name="remark"   maxlength="255" th:text="${editObj.remark}"></textarea>
+	      	
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+	<div class="form-group ">
+		
+			<label for="indexShowTitle" class="col-sm-1"> 首页展示标题 : </label>
+			<div class="col-md-4 col-sm-10">
+				    
+				  <input type="text" class="form-control" id="indexShowTitle" name="indexShowTitle" required="required" maxlength="64" th:text="${editObj.indexShowTitle}"/>
+				    
+			      <div class="help-block"></div> 
+		    </div>
+		</div>
+	
+	
+		
+		<div class="form-group ">
+		
+			<label for="indexPicUrl" class="col-sm-1"> 首页展示图片 : </label>
+			<div class="col-md-4 col-sm-10">
+			      	<input type="hidden" class="form-control" id="indexPicUrl" name="indexPicUrl"  maxlength="255"  th:value="${editObj.indexPicUrl}"/>
+				  	<div id='indexPicUrl_uploader' class="uploader" data-ride="uploader" ></div>
+			  		<script th:inline="javascript">
+					    /*<![CDATA[*/
+					    	
+			               	var indexPicUrlUploader = UploaderOperation.initUploader({
+			               		uploaderId: 'indexPicUrl_uploader',
+			               		filesUrlInputId: 'indexPicUrl',
+			   			    	limitFilesCount: 1,
+			   			    });
+						   	
+						   	/*]]>*/
+				    </script>
+			      
+			      <div class="help-block"></div> 
+		    </div>
+		</div>
+	
+	
+	
+
+	<div class="form-group ">
+		<label for="pictureUrl" class="col-sm-1"> 分类背景图片 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+		  	<input type="hidden" class="form-control" id="pictureUrl" name="pictureUrl"   maxlength="255" th:value="${editObj.pictureUrl}"/>
+		  	<div id='pictureUrl_uploader' class="uploader" data-ride="uploader" ></div>
+	  		<script th:inline="javascript">
+			    /*<![CDATA[*/
+			    	
+			    	var filesUrlInputId = 'pictureUrl';
+			                	
+	               	var coverUrlUploader = UploaderOperation.initUploader({
+	               		uploaderId: filesUrlInputId + '_uploader',
+	               		filesUrlInputId: filesUrlInputId,
+	   			    	limitFilesCount: 1,
+	   			    });
+				   	
+				   	/*]]>*/
+		    </script>
+	  		
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+	
+
+	<div class="form-group ">
+		<label for="sort" class="col-sm-1"> 排序 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  <input type="number" step="1" class="form-control" id="sort" name="sort"   maxlength="11"   th:value="${editObj.sort}" />
+	  	  
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+	
+
+	<div class="form-group ">
+		<label for="enabled" class="col-sm-1"> 启用状态 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      	  <select id="enabled" name="enabled"   maxlength="1" class="form-control">
+		      	<option th:selected="${editObj.enabled == 0 }" value="0">禁用</option>
+		      	<option th:selected="${editObj.enabled == 1 }" value="1">启用</option>
+		      </select>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+	  
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-10">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+	    </div>
+	  </div>
+	  
+	</form>
+	
+
+</body>
+
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+
+		
+	
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+		
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+            
+            /*
+            var params = $form.serializeArray().map(x => {
+            	var v = x.value;
+            	if(x.name === 'price'){
+            		//console.log(parseInt(x.value * 100))
+            		v = parseInt(x.value * 100)
+                }
+            	return `${x.name}=${v}`;
+
+            }).join('&');
+            */
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                
+                if(result.success){
+            		Msg.success('操作成功!',null,function(){
+	            		location.href = referer;                		
+                	});
+				}else{
+					Msg.error('提示消息：操作失败!');
+					setTimeout(function(){
+						formValidationPlugin.disableSubmitButtons(false);
+					},1000);
+				}
+                
+            }, 'json');
+        });
+    
+	
+	
+	
+	
+	$(function(){
+		$('#updateDate').attr('disabled','disabled');
+		$('#createDate').attr('disabled','disabled');
+		//$('#updateUserName').attr('disabled','disabled');
+		//$('#createUserName').attr('disabled','disabled');
+	})
+/*]]>*/
+</script>
+
+</html>

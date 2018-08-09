@@ -1,0 +1,37 @@
+
+	
+	//所有项目配置
+	subprojects {
+		apply plugin: 'java'
+		//apply plugin: 'maven-publish'
+		
+		
+		sourceCompatibility = 1.8
+		
+		
+		
+		group = "${group}"
+		version = "${version}"
+		
+		repositories {
+			maven {
+				url "${nexusPublicUrl}"
+				//url 'http://repo.spring.io/milestone'
+	        	//url 'https://repo.spring.io/libs-snapshot'
+			}
+			
+			mavenLocal()
+		}
+		
+		
+		dependencies {
+			
+		}
+		
+		tasks.withType(JavaCompile) {  
+			options.encoding = "UTF-8"  
+		} 
+		
+		
+	}
+	

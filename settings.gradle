@@ -1,0 +1,16 @@
+
+
+rootProject.name = "${projectRootName}"
+
+include ":${rootProject.name}-admin"
+include ":${rootProject.name}-web"
+include ":${rootProject.name}-common"
+include ":${rootProject.name}-code-gen"
+include ":${rootProject.name}-files-service"
+
+include ":${rootProject.name}-api-gateway"
+include ":${rootProject.name}-ngx-callback"
+include ":${rootProject.name}-service-registry"
+
+
+

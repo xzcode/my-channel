@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<link rel="stylesheet" type="text/css"
+	href="/css/style_9_common.css?J78">
+	<link rel="stylesheet" type="text/css"
+		href="/css/style_9_portal_list.css?J78">
+	<link rel="stylesheet" type="text/css"
+		href="/css/list.css">
+	
+
+</head>
+<body>
+
+
+<div th:include="common :: header_common" th:remove="tag"></div>
+
+
+
+
+	<div id="ct" class="ct2 wp inside_box cl" style="padding-top: 5px;">
+		<div class="mn"
+			style="padding: 0; margin: 0; box-shadow: none; background: none;">
+
+
+
+
+			<div class="Framebox cl" style="width: 810px; padding: 0 0 10px 0;">
+				<div class="middle_info cl">
+					<div class="bm vw" style="background: none;">
+
+
+
+						<div class="h hm cl">
+							<div class="cl">
+								<h1 class="ph" th:text="${obj.title}">标题</h1>
+							</div>
+							<div class="avatar_right cl">
+								<div class="cl"
+									style="float: left; width: 380px; overflow: hidden;">
+									<p class="authors" style="margin: 0 0 5px 0;">
+										<span style="float: left; margin-left: 8px;" th:text="${@thHelper.dateTimeFormat(obj.createDate)}">2018-1-12 15:08:12</span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="content_middle cl" style="padding: 0; word-break: break-all; overflow: hidden;" th:utext="${obj.content}">
+
+
+						
+
+
+
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="sd pph"
+			style="width: 340px; padding: 0; box-shadow: none; background: none;">
+			<!--[diy=diy6]-->
+			<div id="diy6" class="area">
+				<div id="frameRxEY48" class="frame move-span cl frame-1">
+					<div id="frameRxEY48_left" class="column frame-1-c">
+						<div id="frameRxEY48_left_temp" class="move-span temp"></div>
+					</div>
+				</div>
+				
+				
+				
+				<div id="frametl4rvs" class="frame move-span cl frame-1">
+					<div id="frametl4rvs_left" class="column frame-1-c">
+						<div id="frametl4rvs_left_temp" class="move-span temp"></div>
+						<div id="portal_block_28" class="block move-span">
+							<div id="portal_block_28_content" class="dxb_bc">
+								<div class="box-moder hot-article cl"
+									style="margin: 30px 0 0 0;">
+									<h3>
+										<span class="span-mark span-mark2"></span><b>热文</b>
+									</h3>
+									<ul>
+										<li th:each="item,state : ${hots}">
+											<div class="hot-article-img">
+												<a
+													th:href="|/info/info_detail/${item.uid}.html|"
+													th:src="${item.coverUrl}"
+													width="280" height="158">
+												</a>
+											</div> 
+											<a th:href="|/info/info_detail/${item.uid}.html|"
+											class="transition" target="_blank" th:text="${item.title}">标题</a>
+										</li>
+										
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--[/diy]-->
+			<div id="recommendArticle">
+				<!--[diy=diy7]-->
+				<div id="diy7" class="area"></div>
+				<!--[/diy]-->
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+<div th:include="common :: footer_common" th:remove="tag"></div>
+
+<div th:include="common :: script_common" th:remove="tag"></div>
+
+<script type="text/javascript">
+
+
+</script>
+
+</body>
+</html>

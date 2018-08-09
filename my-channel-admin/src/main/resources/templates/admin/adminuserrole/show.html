@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- jdbclink code generator - 2018-05-16 17:44:39 -->
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/admin/adminuserrole'">
+	<ol class="breadcrumb">
+	  <li>首页</li>
+	  <li>系统用户角色管理</li>
+	  <li>系统用户角色列表</li>
+	  <li>查看</li>
+	</ol>
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/edit/save|}">
+		
+		
+		
+	
+	<div class="form-group ">
+		<label for="userId" class="col-sm-1">  : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="userId" id="userId"   th:value="${editObj.userId}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="roleId" class="col-sm-1">  : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="roleId" id="roleId"   th:value="${editObj.roleId}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	  
+	
+	  
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-10">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+	    </div>
+	  </div>
+	  
+	</form>
+	
+
+</body>
+
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+
+		
+	
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+		
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+            
+            /*
+            var params = $form.serializeArray().map(x => {
+            	var v = x.value;
+            	if(x.name === 'price'){
+            		//console.log(parseInt(x.value * 100))
+            		v = parseInt(x.value * 100)
+                }
+            	return `${x.name}=${v}`;
+
+            }).join('&');
+            */
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                
+                if(result.success){
+            		Msg.success('操作成功!',null,function(){
+	            		location.href = referer;                		
+                	});
+				}else{
+					Msg.error('提示消息：操作失败!');
+					setTimeout(function(){
+						formValidationPlugin.disableSubmitButtons(false);
+					},1000);
+				}
+                
+            }, 'json');
+        });
+    
+	
+	
+	$(function(){
+		$('input').attr('disabled','disabled');
+		$('textarea').attr('disabled','disabled');
+		$('select').attr('disabled','disabled');
+	})
+/*]]>*/
+</script>
+
+</html>

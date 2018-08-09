@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+>
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/feedback/feedback'">
+	<ol class="breadcrumb">
+	  <li><a th:href="@{/home}"><i class="icon icon-home"></i>首页</a></li>
+	  <li>用户反馈表</li>
+	  <li>添加</li>
+	</ol>
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/add/save|}">
+		
+	  <div class="form-group hide">
+	    <label for="username" class="col-sm-1">隐藏参数</label>
+	    <div class="col-md-4 col-sm-10">
+	      <input type="text" class="form-control" name="uid" id="uid"/>
+	    </div>
+	  </div>
+	
+	   
+				<div class="form-group hide">
+					<label for="uid" class="col-sm-1"> 唯一id : </label>
+					<div class="col-md-4 col-sm-10">
+					      <input type="text" class="form-control" name="uid" id="uid"  required="required" />
+				    </div>
+				</div>
+				
+	   
+				<div class="form-group ">
+					<label for="userId" class="col-sm-1"> 用户id : </label>
+					<div class="col-md-4 col-sm-10">
+					      <input type="text" class="form-control" name="userId" id="userId"  required="required" />
+				    </div>
+				</div>
+				
+	   
+				<div class="form-group ">
+					<label for="content" class="col-sm-1"> 反馈内容 : </label>
+					<div class="col-md-4 col-sm-10">
+					      <input type="text" class="form-control" name="content" id="content"   />
+				    </div>
+				</div>
+				
+	   
+				<div class="form-group ">
+					<label for="reply" class="col-sm-1"> 回复 : </label>
+					<div class="col-md-4 col-sm-10">
+					      <input type="text" class="form-control" name="reply" id="reply"   />
+				    </div>
+				</div>
+				
+	   
+				<div class="form-group ">
+					<label for="createDate" class="col-sm-1"> 创建日期 : </label>
+					<div class="col-md-4 col-sm-10">
+				      	  <input type="text" readonly="readonly" name="createDate" id="createDate"  class="form-control" />
+				      	  
+					      <script type="text/javascript" th:inline="javascript">
+							    $(function(){
+							    	$("#createDate").datetimepicker({
+									    language:  "zh-CN",
+									    weekStart: 1,
+									    todayBtn:  1,
+									    autoclose: 1,
+									    todayHighlight: 1,
+									    startView: 2, //'month',
+									    minView: 2,
+									    forceParse: 1,
+									    format: "yyyy-mm-dd hh:ii:ss"
+									});
+							    })
+						    </script>
+				    </div>
+				</div>
+				
+	   
+				<div class="form-group ">
+					<label for="replyDate" class="col-sm-1"> 回复日期 : </label>
+					<div class="col-md-4 col-sm-10">
+				      	  <input type="text" readonly="readonly" name="replyDate" id="replyDate"  class="form-control" />
+				      	  
+					      <script type="text/javascript" th:inline="javascript">
+							    $(function(){
+							    	$("#replyDate").datetimepicker({
+									    language:  "zh-CN",
+									    weekStart: 1,
+									    todayBtn:  1,
+									    autoclose: 1,
+									    todayHighlight: 1,
+									    startView: 2, //'month',
+									    minView: 2,
+									    forceParse: 1,
+									    format: "yyyy-mm-dd hh:ii:ss"
+									});
+							    })
+						    </script>
+				    </div>
+				</div>
+				
+	   
+				<div class="form-group ">
+					<label for="replyBy" class="col-sm-1"> 回复人 : </label>
+					<div class="col-md-4 col-sm-10">
+					      <input type="text" class="form-control" name="replyBy" id="replyBy"   />
+				    </div>
+				</div>
+				
+	   
+				<div class="form-group ">
+					<label for="remark" class="col-sm-1"> 备注 : </label>
+					<div class="col-md-4 col-sm-10">
+					      <input type="text" class="form-control" name="remark" id="remark"   />
+				    </div>
+				</div>
+				
+	   
+				<div class="form-group ">
+					<label for="status" class="col-sm-1"> 回复状态 : </label>
+					<div class="col-md-4 col-sm-10">
+					      	  <select name="status" id="status" class="form-control">
+						      	<option value="0">未回复</option>
+						      	<option value="1">已回复</option>
+						      </select>
+				    </div>
+				</div>
+				
+		
+	  
+	  
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-10">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+	    </div>
+	  </div>
+	</form>
+	
+
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+		
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+	
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e, data) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+            	if(result.success){
+            		Msg.success('操作成功!',null,function(){
+	            		location.href = referer;                		
+                	});
+				}else{
+					Msg.error('提示消息：操作失败!');
+					setTimeout(function(){
+						formValidationPlugin.disableSubmitButtons(false);
+					},1000);
+				}
+            }, 'json');
+        });
+    
+        
+        
+
+	
+	var options = {
+			file_data_name: 'file', //上传文件name，对应controller的字段名称
+			limitFilesCount: 1,//限制上传文件数
+			//removeUploaded: false,//上传成功后自动从界面上移除
+			deleteActionOnDone: function(file, doRemoveFile){doRemoveFile()},//删除上传成功的文件
+			filters:{
+			    // 只允许上传图片或图标（.ico）
+			    mime_types: [
+			        {title: '图片', extensions: 'jpg,gif,png'}
+			    ],
+			    // 最大上传文件为 1MB
+			    max_file_size: '4mb',
+			    // 不允许上传重复文件
+			    prevent_duplicates: true
+			},
+			multi_selection: false, // 多选文件
+			responseHandler: function(responseObject, file){
+				if(responseObject.status == 200){
+					var resp = JSON.parse(responseObject.response);
+					$("#avatar").attr('value',resp.data.url);
+				}
+			},
+			multipart_params: {} //	multipart 附加参数
+	};
+	
+	
+	$('#uploader').uploader(options);
+	var uploader = $('#uploader').data('zui.uploader');
+	
+	
+/*]]>*/
+</script>
+
+</html>

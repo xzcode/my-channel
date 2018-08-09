@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzcode.product.app.dao.admin.AdminUserMapper" >
+
+	<!-- 基础结果集-->
+    <resultMap id="BaseResultMap" type="com.xzcode.product.common.entity.admin.AdminUser" >
+        
+			<!-- 自增主键 -->
+			<id column="uid" property="uid"/>
+			<!-- 用户帐号 -->
+			<result column="username" property="username"/>
+			<!-- md5密码 -->
+			<result column="password" property="password"/>
+			<!-- 真实姓名 -->
+			<result column="realname" property="realname"/>
+			<!-- md5加盐 -->
+			<result column="salt" property="salt"/>
+			<!-- 手机号码 -->
+			<result column="mobile" property="mobile"/>
+			<!-- 头像 -->
+			<result column="avatar" property="avatar"/>
+			<!-- 创建日期 -->
+			<result column="create_date" property="createDate"/>
+			<!-- 更新日期 -->
+			<result column="update_date" property="updateDate"/>
+			<!-- 启用状态[0 禁用 no; 1 启用 yes] -->
+			<result column="enabled" property="enabled"/>
+    </resultMap>
+    
+
+    
+<!-- ///////////////////////////// -->
+
+
+	<!-- 表名 -->
+  <sql id="Table_Name" >
+    admin_user
+  </sql>
+  
+  <!-- 表别名 -->
+  <sql id="Table_Alias_Name">
+    ad_us
+  </sql>
+  
+  <!-- 用于查询的表名 -->
+  <sql id="Select_Table_Name" >
+    	<include refid="Table_Name"/>
+    as 
+    	<include refid="Table_Alias_Name"/>
+  </sql>
+
+
+  <!-- 分页 & 排序条件 -->
+  
+    <sql id="Condition_sort_group_sql">
+	  <if test="condition != null">
+		        <if test="condition.sortGroup != null">
+		            order by 
+		            <foreach collection="condition.sortGroup" index="index"  item="value" separator="," open="" close="">
+		              <if test="null != value">    
+				        ${value.orderBy} ${value.sortBy} 
+				      </if>  
+		         	</foreach>
+		        </if>
+		  </if>
+  </sql>
+  
+   <sql id="Condition_page_limit_sql">
+	  <if test="condition != null">
+		        <if test="condition.pageSize !=null">
+		            limit #{condition.starts}, #{condition.pageSize}
+		        </if>
+		  </if>
+  	</sql>
+  	
+  	<sql id="Condition_sort_and_page_sql">
+	  	<include refid="Condition_sort_group_sql"/>
+	  	
+	  	<include refid="Condition_page_limit_sql"/>
+  </sql>
+    
+  
+  <!-- 查询列sql -->
+  <sql id="Base_Select_Column_List" >
+  <trim prefix="" suffix="" suffixOverrides="," >
+  			ad_us.uid,
+  			ad_us.username,
+  			ad_us.password,
+  			ad_us.realname,
+  			ad_us.salt,
+  			ad_us.mobile,
+  			ad_us.avatar,
+  			ad_us.create_date,
+  			ad_us.update_date,
+  			ad_us.enabled,
+	</trim>
+  </sql>
+  
+  <!-- 根据id查询字句 -->
+  <sql id="Uid_Where">
+  	where ad_us.uid = #{uid}
+  </sql>
+  
+   <!-- 根据id查询字句 用于update-->
+  <sql id="Uid_Where_Update">
+  	where uid = #{uid}
+  </sql>
+  
+  
+  <!-- 插入列sql -->
+  <sql id="Insert_Column_Trim_List">
+  		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  			<if test="uid != null" >
+		    		uid,
+		   		</if>
+	  			<if test="username != null" >
+		    		username,
+		   		</if>
+	  			<if test="password != null" >
+		    		password,
+		   		</if>
+	  			<if test="realname != null" >
+		    		realname,
+		   		</if>
+	  			<if test="salt != null" >
+		    		salt,
+		   		</if>
+	  			<if test="mobile != null" >
+		    		mobile,
+		   		</if>
+	  			<if test="avatar != null" >
+		    		avatar,
+		   		</if>
+	  			<if test="createDate != null" >
+		    		create_date,
+		   		</if>
+	  			<if test="updateDate != null" >
+		    		update_date,
+		   		</if>
+	  			<if test="enabled != null" >
+		    		enabled,
+		   		</if>
+    	</trim>
+  </sql>
+  
+  <!-- 插入值sql -->
+  <sql id="Insert_Values_Trim_List">
+  	<trim prefix="(" suffix=")" suffixOverrides="," >
+	  			<if test="uid != null" >
+		    		#{uid},
+		   		</if>
+	  			<if test="username != null" >
+		    		#{username},
+		   		</if>
+	  			<if test="password != null" >
+		    		#{password},
+		   		</if>
+	  			<if test="realname != null" >
+		    		#{realname},
+		   		</if>
+	  			<if test="salt != null" >
+		    		#{salt},
+		   		</if>
+	  			<if test="mobile != null" >
+		    		#{mobile},
+		   		</if>
+	  			<if test="avatar != null" >
+		    		#{avatar},
+		   		</if>
+	  			<if test="createDate != null" >
+		    		#{createDate},
+		   		</if>
+	  			<if test="updateDate != null" >
+		    		#{updateDate},
+		   		</if>
+	  			<if test="enabled != null" >
+		    		#{enabled},
+		   		</if>
+    	</trim>
+  </sql>
+  
+  <!-- 更新列sql -->
+  <sql id="Update_Columns_Set_List">
+  	<set> 		
+      <trim prefix="" suffix="" suffixOverrides="," >
+      			<if test="username != null">
+					username = #{username},
+	    		</if>
+      			<if test="password != null">
+					password = #{password},
+	    		</if>
+      			<if test="realname != null">
+					realname = #{realname},
+	    		</if>
+      			<if test="salt != null">
+					salt = #{salt},
+	    		</if>
+      			<if test="mobile != null">
+					mobile = #{mobile},
+	    		</if>
+      			<if test="avatar != null">
+					avatar = #{avatar},
+	    		</if>
+      			<if test="updateDate != null">
+					update_date = #{updateDate},
+	    		</if>
+      			<if test="enabled != null">
+					enabled = #{enabled},
+	    		</if>
+      </trim>
+    </set>
+  </sql>
+  
+  <!-- ///////////////////////////// -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Select_Column_List" />
+    from 
+    	<include refid="Select_Table_Name" />
+    	<include refid="Uid_Where"/>
+  </select>
+  
+  
+  
+  <select id="list" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Select_Column_List" />
+    from 
+    	<include refid="Select_Table_Name" />
+  </select>
+  
+  
+  
+  
+  
+  
+  <select id="count" resultType="int">
+    	select 
+    		count(*) as count 
+    	from 
+    		<include refid="Select_Table_Name" />
+    </select>
+    
+    
+  <delete id="deleteByPrimaryKey">
+    delete from 
+    	<include refid="Table_Name" />
+    	<include refid="Uid_Where_Update"/>
+  </delete>
+  
+  <insert id="insert"  >
+    insert into 
+       	<include refid="Table_Name" />
+    	<include refid="Insert_Column_Trim_List"/>
+    values 
+    	<include refid="Insert_Values_Trim_List"/>
+  </insert>
+  
+  <insert id="insertSelective" keyColumn="uid" keyProperty="uid" useGeneratedKeys="true" >
+    insert into 
+    	<include refid="Table_Name" />
+    	<include refid="Insert_Column_Trim_List"/>
+    values 
+    	<include refid="Insert_Values_Trim_List"/>
+  </insert>
+  
+  <update id="updateByPrimaryKey">
+    update
+    	<include refid="Table_Name" />
+    	<include refid="Update_Columns_Set_List"/>
+    	<include refid="Uid_Where_Update"/>
+  </update>
+  
+  <update id="updateEnabled">
+    	update
+    	<include refid="Table_Name" />
+    	set
+    		enabled = #{enabled}
+    	<include refid="Uid_Where_Update"/>
+	</update>
+    
+  
+  <!-- ///////////////////////////// -->
+  
+  
+  
+ </mapper>

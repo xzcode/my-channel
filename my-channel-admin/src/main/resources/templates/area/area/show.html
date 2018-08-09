@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- jdbclink code generator - 2018-05-16 17:44:39 -->
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/area/area'">
+	<ol class="breadcrumb">
+	  <li>首页</li>
+	  <li>数据地域信息管理</li>
+	  <li>数据地域信息列表</li>
+	  <li>查看</li>
+	</ol>
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/edit/save|}">
+		
+		
+		
+	
+	<div class="form-group hide">
+		<label for="uid" class="col-sm-1">  : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="uid" id="uid"   th:value="${editObj.uid}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="areaId" class="col-sm-1"> 父级 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="areaId" id="areaId"   th:value="${editObj.areaId}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="name" class="col-sm-1"> 名称 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="name" id="name"   th:value="${editObj.name}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="shortname" class="col-sm-1"> 简称 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="shortname" id="shortname"   th:value="${editObj.shortname}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="longitude" class="col-sm-1"> 经度 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="longitude" id="longitude"   th:value="${editObj.longitude}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="latitude" class="col-sm-1"> 纬度 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="latitude" id="latitude"   th:value="${editObj.latitude}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="layer" class="col-sm-1"> 级别 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="layer" id="layer"   th:value="${editObj.layer}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="sort" class="col-sm-1"> 排序 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="sort" id="sort"   th:value="${editObj.sort}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="status" class="col-sm-1"> 状态1有效 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="status" id="status"   th:value="${editObj.status}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	  
+	
+	  
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-10">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+	    </div>
+	  </div>
+	  
+	</form>
+	
+
+</body>
+
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+
+		
+	
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+		
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+            
+            /*
+            var params = $form.serializeArray().map(x => {
+            	var v = x.value;
+            	if(x.name === 'price'){
+            		//console.log(parseInt(x.value * 100))
+            		v = parseInt(x.value * 100)
+                }
+            	return `${x.name}=${v}`;
+
+            }).join('&');
+            */
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                
+                if(result.success){
+            		Msg.success('操作成功!',null,function(){
+	            		location.href = referer;                		
+                	});
+				}else{
+					Msg.error('提示消息：操作失败!');
+					setTimeout(function(){
+						formValidationPlugin.disableSubmitButtons(false);
+					},1000);
+				}
+                
+            }, 'json');
+        });
+    
+	
+	
+	$(function(){
+		$('input').attr('disabled','disabled');
+		$('textarea').attr('disabled','disabled');
+		$('select').attr('disabled','disabled');
+	})
+/*]]>*/
+</script>
+
+</html>

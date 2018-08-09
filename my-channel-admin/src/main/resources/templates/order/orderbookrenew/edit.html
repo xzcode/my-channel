@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- jdbclink code generator - 2018-05-21 11:50:04 -->
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/order/orderbookrenew'">
+	<ol class="breadcrumb">
+	  <li>图书续借记录管理</li>
+	  <li>图书续借记录列表</li>
+	  <li>编辑</li>
+	</ol>
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/edit/save|}">
+		
+		
+
+
+
+	<div class="form-group hide">
+		<label for="uid" class="col-sm-1">  : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="uid" name="uid"  required="required" maxlength="20" th:value="${editObj.uid}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="orderBookId" class="col-sm-1"> 图书借阅标识 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="orderBookId" name="orderBookId"  required="required" maxlength="20" th:value="${editObj.orderBookId}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="startDate" class="col-sm-1"> 续借开始时间 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  <input type="text" readonly="readonly" id="startDate" name="startDate"    class="form-control"  th:value="${editObj.startDate != null ? #dates.format(editObj. startDate, 'yyyy-MM-dd HH:mm:ss') : ''}" />
+	  	  
+	      <script type="text/javascript" th:inline="javascript">
+			    $(function(){
+			    	$("#startDate").datetimepicker({
+					    language:  "zh-CN",
+					    weekStart: 1,
+					    todayBtn:  1,
+					    autoclose: 1,
+					    todayHighlight: 1,
+					    startView: 2, //'month',
+					    minView: 2,
+					    forceParse: 1,
+					    format: "yyyy-mm-dd hh:ii:ss"
+					});
+			    })
+		    </script>
+	      
+	      	
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="endDate" class="col-sm-1"> 续借到期时间 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  <input type="text" readonly="readonly" id="endDate" name="endDate"    class="form-control"  th:value="${editObj.endDate != null ? #dates.format(editObj. endDate, 'yyyy-MM-dd HH:mm:ss') : ''}" />
+	  	  
+	      <script type="text/javascript" th:inline="javascript">
+			    $(function(){
+			    	$("#endDate").datetimepicker({
+					    language:  "zh-CN",
+					    weekStart: 1,
+					    todayBtn:  1,
+					    autoclose: 1,
+					    todayHighlight: 1,
+					    startView: 2, //'month',
+					    minView: 2,
+					    forceParse: 1,
+					    format: "yyyy-mm-dd hh:ii:ss"
+					});
+			    })
+		    </script>
+	      
+	      	
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="payRenewPrice" class="col-sm-1"> 支付续借费用 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  
+	  	  <input type="number" step="0.01" data-fv-regexp-message="格式错误" pattern="^\d+(\.\d{1,2})?$" class="form-control" id="payRenewPrice" name="payRenewPrice"  required="required" maxlength="11"  th:value="${@thAmounts.toYuan(editObj.payRenewPrice)}" />
+	  	  
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="createDate" class="col-sm-1"> 续借时间 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  <input type="text" disabled="disabled" class="form-control"  th:value="${editObj.createDate != null ? #dates.format(editObj. createDate, 'yyyy-MM-dd HH:mm:ss') : ''}" />
+	  	  
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+	  
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-10">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+	    </div>
+	  </div>
+	  
+	</form>
+	
+
+</body>
+
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+
+		
+	
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+		
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+            
+            /*
+            var params = $form.serializeArray().map(x => {
+            	var v = x.value;
+            	if(x.name === 'price'){
+            		//console.log(parseInt(x.value * 100))
+            		v = parseInt(x.value * 100)
+                }
+            	return `${x.name}=${v}`;
+
+            }).join('&');
+            */
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                
+                if(result.success){
+            		Msg.success('操作成功!',null,function(){
+	            		location.href = referer;                		
+                	});
+				}else{
+					Msg.error('提示消息：操作失败!');
+					setTimeout(function(){
+						formValidationPlugin.disableSubmitButtons(false);
+					},1000);
+				}
+                
+            }, 'json');
+        });
+    
+	
+	
+	
+	
+	$(function(){
+		$('#updateDate').attr('disabled','disabled');
+		$('#createDate').attr('disabled','disabled');
+		//$('#updateUserName').attr('disabled','disabled');
+		//$('#createUserName').attr('disabled','disabled');
+	})
+/*]]>*/
+</script>
+
+</html>

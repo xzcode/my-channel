@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	
+	<meta th:include="common :: head_common" th:remove="tag"/>
+	
+
+</head>
+<body>
+
+
+<div th:include="common :: header_common" th:remove="tag"></div>
+
+
+	
+<section class="hotel_title">
+	<div class="ht_container">
+		<div class="ht_logo"></div>
+		<h1>智慧酒店系统</h1>
+		<p class="ht_txt">
+			以“效率、舒适和节能”为导向，通过整合酒店的照明系统、遮阳系统、影音系统、环境系统，实现系统设备的智能互联和全闭环的智能服务和管理。
+		</p>
+		<a href="javascript:void(0)"></a>
+	</div>
+</section>
+<section class="hotel_process">
+	<div class="hp_container">
+		<p class="hc_txt">WeHotel智慧酒店系统是基于微信平台开发的创新型智慧酒店综合服务管理平台。它包括酒店客户下单、入住、设备智能化交互、客房服务等。</p>
+		<div class="hc_icons"></div>
+		<h2 class="hc_title">更快捷、更便利的入住流程</h2>
+		<p class="hc_tips">客人无需繁琐的登记入住步骤，一键就可以实现开锁入住。如果需要服务，还可以直接通过微信和酒店的24小时在线客服联系。</p>
+	</div>
+	<div class="hp_line"></div>
+	<div class="hp_pic"></div>
+</section>
+<section class="hotel_experience">
+	<h2>更舒适、更时尚的入住体验</h2>
+	<p>客人可以在客房享受影音娱乐、智能卫浴、智能灯光、睡眠监测等全方位的入住体验。</p>
+</section>
+<section class="hotel_content">
+	<p class="hc_title">体验内容</p>
+	<div class="hc_content">
+		<p class="hc_title">客房入住体验</p>
+		<p class="hc_txt">通过微信获取开门二维码，可以直接用二维码开门。<br>进入客房后自动开启欢迎入住模式（开启灯光、音乐、空调等设备）。</p>
+	</div>
+	<div class="hc_content">
+		<p class="hc_title">客房预订体验</p>
+		<p class="hc_txt">用户通过微信公众号，进行客房预定和信息登记。<br>管理系统生成客房开锁二维码，通过微信发送到顾客手机上。<br>酒店前台、管家办理身份证等登记。<br>顾客通过二维码直接打开门锁进入客房完成入住。</p>
+	</div>
+</section>
+<section class="hotel_banner">
+	<div class="hb_container">
+		<div class="banner_pic">
+			<ul class="hp_sliders" id="side_slider">
+				<li class="hs_slider hs_one">
+					<div class="hss_content">
+						<h1>WeHotel智慧酒店系统-卫浴体验</h1>
+						<p>在浴室内安装的魔镜做为浴室里的中心平台，可以连接环境监测、智能浴缸、智能照明以及其他浴室设备。当客户站在魔镜前，将自动获取睡眠的质量、天气状况、空气质量、当天新闻资讯等信息。</p>
+					</div>
+				</li>
+				<li class="hs_slider hs_two">
+					<div class="hss_content">
+						<h1>设备交互体验</h1>
+						<p>客户无需下载专用APP，直接通过微信就可对客房设备进行控制。</p>
+					</div>
+				</li>
+				<li class="hs_slider hs_three">
+					<div class="ht_one">
+						<div class="ht_pic"></div>
+						<img src="/static/guanwang_second/front/images/new_version/hotel_icon5.png" alt="智能酒店">
+					</div>
+					<div class="ht_two">
+						<div class="ht_pic"></div>
+						<img src="/static/guanwang_second/front/images/new_version/hotel_icon5.png" alt="智能酒店">
+					</div>
+					<div class="ht_three">
+						<div class="ht_pic"></div>
+						<img src="/static/guanwang_second/front/images/new_version/hotel_icon5.png" alt="智能酒店">
+					</div>
+					<div class="ht_four">
+						<div class="ht_pic"></div>
+						<img src="/static/guanwang_second/front/images/new_version/hotel_icon5.png" alt="智能酒店">
+					</div>
+					<div class="ht_content">
+						<p class="hc_title">影音娱乐体验</p>
+						<p class="hc_txt">客户进入客房之后，可以一键开启娱乐模式，电视、机顶盒、DVD自动开启、空调调节到合适的温度、窗帘自动关闭，坐享娱乐体验。</p>
+					</div>
+				</li>
+			</ul>
+			<ul class="hb_mark"> 
+	      <li class="inCur">
+	        <a href="javascript:void(0)">卫浴体验</a>
+	      </li>
+	      <li>
+	        <a href="javascript:void(0)">设备交互体验</a>
+	      </li>
+	      <li>
+	        <a href="javascript:void(0)">影音娱乐体验</a>
+	      </li>
+	    </ul>
+		</div>
+	</div>	
+</section>
+<section class="hotel_bar">
+	<div class="hb_block clear">
+		<img src="/static/guanwang_second/front/images/solutions/hotel_img1.jpg" alt="客房睡眠体验">
+		<div class="hb_right">
+			<p class="hr_title">客房睡眠体验</p>
+			<em></em>
+			<p class="hr_txt">当客户入睡后，将自动设置门铃为勿扰模式，避免受到打扰。Sleepaces睡眠监测系统将监控呼气频率、心跳、若发现异常立即报警，保证客户的健康安全。并在次日提供完整的睡眠报告，让客户详细了解睡眠质量情况，有助改善睡眠状况。</p>
+		</div>
+	</div>
+	<div class="hb_block hb_two clear">
+		<img src="/static/guanwang_second/front/images/solutions/hotel_img2.jpg" alt="客服体验">
+		<div class="hb_right">
+			<p class="hr_title">客服体验</p>
+			<em></em>
+			<p class="hr_txt">当客户洗漱用品、餐饮、领取快递外卖等服务，机器人可以代替人工客服，实现快速作业。并不间断巡逻前厅、客房，让客户享有高效、人性化的创新性酒店客房服务。</p>
+		</div>
+	</div>
+</section>
+<section class="hotel_last">
+	<h2>更实效、更全面的后台管理与控制</h2>
+	<p>酒店可以通过欧瑞博提供的WeHotel智慧酒店系统后台，实现高效客户管理和优化客房控制、通过分析大数据，进一步制定更完善的营销策略。</p>
+</section>
+	<div class="video_mask"></div>
+	<div class="video_modal"></div>
+
+	<div class="fixed">
+  <a href="http://a1.7x24cc.com/phone_webChat.html?accountId=N000000013331&chatId=2db073ca-1fea-4b3c-93a1-684ac8e47bf5" class="online"
+    target="_blank" title="在线咨询" id="zhixun1">
+    <div></div>
+  </a>
+  <a class="getTop" href="javascript:void(0)">
+    <div></div>
+  </a>
+</div>
+<div class="erweima">
+  <div class="modal-mask"></div>
+  <div class="modal-con">
+    <div class="modal-container">
+      <a href="javascript:void(0)" class="qr_close"></a>
+      <h2>ORVIBO官方微信</h2>
+      <p>打开微信，点击右上角的“+”，选择“扫一扫”
+        <br>功能，用摄像头对准下方二维码即可。</p>
+      <img src="/static/guanwang_second/front/images/new/qrcode_new.jpg" alt="">
+    </div>
+  </div>
+</div>
+<div class="miniapp">
+  <div class="modal-mask"></div>
+  <div class="modal-con">
+    <div class="modal-container">
+      <a href="javascript:void(0)" class="miniapp_close"></a>
+      <h2>官方小程序二维码</h2>
+      <p>打开微信，点击右上角的“+”，选择“扫一扫”
+        <br>功能，用摄像头对准下方二维码即可。</p>
+      <img src="/static/guanwang_second/front/images/new/prm_code.png" alt="">
+    </div>
+  </div>
+</div>
+<footer class="foot">
+  <div class="content clear">
+    <div class="foot_top clear">
+      <div class="link_list">
+        <ul>
+          <li class="first_li">关于ORVIBO</li>
+          <li>
+            <a href="/about/about_us.html">公司简介</a>
+          </li>
+          <li>
+            <a href="/about/join_us.html">加入我们</a>
+          </li>
+          <li>
+            <a href="http://bbs.orvibo.com/" target="_blank">新闻动态</a>
+          </li>
+          <li>
+            <a href="/about/contact.html">联系我们</a>
+          </li>
+        </ul>
+      </div>
+      <div class="link_list">
+        <ul>
+          <li class="first_li">产品及服务</li>
+          <li>
+            <a href="/product/productList.html">产品中心</a>
+          </li>
+          <li>
+            <a href="/solution/house_solution.html">智慧家庭</a>
+          </li>
+          <li>
+            <a href="/solution/office_solution.html">智慧办公</a>
+          </li>
+          <li>
+            <a href="/solution/hotel_solution.html">智慧酒店</a>
+          </li>
+          <!-- <li><a href="/orvibo_inside.html">设备智能化升级方案</a></li> -->
+          <li>
+            <a href="/app.html">APP下载</a>
+          </li>
+        </ul>
+      </div>
+      <div class="link_list">
+        <ul>
+          <li class="first_li">体验购买</li>
+          <li>
+            <a href="https://mall.jd.com/index-677432.html" target="_blank">京东旗舰店</a>
+          </li>
+          <li>
+            <a href="https://orvibo.tmall.com/?spm=a220o.1000855.1997427721.d4918089.8PDqRf" target="_blank">天猫旗舰店</a>
+          </li>
+        </ul>
+      </div>
+      <div class="link_list">
+        <ul>
+          <li class="first_li">关注及合作</li>
+          <li>
+            <a href="javascript:void(0)" class="qrcode">官方公众号</a>
+          </li>
+        </ul>
+      </div>
+      <div class="link_list">
+        <ul>
+          <li class="first_li">服务支持</li>
+          <li>
+            <a href="javascript:void(0)" class="miniapp_code">小程序</a>
+          </li>
+          <li>
+            <a href="https://partner.orvibo.com/#/register" id="prm_foot" target="_blank">合作伙伴系统</a>
+          </li>
+        </ul>
+      </div>
+      <div class="tel">
+        <p class="phone_num digit">400-060-6050</p>
+        <p>周一至周日9:00-12:00 13:30-18:00</p>
+        <a class="online_service" href="http://a1.7x24cc.com/phone_webChat.html?accountId=N000000013331&chatId=2db073ca-1fea-4b3c-93a1-684ac8e47bf5"
+          target="_blank" id="zhixun">
+          <i></i>
+          在线咨询</a>
+      </div>
+    </div>
+    <div class="copyright clear">
+      <p>Copyright©2014-2018 深圳市欧瑞博科技有限公司 版权所有 粤ICP备12019139号-2 </p>
+      <div class="language">
+        <ul class="lan_list">
+          <li id="en">
+            <a href="/en/index.html">
+              <i class="flag us_en"></i>English</a>
+          </li>
+          <li class="arrow_d">
+            <a href="javascript:void(0)">
+              <i class="flag china"></i>中文</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+ <script type="text/javascript" src=/static/guanwang_second/front/bower_components/jquery/dist/jquery.min.js?v=1529046969038>
+  </script>
+   <script type="text/javascript" src=/static/guanwang_second/front/js/common_ch.js?v=1529046969038>
+  </script>
+  
+  <!-- <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
+  <script>
+    !(function ($) {
+      var host = window.location.host;
+      if (host == "zhijiacloud.com" || host == "www.zhijiacloud.com") {
+        $(".copyright p").text("© 2014-2017 深圳市欧瑞博科技有限公司版权所有 . 粤ICP备12019139号-3")
+      }
+    })(jQuery)
+  </script>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3846GP" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<script>
+	!(function(){
+		$('#side_slider').slider({
+      speed:950,
+      play:"inCur",
+      moveSlider:false,
+      opacity:true,
+      markSlider:true,
+      auto:false,
+      bLeft:false,
+      bRight:false,
+      markClass:"hb_mark",
+      markLiClass:"inCur",
+      control:"click"
+    },"side_slider");
+    $(".hb_block .hb_right").css({"height":$(".hb_block img").height() - 4 +"px"});
+    $(window).resize(function(){
+    	$(".hb_block .hb_right").css({"height":$(".hb_block img").height() - 4 +"px"});
+    })
+    $(".hotel_title a").click(function(){
+		$("body").css({"overflow":"hidden"});
+		var width = $(window).width();
+		var height = $(window).height();
+		var src="http://200003613.vod.myqcloud.com/200003613_648d0948fa5711e6b7beffa7fcfa3e11.f0.mp4";
+		$(".video_modal").fadeIn(300);
+		$(".video_modal").append('<video id="really-cool-video" class="video-js" controls preload="auto" autoplay data-setup='+'{ "controls": true, "autoplay": true, "preload": "auto"}'+' style="width:1190px;height:600px"><source src="'+src+'" type="video/mp4" /></video>');
+		$(".video_mask").css({"width":width+"px","height":height+"px"});
+		$(".video_mask").fadeIn(300);
+		$(".video_mask").click(function(){
+			$(".video_modal").fadeOut(300);
+			$(".video_mask").fadeOut(300);
+			$("#really-cool-video").remove();
+			$("body").css({"overflow":"auto"});
+		});
+	});
+	})(jQuery)
+</script>

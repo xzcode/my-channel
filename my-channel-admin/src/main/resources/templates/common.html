@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+
+<title></title>
+
+
+</head>
+<body>
+<div th:fragment="head_common" >
+	
+	<meta charset="UTF-8">
+
+	<meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" /> -->
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<meta http-equiv="pragma" content="no-cache"/>
+	<meta http-equiv="cache-control" content="no-cache"/>
+	<meta http-equiv="expires" content="0"/>
+	
+</div>
+
+<div th:fragment="css_common" >
+	
+	
+
+	<!-- 
+	
+	<link th:href="@{/plugins/zui/css/zui.min.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/plugins/zui/css/zui-theme.css}" rel="stylesheet" type="text/css" />
+	
+	<link th:href="@{/plugins/zui/lib/datatable/zui.datatable.min.css}" rel="stylesheet"/>
+	<link th:href="@{/plugins/zui/lib/uploader/zui.uploader.min.css}" rel="stylesheet"/>
+	
+	<link th:href="@{/plugins/zui/lib/datetimepicker/datetimepicker.min.css}" rel="stylesheet"/>
+	
+	<link th:href="@{/plugins/zui/lib/bootbox/bootbox.min.css}" rel="stylesheet"/>
+	
+
+	<link th:href="@{/css/zTreeStyle/zTreeStyle.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/metroStyle/metroStyle.css}" rel="stylesheet" type="text/css" />
+	
+	<link th:href="@{/css/my-common.css}" rel="stylesheet" type="text/css" />
+	
+	<link th:href="@{/plugins/form-validation/formValidation.min.css}" rel="stylesheet"/>
+	
+	<link th:href="@{/css/sweetalert2.min.css}" rel="stylesheet"/>
+	
+	 <link th:href="@{/plugins/DataTables/DataTables-1.10.15/media/css/jquery.dataTables.min.css}" rel="stylesheet" type="text/css" />
+	
+	 <link th:href="@{/plugins/DataTables/DataTables-1.10.15/extensions/Responsive/css/responsive.foundation.min.css}" rel="stylesheet" type="text/css" />
+	 <link th:href="@{/plugins/DataTables/DataTables-1.10.15/extensions/Buttons/css/buttons.dataTables.min.css}" rel="stylesheet" type="text/css" />
+	 <link th:href="@{/plugins/DataTables/DataTables-1.10.15/extensions/FixedColumns/css/fixedColumns.dataTables.min.css}" rel="stylesheet" type="text/css" />
+	
+	 -->
+	
+</div>
+
+
+<div th:fragment="script_common" >
+	<!-- 
+	<script th:src="@{/js/jquery.js}"></script>
+	
+	<script th:src="@{/plugins/zui/js/zui.min.js}"></script>
+	
+	<script th:src="@{/plugins/zui/lib/uploader/zui.uploader.js}"></script>
+	<script th:src="@{/plugins/zui/lib/datatable/zui.datatable.min.js}"></script>
+	<script th:src="@{/plugins/zui/lib/dashboard/zui.dashboard.js}"></script>
+	<script th:src="@{/plugins/zui/lib/datetimepicker/datetimepicker.min.js}"></script>
+	
+	<script th:src="@{/plugins/zui/lib/bootbox/bootbox.js}"></script>
+	
+	<script th:src="@{/plugins/form-validation/formValidation.js}"></script>
+	<script th:src="@{/plugins/form-validation/language/zh_CN.js}"></script>
+	<script th:src="@{/plugins/form-validation/framework/bootstrap.min.js}"></script>
+	
+	<script th:src="@{/js/jquery.validate.min.js}"></script>
+	<script th:src="@{/js/moment-min.js}"></script>
+	<script th:src="@{/js/ajaxfileupload.js}" type="text/javascript" ></script>
+    <script th:src="@{/js/jquery.ztree.core.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/jquery.ztree.exedit.js}"  type="text/javascript"></script>
+    <script th:src="@{/js/jquery.ztree.excheck.js}"  type="text/javascript"> </script>
+    
+    
+    <script th:src="@{/plugins/ueditor/1.4.3/ueditor.config.js}"  type="text/javascript"></script>
+    <script th:src="@{/plugins/ueditor/1.4.3/ueditor.all.js}"  type="text/javascript"></script>
+    <script th:src="@{/plugins/ueditor/1.4.3/lang/zh-cn/zh-cn.js}"  type="text/javascript"></script>
+    
+    <script th:src="@{/js/md5.js}" type="text/javascript"></script>
+    
+    <script th:src="@{/js/util.js}" type="text/javascript"></script>
+    
+    <script th:src="@{/js/easy-breadcrumb.js}" type="text/javascript"></script>
+    
+    <link th:href="@{/plugins/zui/lib/datagrid/zui.datagrid.min.css}" rel="stylesheet"/>
+    
+	<script th:src="@{/plugins/zui/lib/datagrid/zui.datagrid.min.js}"></script>
+	
+	<link th:href="@{/plugins/zui/lib/tabs/zui.tabs.min.css}" rel="stylesheet"/>
+	<script th:src="@{/plugins/zui/lib/tabs/zui.tabs.min.js}"></script>
+	
+	<script th:src="@{/plugins/DataTables/DataTables-1.10.15/media/js/jquery.dataTables.min.js}"></script>
+	
+	<script th:src="@{/plugins/DataTables/DataTables-1.10.15/extensions/Responsive/js/dataTables.responsive.min.js}"></script>
+	<script th:src="@{/plugins/DataTables/DataTables-1.10.15/extensions/Buttons/js/dataTables.buttons.min.js}"></script>
+	<script th:src="@{/plugins/DataTables/DataTables-1.10.15/extensions/FixedColumns/js/dataTables.fixedColumns.min.js}"></script>
+	<script th:src="@{/plugins/DataTables/DataTables-1.10.15/extensions/Select/js/dataTables.select.min.js}"></script>
+    
+    <script th:src="@{/plugins/layer-v3.1.1/layer/layer.js}"></script>
+    
+     -->
+     
+     
+     
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	
+	<link href="https://cdn.bootcss.com/zui/1.8.1/css/zui.min.css" rel="stylesheet" type="text/css" />
+	<script src="https://cdn.bootcss.com/zui/1.8.1/js/zui.min.js"></script>
+	
+	<link th:href="@{/plugins/zui/css/zui-theme.css}" rel="stylesheet" type="text/css" />
+	
+	<link href="https://cdn.bootcss.com/zui/1.8.1/lib/uploader/zui.uploader.min.css" rel="stylesheet"/>
+	<script src="https://cdn.bootcss.com/zui/1.8.1/lib/uploader/zui.uploader.min.js"></script>
+	
+	
+	<link href="https://cdn.bootcss.com/zui/1.8.1/lib/datetimepicker/datetimepicker.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/zui/1.8.1/lib/datetimepicker/datetimepicker.min.js"></script>
+	
+	
+	<link href="https://cdn.bootcss.com/zui/1.8.1/lib/bootbox/bootbox.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/zui/1.8.1/lib/bootbox/bootbox.js"></script>
+	
+	
+	<link href="https://cdn.bootcss.com/zui/1.8.1/lib/dashboard/zui.dashboard.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/zui/1.8.1/lib/dashboard/zui.dashboard.min.js"></script>
+	
+	<link href="https://cdn.bootcss.com/zui/1.8.1/lib/tabs/zui.tabs.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/zui/1.8.1/lib/tabs/zui.tabs.min.js"></script>
+	
+
+	<link href="https://cdn.bootcss.com/zTree.v3/3.5.33/css/zTreeStyle/zTreeStyle.min.css" rel="stylesheet">
+	<link href="https://cdn.bootcss.com/zTree.v3/3.5.33/css/metroStyle/metroStyle.min.css" rel="stylesheet">
+	
+	
+	<script src="https://cdn.bootcss.com/zTree.v3/3.5.33/js/jquery.ztree.all.min.js"></script>
+	
+	
+	
+	
+	
+	<link th:href="@{/plugins/form-validation/formValidation.min.css}" rel="stylesheet"/>
+	<script th:src="@{/plugins/form-validation/formValidation.js}"></script>
+	<script th:src="@{/plugins/form-validation/language/zh_CN.js}"></script>
+	<script th:src="@{/plugins/form-validation/framework/bootstrap.min.js}"></script>
+	
+	
+	 <link href="https://cdn.bootcss.com/datatables/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
+	 
+	 <script src="https://cdn.bootcss.com/datatables/1.10.15/js/jquery.dataTables.min.js"></script>
+	
+	 <link th:href="@{/plugins/DataTables/DataTables-1.10.15/extensions/Responsive/css/responsive.foundation.min.css}" rel="stylesheet" type="text/css" />
+	 <link th:href="@{/plugins/DataTables/DataTables-1.10.15/extensions/Buttons/css/buttons.dataTables.min.css}" rel="stylesheet" type="text/css" />
+	 <link th:href="@{/plugins/DataTables/DataTables-1.10.15/extensions/FixedColumns/css/fixedColumns.dataTables.min.css}" rel="stylesheet" type="text/css" />
+	
+	<script th:src="@{/plugins/DataTables/DataTables-1.10.15/extensions/Responsive/js/dataTables.responsive.min.js}"></script>
+	<script th:src="@{/plugins/DataTables/DataTables-1.10.15/extensions/Buttons/js/dataTables.buttons.min.js}"></script>
+	<script th:src="@{/plugins/DataTables/DataTables-1.10.15/extensions/FixedColumns/js/dataTables.fixedColumns.min.js}"></script>
+	<script th:src="@{/plugins/DataTables/DataTables-1.10.15/extensions/Select/js/dataTables.select.min.js}"></script>
+	
+    
+    <script th:src="@{/plugins/ueditor/1.4.3/ueditor.config.js}"  type="text/javascript"></script>
+    <script th:src="@{/plugins/ueditor/1.4.3/ueditor.all.js}"  type="text/javascript"></script>
+    <script th:src="@{/plugins/ueditor/1.4.3/lang/zh-cn/zh-cn.js}"  type="text/javascript"></script>
+    
+    <script src="https://cdn.bootcss.com/moment.js/2.22.1/moment.min.js"></script>
+    
+    <script th:src="@{/js/md5.js}" type="text/javascript"></script>
+    
+    <script th:src="@{/js/util.js}" type="text/javascript"></script>
+    
+	
+    
+    <script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+     
+    
+    <script type="text/javascript" th:inline="javascript">
+
+	/*<![CDATA[*/
+		var UploadUrl= [[${@uploadHelper.host + @uploadHelper.uploadUrl}]];
+	
+	/*]]>*/
+	</script>
+	
+	<link th:href="@{/css/my-common.css}" rel="stylesheet" type="text/css" />
+	
+	<script th:src="@{|/js/my-common.js?v=1.0.1|}" type="text/javascript"></script>
+	
+</div>
+
+<!--
+<ul th:fragment="pager_common" class="pager" style="float: right;">
+	<li class="previous"><a th:href="@{${url}(pageOffset=${1})}">««首页</a></li>
+  	<li class="previous"><a th:href="@{${url}(pageOffset=${page.prevPage})}">«上一页</a></li>
+  	<li class=""><a><span th:text="${page.pageOffset}">1</span> / <span th:text="${page.pageCount}">2</span> &nbsp;&nbsp;共<span th:text="${page.total}">2</span>条</a></li>
+  	<li class="next"><a th:href="@{${url}(pageOffset=${page.nextPage})}">下一页»</a></li>
+  	<li class="next"><a th:href="@{${url}(pageOffset=${page.pageCount})}">尾页»»</a></li>
+</ul>
+
+ <ul th:fragment="pager_common_jdbclink" class="pager" style="float: right;">
+	<li class="previous"><a th:href="@{${url}(pageNo=${1})}">««首页</a></li>
+  	<li class="previous"><a th:href="@{${url}(pageNo=${page.prev})}">«上一页</a></li>
+  	<li class=""><a><span th:text="${page.total == 0 ? '0' : page.pageNo}">1</span> / <span th:text="${page.pages}">2</span> &nbsp;&nbsp;共 <span th:text="${page.total}">2</span> 条</a></li>
+  	<li class="next"><a th:href="@{${url}(pageNo=${page.next})}">下一页»</a></li>
+  	<li class="next"><a th:href="@{${url}(pageNo=${page.pages})}">尾页»»</a></li>
+</ul> -->
+
+<ul th:fragment="pager_common_jdbclink" class="pager" style="float: right;">
+	<li class="previous"><a href="javascript:;" onclick="_changepage(1)">««首页</a></li>
+  	<li class="previous"><a href="javascript:;"  th:onclick="|_changepage(${page.prev})|">«上一页</a></li>
+  	<li class=""><a><span th:text="${page.total == 0 ? '0' : page.pageNo}">1</span> / <span th:text="${page.pages}">2</span> &nbsp;&nbsp;共 <span th:text="${page.total}">2</span> 条</a></li>
+  	<li class="next"><a href="javascript:;"  th:onclick="|_changepage(${page.next})|">下一页»</a></li>
+  	<li class="next"><a href="javascript:;"  th:onclick="|_changepage(${page.pages})|">尾页»»</a></li>
+  	
+  	<script type="text/javascript" th:inline="javascript">
+
+	/*<![CDATA[*/
+		function _changepage(pageNO){
+			$('.search-form #pageNo').val(pageNO);
+			$('.search-form').submit();
+		}
+	
+	/*]]>*/
+	
+	
+	</script>
+</ul>
+
+
+
+<!-- <meta th:include="include/common :: head_common" th:remove="tag"></meta>
+
+<meta th:include="include/common :: css_common" th:remove="tag"></meta>
+
+<div th:include="include/common :: script_common" th:remove="tag"></div> -->
+
+<script type="text/javascript" th:inline="javascript">
+
+/*<![CDATA[*/
+
+/*]]>*/
+
+
+</script>
+
+
+<script  th:fragment="delete_script_common" type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+	
+	$(".delete-btn").on("click", function(){
+		clickToUpdateStatus(this)
+	}); 
+	
+/*]]>*/
+</script>
+
+
+</body>
+</html>
+

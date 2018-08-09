@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+>
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+	
+
+</head>
+<body th:with="baseReqPath='/feedback/feedback'">
+
+
+	<ol class="breadcrumb">
+	  <!-- <li><a th:href="@{/home}"><i class="icon icon-home"></i>首页</a></li> -->
+	  <li>反馈管理</li>
+	  <li>反馈列表</li>
+	</ol>
+	
+	<div class="panel panel" style="margin-bottom: 5px;">
+   	  <div class="panel-heading">
+	         筛选条件
+	  </div>
+	  <div class="panel-body">
+	    <form class="form-inline search-form" onsubmit="return false">
+		  <div class="form-group ">
+		    <label for="keyword">搜索:</label>
+		    <input type="text" class="form-control" id="keyword" name="keyword" placeholder="搜索关键字"/>
+		  </div>
+		  <div class="form-group " style="display: none;">
+		    <label for="keyword">隐藏字段:</label>
+		    
+		  </div>
+		  <!-- 
+		  <div class="form-group ">
+		    <label for="startDate"> 启用状态:</label>
+		    <select class="form-control" name="enabled" id="enabled" >
+			  	<option value="">全部</option>
+			  	<option th:selected="${enabled == 1}" value="1">启用</option>
+			  	<option th:selected="${enabled == 0}" value="0">禁用</option>
+			</select>
+		  </div> 
+		  -->
+		  
+		  <button type="button" class="btn btn-primary search-btn"><i class="icon icon-search"></i> 搜索</button>
+		  <button type="button" class="btn reset-btn"> 重置</button>
+		</form>
+	  </div>
+	</div>
+	
+	<div style="padding: 10px;" class="dataTables_wrapper">
+	
+		<table id="data_table" class="display" style="width:100%;"></table>
+
+	</div>
+
+<script type="text/javascript" th:inline="javascript">
+	//Thymeleaf内联区
+	var baseReqPath = [[${baseReqPath}]];
+</script>		
+
+<script type="text/javascript" th:inline="none">
+	
+	
+	
+	var dataTableUrl = baseReqPath + '/ajax/list';
+    
+    var table = 
+   	DataTableErrorHandle($('#data_table'))
+    .DataTable(
+    		DataTableOperation.initDatatablesOptions({
+    		   ajax: function (data, callback, settings) {
+    		   		DataTableOperation.datatableAjax(dataTableUrl, data, callback);
+    		   },
+        	   order: [[ 0, 'desc' ]],//默认排序
+               columns : [
+                   {//id列，默认隐藏
+                	   title: "uid",//表头标题
+                       data:"uid", //数据对应key
+                       name : "uid", //对应字段名称
+                       visible: false, //是否可视
+                       orderable: true, //是否可排序
+                       render : function(data, type, row) { //渲染单元格
+                           return data;
+                       },
+                   },
+                   {//序号列
+                	   title: "#", 
+                       width: 20,
+                       visible: true, 
+                       orderable: false,
+                       render : function(data, type, row, meta) { //渲染单元格
+                    	   //console.log(meta)
+                    	   return meta.row + 1 + meta.settings._iDisplayStart;
+                       },
+                   },
+                   {
+                	   title: "用户名 ",
+                       data:"username", 
+                       name : "username",
+                       width: 100,
+                       visible: true,
+                       orderable: false,
+                       render : function(data, type, row, meta) {
+                           return data;
+                       },
+                   },
+                   {
+                	   title: "反馈内容 ",
+                       data:"content", 
+                       name : "content",
+                       width: 100,
+                       visible: true,
+                       orderable: false,
+                       //searchable: true,
+                       //orderData: [2,0],
+                       render : function(data, type, row, meta) {
+                           return data;
+                       },
+                   },
+                   {
+                	   title: "链接地址",
+                       data:"linkUrl", 
+                       name : "linkUrl",
+                       width: 100,
+                       visible: true,
+                       orderable: false,
+                       render : function(data, type, row, meta) {
+                           return data;
+                       },
+                   },
+                   {
+                	   title: "备注",
+                       data:"remark", 
+                       name : "remark",
+                       width: 100,
+                       visible: true,
+                       orderable: false,
+                       render : function(data, type, row, meta) {
+                           return data;
+                       },
+                   },
+                   {
+                	   title: "创建时间",
+                       data:"createDate", 
+                       name : "createDate",
+                       width: 100,
+                       visible: true,
+                       orderable: true,
+                       render : function(data, type, row, meta) {
+                           return Util.longToDateTime(data);
+                       },
+                   },
+                   /* {
+                	   title: "启用状态",
+                       data:"enabled", 
+                       name : "enabled",
+                       width: 100,
+                       visible: true,
+                       orderable: true,
+                       responsivePriority: 2,
+                       render : function(data, type, row) {
+                    	   if(data == 1){
+                    		   return `<span class="label label-badge label-success">启用</span>`
+                    	   }
+                           return `<span class="label label-badge label-danger">禁用</span>`;
+                       },
+                       
+                   }, */
+                   {
+                	   title: "操作",
+                       data:"uid", 
+                       name : "uid",
+                       width: 100,
+                       visible: true,
+                       responsivePriority: 1,
+                       orderable: false,
+                       render : function(data, type, row) {
+                    	   return `
+	                           ${!true  ? '' : `<a class="btn btn-mini btn-primary" href="${baseReqPath}/view/edit?uid=${row.uid}">查看</a>`}
+	                           ${!false ? '' : `<a class="btn btn-mini btn-danger delete-btn" onclick="clickToUpdateStatus(this)" data-uid="${row.uid}"  data-value="0"  data-url="${baseReqPath}/ajax/delete">删除</a>`}
+                           `
+                       },
+                       
+                   },
+                ]
+           			
+           })
+           );
+    
+    
+    $('.search-btn').click(function(){
+    	table.draw();
+    })
+    
+    //清除数据表记录
+    $('.reset-btn').click(function() {
+    	$('input').val('');
+    	table.state.clear();
+    	window.location.reload();
+    })
+    
+    //搜索框下，按下ESC触发清除搜索框
+    $("#keyword").keydown(function(event){
+    	
+    	if(event.keyCode == 13 ){ //enter
+    		$(".search-btn").click();
+    	}else if(event.keyCode == 27 ){//esc
+       		$("#keyword").val('');
+       	}
+    	
+	});
+    
+           
+</script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	
+	<meta th:include="common :: head_common" th:remove="tag"/>
+	
+</head>
+<body>
+
+
+<div th:include="common :: header_common" th:remove="tag"></div>
+
+
+	<div class="product_list_container">
+     <div class="main clear">
+         <nav class="top_nav" id="top_nav">
+            <!-- 
+           <ul class="clear nav" th:if="false">
+            <li onclick="selectProductByChina(this,1);" data-tab="1">
+               <a href="#1">交互中心</a>
+           </li>
+            <li onclick="selectProductByChina(this,2);" data-tab="2">
+                 <a href="#2">智能照明</a>
+             </li>
+             <li onclick="selectProductByChina(this,3);" data-tab="3">
+                 <a href="#3">门锁安防</a>
+             </li>
+             <li onclick="selectProductByChina(this,4);" data-tab="4">
+                 <a href="#4">门窗遮阳</a>
+             </li>
+             <li onclick="selectProductByChina(this,5);" data-tab="5">
+                 <a href="#5">暖通舒适</a>
+             </li>
+              <li onclick="selectProductByChina(this,6);" data-tab="6">
+                 <a href="#6">能源管理</a>
+             </li>
+             <li onclick="selectProductByChina(this,7);" data-tab="7" style="margin-right: 0;">
+                 <a href="#7">影音娱乐</a>
+             </li>
+           </ul>
+              -->
+              <ul class="clear nav">
+	            <li th:each="item,state : ${categories}" th:onclick="|selectProductByChina(this,${item.uid});|" th:attr="data-tab=${item.uid}">
+	               <a th:href="|#${item.uid}|" th:text="${item.name}">交互中心</a>
+	           </li>
+	           </ul>
+         </nav>
+          
+      
+        <div th:each="item,state : ${categories}" class="list" th:attr="data-id=${item.uid}" >
+            
+                <a th:href="|#${item.uid}|" style="display: block;width: 1200px;height: 400px;">
+                	<img class="lazy" th:attr="data-original=${item.pictureUrl}" alt="" width="1200" height="400">
+                </a>
+                
+                <ul class="clear">
+                
+                   <li th:each="prod,statp : ${item.products}" class="clear">
+                       <a target="_blank"  th:href="|/product/product_detail/${prod.uid}.html|" class="block">
+                           <div class="left">
+                               <p class="title" th:text="${prod.coverTitle}">标题</p>
+                               <p class="text" th:text="${prod.coverIntro}">简介</p>
+                           </div>
+                           <div class="right">
+                               <img class="lazy" style="height: 100%; width: 100%; object-fit: cover;" th:attr="data-original=${prod.coverUrl}" th:alt="${prod.coverTitle}">
+                           </div>
+                       </a>
+                       <a target="_blank" th:href="|/product/product_detail/${prod.uid}.html|" class="button">查看详情</a>
+                   </li>
+                   
+             </ul>
+         </div>
+      
+      
+      
+      
+      
+      
+    <!-- 
+        <div class="robot_list" th:if="false">
+            <h1>ORVIBO产品已支持多款语音控制设备</h1>
+            <p>支持天猫精灵、小白机器人、若琪机器人、腾讯云小微、Google Home、Amazon Echo等主流语音控制设备，<br>多元交互实现不同场景的便捷控制。</p>
+            <ul class="clearfix">
+                <li class="rl_item1">
+                    <i class="rli_icon"></i>
+                    <p>天猫精灵</p>
+                </li>
+                <li class="rl_item2">
+                    <i class="rli_icon"></i>
+                    <p>小白机器人</p>
+                </li>
+                <li class="rl_item3">
+                    <i class="rli_icon"></i>
+                    <p>若琪机器人</p>
+                </li>
+                <li class="rl_item4">
+                    <i class="rli_icon"></i>
+                    <p>腾讯云小微</p>
+                </li>
+                <li class="rl_item5">
+                    <i class="rli_icon"></i>
+                    <p>Google Home</p>
+                </li>
+                <li class="rl_item6">
+                    <i class="rli_icon"></i>
+                    <p>Amazon Echo</p>
+                </li>
+                <li class="rl_item7">
+                    <p>即将支持<br>更多设备</p>
+                </li>
+            </ul>
+        </div>
+        
+         -->
+
+     </div>
+</div>
+
+
+<div th:include="common :: footer_common" th:remove="tag"></div>
+
+<div th:include="common :: script_common" th:remove="tag"></div>
+
+<script type="text/javascript" src="/static/guanwang_second/front/js/jquery.lazyload.min.js?v=1529046969038"></script>
+
+
+<script>
+	
+  	$(document).ready(function () {
+      initPage();
+    })
+    $(window).on("hashchange", initPage);
+    function initPage(){
+      var arr = document.location.href.split("#")
+      $("#top_nav .nav>li").removeClass("active")
+  		var $list = $(".product_list_container .list")
+        if (arr.length == 1){
+        	$list.eq(1).show()
+        	$("#top_nav .nav>li").eq(0).addClass('active')
+        } else {
+        	for (var i = 0; i < $list.length; i++){
+        		if ($list.eq(i).attr("data-id") == arr[1]){
+        			$list.eq(i).show()
+        			break;
+        		}
+        	}
+        	var lis = $("#top_nav .nav>li")
+        	for(var i = 0; i < lis.length; i++){
+        		if (lis.eq(i).attr("data-tab") == arr[1]){
+        			lis.eq(i).addClass('active')
+        			break;
+        		}
+        	}
+        }
+  		$('html').scrollTop(0);
+  		$('body').scrollTop(0);
+  		$(document).scrollTop(0);
+        $("img.lazy").lazyload({effect: "fadeIn"});
+    }
+    function selectProductByChina(obj,id){
+  		var $list = $(".product_list_container .list")
+    	$("#top_nav .nav>li").removeClass("active");
+        $(obj).addClass("active");
+        $list.hide();
+        for (var i = 0; i < $list.length; i++){
+    		if ($list.eq(i).attr("data-id") == id){
+    			$list.eq(i).show()
+    			break;
+    		}
+    	}
+        $("img.lazy").lazyload({effect: "fadeIn"});
+    }
+</script>
+</body>
+</html>

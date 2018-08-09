@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- jdbclink code generator - 2018-07-04 12:25:31 -->
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/product/productcategory'">
+	<ol class="breadcrumb">
+	  <li>产品分类信息管理</li>
+	  <li>产品分类信息列表</li>
+	  <li>查看</li>
+	</ol>
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/edit/save|}">
+		
+		
+		
+	
+	<div class="form-group hide">
+		<label for="uid" class="col-sm-1"> 自增主键 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="uid" id="uid"   th:value="${editObj.uid}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="name" class="col-sm-1"> 分类名称 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="name" id="name"   th:value="${editObj.name}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="remark" class="col-sm-1"> 分类说明 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+		  
+		  <textarea class="form-control" style="width:100%; height: 100px;" th:text="${editObj.remark}"></textarea>
+	      	
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="pictureUrl" class="col-sm-1"> 分类背景图片 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+      	  
+      	  <a th:href="${editObj.pictureUrl}" target="_blank">
+			<img th:src="${@uploadHelper.getMini(editObj.pictureUrl)}" width="50" height="50" class=""/>
+		  </a>
+      	  
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="sort" class="col-sm-1"> 排序 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="sort" id="sort"   th:value="${editObj.sort}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="enabled" class="col-sm-1"> 启用状态 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      	  <select name="enabled" id="enabled" class="form-control">
+		      	<option th:selected="${editObj.enabled == 0 }" value="0">禁用</option>
+		      	<option th:selected="${editObj.enabled == 1 }" value="1">启用</option>
+		      </select>
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	  
+	
+	  
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-10">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+	    </div>
+	  </div>
+	  
+	</form>
+	
+
+</body>
+
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+
+		
+	
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+		
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+            
+            /*
+            var params = $form.serializeArray().map(x => {
+            	var v = x.value;
+            	if(x.name === 'price'){
+            		//console.log(parseInt(x.value * 100))
+            		v = parseInt(x.value * 100)
+                }
+            	return `${x.name}=${v}`;
+
+            }).join('&');
+            */
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                
+                if(result.success){
+            		Msg.success('操作成功!',null,function(){
+	            		location.href = referer;                		
+                	});
+				}else{
+					Msg.error('提示消息：操作失败!');
+					setTimeout(function(){
+						formValidationPlugin.disableSubmitButtons(false);
+					},1000);
+				}
+                
+            }, 'json');
+        });
+    
+	
+	
+	$(function(){
+		$('input').attr('disabled','disabled');
+		$('textarea').attr('disabled','disabled');
+		$('select').attr('disabled','disabled');
+	})
+/*]]>*/
+</script>
+
+</html>

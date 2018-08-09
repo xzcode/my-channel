@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- jdbclink code generator - 2018-05-21 11:50:04 -->
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/order/orderproduct'">
+	<ol class="breadcrumb">
+	  <li>商品订单信息管理</li>
+	  <li>商品订单信息列表</li>
+	  <li>编辑</li>
+	</ol>
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/edit/save|}">
+		
+		
+
+
+
+	<div class="form-group hide">
+		<label for="uid" class="col-sm-1"> 商品订单标识 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="uid" name="uid"  required="required" maxlength="20" th:value="${editObj.uid}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="userId" class="col-sm-1"> 下单用户 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	       <input type="text" disabled="disabled" class="form-control" id="username" th:value="${editObj.username}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="productId" class="col-sm-1"> 商品标识 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="productId" name="productId"  required="required" maxlength="20" th:value="${editObj.productId}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="productTitle" class="col-sm-1"> 商品标题 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="productTitle" name="productTitle"   maxlength="64" th:value="${editObj.productTitle}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="productPrice" class="col-sm-1"> 商品单价，单位分 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  
+	  	  <input type="number" step="0.01" data-fv-regexp-message="格式错误" pattern="^\d+(\.\d{1,2})?$" class="form-control" id="productPrice" name="productPrice"  required="required" maxlength="20"  th:value="${@thAmounts.toYuan(editObj.productPrice)}" />
+	  	  
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="productFigureUrl" class="col-sm-1"> 商品图片 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+		  	<input type="hidden" class="form-control" id="productFigureUrl" name="productFigureUrl"   maxlength="256" th:value="${editObj.productFigureUrl}"/>
+		  	<div id='productFigureUrl_uploader' class="uploader" data-ride="uploader" ></div>
+	  		<script th:inline="javascript">
+			    /*<![CDATA[*/
+			    	
+			    	var pictureUrl = [[${editObj.productFigureUrl}]];
+			                	
+	               	var productFigureUrlUploader = UploaderOperation.initUploader({
+	               		uploaderId: 'productFigureUrl_uploader',
+	               		filesUrlInputId: 'productFigureUrl',
+	   			    	staticFiles: [{id: 'pic_1', url: pictureUrl}],
+	   			    	limitFilesCount: 1,
+	   			    });
+				   	
+				   	/*]]>*/
+		    </script>
+	  		
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="number" class="col-sm-1"> 商品数量 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="number" name="number"  required="required" maxlength="11" th:value="${editObj.number}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="productAmount" class="col-sm-1"> 商品总额，单位分 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  
+	  	  <input type="number" step="0.01" data-fv-regexp-message="格式错误" pattern="^\d+(\.\d{1,2})?$" class="form-control" id="productAmount" name="productAmount"  required="required" maxlength="20"  th:value="${@thAmounts.toYuan(editObj.productAmount)}" />
+	  	  
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="payChannel" class="col-sm-1"> 支付渠道 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      	  <select id="payChannel" name="payChannel"  required="required" maxlength="11" class="form-control">
+		      	<option th:selected="${editObj.payChannel == 0 }" value="0">支付宝</option>
+		      	<option th:selected="${editObj.payChannel == 1 }" value="1">微信</option>
+		      </select>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="orderNo" class="col-sm-1"> 订单号 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="orderNo" name="orderNo"   maxlength="32" th:value="${editObj.orderNo}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="expressNo" class="col-sm-1"> 快递单号 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="expressNo" name="expressNo"   maxlength="64" th:value="${editObj.expressNo}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="addressId" class="col-sm-1"> 收货地址 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="addressId" name="addressId"   maxlength="20" th:value="${editObj.addressId}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="consignee" class="col-sm-1"> 收货人 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="consignee" name="consignee"   maxlength="32" th:value="${editObj.consignee}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="consigneeMobile" class="col-sm-1"> 收货人联系方式 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="consigneeMobile" name="consigneeMobile"   maxlength="32" th:value="${editObj.consigneeMobile}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="consigneeAddress" class="col-sm-1"> 收货地址(省、市、区、详细地址) : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="consigneeAddress" name="consigneeAddress"   maxlength="64" th:value="${editObj.consigneeAddress}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="remark" class="col-sm-1"> 备注 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+		  <textarea class="form-control" style="width:100%; height: 100px;" id="remark" name="remark"   maxlength="128" th:text="${editObj.remark}"></textarea>
+	      	
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="status" class="col-sm-1"> 订单状态 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      	  <select id="status" name="status"  required="required" maxlength="11" class="form-control">
+		      	<option th:selected="${editObj.status == 0 }" value="0">待支付</option>
+		      	<option th:selected="${editObj.status == 1 }" value="1">待发货</option>
+		      	<option th:selected="${editObj.status == 2 }" value="2">待收货</option>
+		      	<option th:selected="${editObj.status == 3 }" value="3">完成</option>
+		      	<option th:selected="${editObj.status == 4 }" value="4">售后</option>
+		      	<option th:selected="${editObj.status == 5 }" value="5">关闭</option>
+		      </select>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="createDate" class="col-sm-1"> 创建时间 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  <input type="text" disabled="disabled" class="form-control"  th:value="${editObj.createDate != null ? #dates.format(editObj. createDate, 'yyyy-MM-dd HH:mm:ss') : ''}" />
+	  	  
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="payDate" class="col-sm-1"> 支付时间（待发货） : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  <input type="text" readonly="readonly" id="payDate" name="payDate"    class="form-control"  th:value="${editObj.payDate != null ? #dates.format(editObj. payDate, 'yyyy-MM-dd HH:mm:ss') : ''}" />
+	  	  
+	      <script type="text/javascript" th:inline="javascript">
+			    $(function(){
+			    	$("#payDate").datetimepicker({
+					    language:  "zh-CN",
+					    weekStart: 1,
+					    todayBtn:  1,
+					    autoclose: 1,
+					    todayHighlight: 1,
+					    startView: 2, //'month',
+					    minView: 2,
+					    forceParse: 1,
+					    format: "yyyy-mm-dd hh:ii:ss"
+					});
+			    })
+		    </script>
+	      
+	      	
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="deliverDate" class="col-sm-1"> 发货时间（待收货） : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  <input type="text" readonly="readonly" id="deliverDate" name="deliverDate"    class="form-control"  th:value="${editObj.deliverDate != null ? #dates.format(editObj. deliverDate, 'yyyy-MM-dd HH:mm:ss') : ''}" />
+	  	  
+	      <script type="text/javascript" th:inline="javascript">
+			    $(function(){
+			    	$("#deliverDate").datetimepicker({
+					    language:  "zh-CN",
+					    weekStart: 1,
+					    todayBtn:  1,
+					    autoclose: 1,
+					    todayHighlight: 1,
+					    startView: 2, //'month',
+					    minView: 2,
+					    forceParse: 1,
+					    format: "yyyy-mm-dd hh:ii:ss"
+					});
+			    })
+		    </script>
+	      
+	      	
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="receiptDate" class="col-sm-1"> 收货时间（失败、完成） : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  <input type="text" readonly="readonly" id="receiptDate" name="receiptDate"    class="form-control"  th:value="${editObj.receiptDate != null ? #dates.format(editObj. receiptDate, 'yyyy-MM-dd HH:mm:ss') : ''}" />
+	  	  
+	      <script type="text/javascript" th:inline="javascript">
+			    $(function(){
+			    	$("#receiptDate").datetimepicker({
+					    language:  "zh-CN",
+					    weekStart: 1,
+					    todayBtn:  1,
+					    autoclose: 1,
+					    todayHighlight: 1,
+					    startView: 2, //'month',
+					    minView: 2,
+					    forceParse: 1,
+					    format: "yyyy-mm-dd hh:ii:ss"
+					});
+			    })
+		    </script>
+	      
+	      	
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="enabled" class="col-sm-1"> 启用状态 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      	  <select id="enabled" name="enabled"  required="required" maxlength="1" class="form-control">
+		      	<option th:selected="${editObj.enabled == 0 }" value="0">禁用</option>
+		      	<option th:selected="${editObj.enabled == 1 }" value="1">启用</option>
+		      </select>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+	  
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-10">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+	    </div>
+	  </div>
+	  
+	</form>
+	
+
+</body>
+
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+
+		
+	
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+		
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+            
+            /*
+            var params = $form.serializeArray().map(x => {
+            	var v = x.value;
+            	if(x.name === 'price'){
+            		//console.log(parseInt(x.value * 100))
+            		v = parseInt(x.value * 100)
+                }
+            	return `${x.name}=${v}`;
+
+            }).join('&');
+            */
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                
+                if(result.success){
+            		Msg.success('操作成功!',null,function(){
+	            		location.href = referer;                		
+                	});
+				}else{
+					Msg.error('提示消息：操作失败!');
+					setTimeout(function(){
+						formValidationPlugin.disableSubmitButtons(false);
+					},1000);
+				}
+                
+            }, 'json');
+        });
+    
+	
+	
+	
+	
+	$(function(){
+		$('#updateDate').attr('disabled','disabled');
+		$('#createDate').attr('disabled','disabled');
+		//$('#updateUserName').attr('disabled','disabled');
+		//$('#createUserName').attr('disabled','disabled');
+	})
+/*]]>*/
+</script>
+
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- jdbclink code generator - 2018-05-21 11:50:04 -->
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/order/orderbook'">
+	<ol class="breadcrumb">
+	  <li>图书借阅订单管理</li>
+	  <li>图书借阅订单列表</li>
+	  <li>编辑</li>
+	</ol>
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/edit/save|}">
+		
+		
+
+
+
+	<div class="form-group hide">
+		<label for="uid" class="col-sm-1">  : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="uid" name="uid"  required="required" maxlength="20" th:value="${editObj.uid}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="userId" class="col-sm-1"> 借阅人 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	       <input type="text" disabled="disabled" class="form-control" id="username" th:value="${editObj.username}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="bookId" class="col-sm-1"> 图书标识 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="bookId" name="bookId"  required="required" maxlength="20" th:value="${editObj.bookId}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="bookName" class="col-sm-1"> 图书名称，最多64个字（记录） : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="bookName" name="bookName"   maxlength="64" th:value="${editObj.bookName}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="bookAuthor" class="col-sm-1"> 作者（记录） : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="bookAuthor" name="bookAuthor"   maxlength="32" th:value="${editObj.bookAuthor}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="bookISBN" class="col-sm-1"> 书号，唯一标识（记录） : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="bookISBN" name="bookISBN"   maxlength="64" th:value="${editObj.bookISBN}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="bookFigureUrl" class="col-sm-1"> 配图（记录） : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+		  	<input type="hidden" class="form-control" id="bookFigureUrl" name="bookFigureUrl"   maxlength="256" th:value="${editObj.bookFigureUrl}"/>
+		  	<div id='bookFigureUrl_uploader' class="uploader" data-ride="uploader" ></div>
+	  		<script th:inline="javascript">
+			    /*<![CDATA[*/
+			    	
+			    	var pictureUrl = [[${editObj.bookFigureUrl}]];
+			                	
+	               	var bookFigureUrlUploader = UploaderOperation.initUploader({
+	               		uploaderId: 'bookFigureUrl_uploader',
+	               		filesUrlInputId: 'bookFigureUrl',
+	   			    	staticFiles: [{id: 'pic_1', url: pictureUrl}],
+	   			    	limitFilesCount: 1,
+	   			    });
+				   	
+				   	/*]]>*/
+		    </script>
+	  		
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="lendPrice" class="col-sm-1"> 借出价格（分）（记录） : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  
+	  	  <input type="number" step="0.01" data-fv-regexp-message="格式错误" pattern="^\d+(\.\d{1,2})?$" class="form-control" id="lendPrice" name="lendPrice"  required="required" maxlength="20"  th:value="${@thAmounts.toYuan(editObj.lendPrice)}" />
+	  	  
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="lendTime" class="col-sm-1"> 可借阅时长（天）（记录） : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="lendTime" name="lendTime"  required="required" maxlength="11" th:value="${editObj.lendTime}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="renewPrice" class="col-sm-1"> 续借价格（分）（记录） : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  
+	  	  <input type="number" step="0.01" data-fv-regexp-message="格式错误" pattern="^\d+(\.\d{1,2})?$" class="form-control" id="renewPrice" name="renewPrice"  required="required" maxlength="20"  th:value="${@thAmounts.toYuan(editObj.renewPrice)}" />
+	  	  
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="renewTime" class="col-sm-1"> 续借时长（记录） : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="renewTime" name="renewTime"  required="required" maxlength="11" th:value="${editObj.renewTime}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="canRenewNum" class="col-sm-1"> 可续借次数（记录） : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  <input type="number" step="1" min="0" class="form-control" id="canRenewNum" name="canRenewNum"  required="required" maxlength="11" th:value="${editObj.canRenewNum}" />
+	  	  
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="orderNo" class="col-sm-1"> 借阅记录号 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      <input type="text" class="form-control" id="orderNo" name="orderNo"   maxlength="32" th:value="${editObj.orderNo}"/>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="payBorrowAmount" class="col-sm-1"> 支付借阅金额 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  
+	  	  <input type="number" step="0.01" data-fv-regexp-message="格式错误" pattern="^\d+(\.\d{1,2})?$" class="form-control" id="payBorrowAmount" name="payBorrowAmount"  required="required" maxlength="20"  th:value="${@thAmounts.toYuan(editObj.payBorrowAmount)}" />
+	  	  
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="renewNum" class="col-sm-1"> 已续借次数 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  <input type="number" step="1" min="0" class="form-control" id="renewNum" name="renewNum"  required="required" maxlength="11" th:value="${editObj.renewNum}" />
+	  	  
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="payRenewAmount" class="col-sm-1"> 支付续借总费用 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  
+	  	  <input type="number" step="0.01" data-fv-regexp-message="格式错误" pattern="^\d+(\.\d{1,2})?$" class="form-control" id="payRenewAmount" name="payRenewAmount"  required="required" maxlength="11"  th:value="${@thAmounts.toYuan(editObj.payRenewAmount)}" />
+	  	  
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="payAmount" class="col-sm-1"> 总支付金额 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  
+	  	  <input type="number" step="0.01" data-fv-regexp-message="格式错误" pattern="^\d+(\.\d{1,2})?$" class="form-control" id="payAmount" name="payAmount"  required="required" maxlength="20"  th:value="${@thAmounts.toYuan(editObj.payAmount)}" />
+	  	  
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="returnDate" class="col-sm-1"> 理论归还时间（借阅时间+借阅时长+续借时长） : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  <input type="text" readonly="readonly" id="returnDate" name="returnDate"    class="form-control"  th:value="${editObj.returnDate != null ? #dates.format(editObj. returnDate, 'yyyy-MM-dd HH:mm:ss') : ''}" />
+	  	  
+	      <script type="text/javascript" th:inline="javascript">
+			    $(function(){
+			    	$("#returnDate").datetimepicker({
+					    language:  "zh-CN",
+					    weekStart: 1,
+					    todayBtn:  1,
+					    autoclose: 1,
+					    todayHighlight: 1,
+					    startView: 2, //'month',
+					    minView: 2,
+					    forceParse: 1,
+					    format: "yyyy-mm-dd hh:ii:ss"
+					});
+			    })
+		    </script>
+	      
+	      	
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="actualReturnDate" class="col-sm-1"> 实际归还时间 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  <input type="text" readonly="readonly" id="actualReturnDate" name="actualReturnDate"    class="form-control"  th:value="${editObj.actualReturnDate != null ? #dates.format(editObj. actualReturnDate, 'yyyy-MM-dd HH:mm:ss') : ''}" />
+	  	  
+	      <script type="text/javascript" th:inline="javascript">
+			    $(function(){
+			    	$("#actualReturnDate").datetimepicker({
+					    language:  "zh-CN",
+					    weekStart: 1,
+					    todayBtn:  1,
+					    autoclose: 1,
+					    todayHighlight: 1,
+					    startView: 2, //'month',
+					    minView: 2,
+					    forceParse: 1,
+					    format: "yyyy-mm-dd hh:ii:ss"
+					});
+			    })
+		    </script>
+	      
+	      	
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="status" class="col-sm-1"> 借阅状态 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      	  <select id="status" name="status"   maxlength="11" class="form-control">
+		      	<option th:selected="${editObj.status == 0 }" value="0">已借阅</option>
+		      	<option th:selected="${editObj.status == 1 }" value="1">已归还</option>
+		      </select>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="createDate" class="col-sm-1"> 创建时间 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	  	  <input type="text" disabled="disabled" class="form-control"  th:value="${editObj.createDate != null ? #dates.format(editObj. createDate, 'yyyy-MM-dd HH:mm:ss') : ''}" />
+	  	  
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+
+
+
+	<div class="form-group ">
+		<label for="enabled" class="col-sm-1"> 启用状态 : </label>
+		<div class="col-md-4 col-sm-10">
+		  
+	      	  <select id="enabled" name="enabled"  required="required" maxlength="1" class="form-control">
+		      	<option th:selected="${editObj.enabled == 0 }" value="0">禁用</option>
+		      	<option th:selected="${editObj.enabled == 1 }" value="1">启用</option>
+		      </select>
+	      <div class="help-block"></div> 
+	    </div>
+	</div>
+	  
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-10">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+	    </div>
+	  </div>
+	  
+	</form>
+	
+
+</body>
+
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+
+		
+	
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+		
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+            
+            /*
+            var params = $form.serializeArray().map(x => {
+            	var v = x.value;
+            	if(x.name === 'price'){
+            		//console.log(parseInt(x.value * 100))
+            		v = parseInt(x.value * 100)
+                }
+            	return `${x.name}=${v}`;
+
+            }).join('&');
+            */
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                
+                if(result.success){
+            		Msg.success('操作成功!',null,function(){
+	            		location.href = referer;                		
+                	});
+				}else{
+					Msg.error('提示消息：操作失败!');
+					setTimeout(function(){
+						formValidationPlugin.disableSubmitButtons(false);
+					},1000);
+				}
+                
+            }, 'json');
+        });
+    
+	
+	
+	
+	
+	$(function(){
+		$('#updateDate').attr('disabled','disabled');
+		$('#createDate').attr('disabled','disabled');
+		//$('#updateUserName').attr('disabled','disabled');
+		//$('#createUserName').attr('disabled','disabled');
+	})
+/*]]>*/
+</script>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+>
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+	
+	<script type="text/javascript" th:src="@{http://api.map.baidu.com/api(v=2.0,ak=ITZLUW0PIK2g00wpdffWIQCc)}"></script>
+	
+	<style type="text/css">
+		html,body {width: 100%;height: 100%;}
+		#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
+		.panel{margin: 0px;}
+	</style>
+</head>
+<body th:with="baseReqPath='/plugin/orderinfo'" style="height: 100%;">
+
+    
+    <div class="panel" style="height: 15%;">
+	  <div class="panel-body">
+		    <label for="keyword">搜索:</label>
+		    <input type="text"  id="keyword" name="keyword" placeholder="地点 "/>
+		  <button type="button" class="btn btn-mini btn-primary search-btn"><i class="icon icon-search"></i> 搜索</button>
+	  </div>
+	</div>
+	
+	<div class="panel" style="height: 85%;">
+		<div id="allmap"></div>
+	</div>
+
+
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+	
+	var callback = [[${#httpServletRequest.getParameter('callback')}]];
+	
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");          
+	//map.centerAndZoom(new BMap.Point(113.269558,23.1422), 11);
+	
+	var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+	
+	var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+	
+	
+	
+	map.centerAndZoom("广州",12);                
+	map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+	map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+	
+	map.addEventListener("tilesloaded",function(){
+		map.addControl(top_left_control);        
+		map.addControl(top_left_navigation);
+	});
+	
+	map.addEventListener("click",function(e){
+		window.parent[callback]({lng:e.point.lng,lat:e.point.lat});
+	});
+	
+	var local;
+	
+	$(".search-btn").on('click', function(){
+		search();
+	});
+	
+	$("#keyword").on('keyup', function(e){
+		if(e.keyCode == 13){
+			search();
+		}
+	});
+	
+	function search(){
+		var keyword = $("#keyword").val();
+		
+		if(keyword && keyword != ''){
+			local = new BMap.LocalSearch(map, {
+					renderOptions:{map: map}
+			});
+			local.search(keyword);
+		}
+	}
+	
+	
+/*]]>*/
+</script>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- jdbclink code generator - 2018-05-16 17:44:39 -->
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/system/systemconfig'">
+	<ol class="breadcrumb">
+	  <li>首页</li>
+	  <li>系统配置管理</li>
+	  <li>系统配置列表</li>
+	  <li>查看</li>
+	</ol>
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/edit/save|}">
+		
+		
+		
+	
+	<div class="form-group hide">
+		<label for="uid" class="col-sm-1">  主键 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="uid" id="uid"   th:value="${editObj.uid}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="k" class="col-sm-1"> 键 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="k" id="k"   th:value="${editObj.k}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="v" class="col-sm-1"> 值 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text" class="form-control" name="v" id="v"   th:value="${editObj.v}"/>
+	      
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="createDate" class="col-sm-1"> 创建时间 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+	      
+	      <input type="text"  class="form-control"  th:value="${editObj.createDate != null ? #dates.format(editObj. createDate, 'yyyy-MM-dd HH:mm:ss') : ''}" />
+	      	
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="remark" class="col-sm-1"> 备注 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+		  
+		  <textarea class="form-control" style="width:100%; height: 100px;" th:text="${editObj.remark}"></textarea>
+	      	
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	
+	<div class="form-group ">
+		<label for="isCanConfig" class="col-sm-1"> 是否允許用戶配置 : </label>
+		<div class="col-md-4 col-sm-10">
+		
+		    <select class="form-control" name="isCanConfig" id="isCanConfig" >
+		     <option th:selected="${editObj.isCanConfig == 0 }" value="0">否</option>
+		     <option th:selected="${editObj.isCanConfig == 1 }" value="1">是</option>
+		    </select>
+	      
+	      <!-- <div class="help-block"></div> -->
+	      
+	    </div>
+	</div>
+		
+	  
+	
+	  
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-10">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+	    </div>
+	  </div>
+	  
+	</form>
+	
+
+</body>
+
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+
+		
+	
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+		
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+            
+            /*
+            var params = $form.serializeArray().map(x => {
+            	var v = x.value;
+            	if(x.name === 'price'){
+            		//console.log(parseInt(x.value * 100))
+            		v = parseInt(x.value * 100)
+                }
+            	return `${x.name}=${v}`;
+
+            }).join('&');
+            */
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                
+                if(result.success){
+            		Msg.success('操作成功!',null,function(){
+	            		location.href = referer;                		
+                	});
+				}else{
+					Msg.error('提示消息：操作失败!');
+					setTimeout(function(){
+						formValidationPlugin.disableSubmitButtons(false);
+					},1000);
+				}
+                
+            }, 'json');
+        });
+    
+	
+	
+	$(function(){
+		$('input').attr('disabled','disabled');
+		$('textarea').attr('disabled','disabled');
+		$('select').attr('disabled','disabled');
+	})
+/*]]>*/
+</script>
+
+</html>

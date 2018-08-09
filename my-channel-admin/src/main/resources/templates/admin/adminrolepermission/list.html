@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- jdbclink code generator - 2018-05-16 17:44:39 -->
+<head>
+<title th:text="#{app.title}">管理系统</title>
+
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+	
+</head>
+<body th:with="baseReqPath='/admin/adminrolepermission'">
+
+
+	<ol class="breadcrumb">
+	  <li>用户权限角色对应关系管理</li>
+	  <li>用户权限角色对应关系列表</li>
+	</ol>
+	
+    
+    <div class="panel panel" style="margin-bottom: 5px;">
+   	  <div class="panel-heading">
+	         筛选条件
+	  </div>
+	  <div class="panel-body">
+	    <form class="form-inline search-form" onsubmit="return false">
+		  <div class="form-group ">
+		    <label for="keyword">搜索:</label>
+		    <input type="text" class="form-control" id="keyword" name="keyword" placeholder="搜索关键字"/>
+		  </div>
+		  <div class="form-group " style="display: none;">
+		    <label for="keyword">隐藏字段:</label>
+		    
+		  </div>
+		  
+	      
+		  <!--
+		  -->
+		  
+		  <button type="button" class="btn btn-primary search-btn"><i class="icon icon-search"></i> 搜索</button>
+		  <button type="button" class="btn reset-btn"> 重置</button>
+		</form>
+	  </div>
+	</div>
+	
+	
+	
+	<div class="panel panel" style="margin-bottom: 5px;">
+	  <div class="panel-body">
+		  <a type="button" th:href="@{|${baseReqPath}/view/add|}" class="btn btn-primary">
+		  <i class="icon icon-plus-sign" style="vertical-align: middle;"></i>
+		  	添加
+		  </a>
+	  </div>
+	</div>
+	
+	<div style="padding: 10px;" class="dataTables_wrapper">
+	
+		<table id="data_table" class="display" style="width:100%;"></table>
+
+	</div>
+	
+	<!-- HTML 代码 -->
+	<table class="table datatable hide">
+	  <thead>
+	    <tr>
+	      <!-- 以下两列左侧固定 -->
+	      <th data-width="100">#</th>
+	   	  
+			  <th data-width="100">
+					[空列名]
+			  </th>
+			  <th data-width="100">
+					[空列名]
+			  </th>
+		  
+	
+	      <!-- 以下列中间可滚动 -->
+	     <!--  <th class="flex-col" data-width="100">事件类型</th>  -->
+	
+	      <!-- 以下列右侧固定 -->
+	      <th data-width="100">操作</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr th:each="item,state : ${pager.items}">
+	    
+	    	<td th:text="${state.index + 1}"></td>
+			<td th:text="${item.roleId}"></td>
+		
+			<td th:text="${item.permissionId}"></td>
+		
+	    	<td>
+	    	
+	    		<a th:if="false" th:href="@{|${baseReqPath}/view/show|(uid=${item.uid})}"  class="btn btn-mini btn-primary">查看</a>
+	    		
+	    		<a th:href="@{|${baseReqPath}/view/edit|(uid=${item.uid})}"  class="btn btn-mini btn-primary">编辑</a>
+	    		
+	    		
+	    		<a th:if="false" href="javascript:;" th:attr="data-uid=${item.uid}" class="btn btn-mini btn-danger delete-btn">删除</a>
+	    	</td>
+	    </tr>
+	  </tbody>
+	</table>
+
+<script type="text/javascript" th:inline="javascript">
+//Thymeleaf内联区
+var baseReqPath = [[${baseReqPath}]];
+</script>
+
+<script type="text/javascript" th:inline="none">
+	
+	
+	
+	var dataTableUrl = baseReqPath + '/ajax/list';
+    
+    var table = 
+   	DataTableErrorHandle($('#data_table'))
+    .DataTable(
+    		DataTableOperation.initDatatablesOptions({
+    			ajax: function (data, callback, settings) {
+    				DataTableOperation.datatableAjax(dataTableUrl, data, callback);
+    			},
+    		   stateSave: true,//是否保存当前表状态
+        	   order: [[ 0, 'desc' ]],//默认排序
+               columns : [
+                   {//id列，默认隐藏
+                	   title: "uid",//表头标题
+                       data:"uid", //数据对应key
+                       name : "uid", //对应字段名称
+                       visible: false, //是否可视
+                       orderable: true, //是否可排序
+                       render : function(data, type, row) { //渲染单元格
+                           return data;
+                       },
+                   },
+                   {//序号列
+                	   title: "#", 
+                       width: 30,
+                       visible: true, 
+                       orderable: false,
+                       render : function(data, type, row, meta) { //渲染单元格
+                    	   //console.log(meta)
+                    	   return meta.row + 1 + meta.settings._iDisplayStart;
+                       },
+                   },
+           		   {
+					   title: "[空列名]",
+                       data:"roleId", 
+                       name : "roleId",
+                       width: 100,
+                       visible: true,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data;
+						},
+                   },
+           		   {
+					   title: "[空列名]",
+                       data:"permissionId", 
+                       name : "permissionId",
+                       width: 100,
+                       visible: true,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data;
+						},
+                   },
+                   
+                   {
+                	   title: "操作",
+                       data:"uid", 
+                       name : "uid",
+                       width: 100,
+                       visible: true,
+                       responsivePriority: 1,
+                       orderable: false,
+                       render : function(data, type, row) {
+                    	   return `
+	                           ${!true ? '' : `<a class="btn btn-mini btn-primary" href="${baseReqPath}/view/edit?uid=${row.uid}">编辑</a>`}
+	                           
+                           `
+                       },
+                       
+                   },
+                ]
+           			
+           })
+           );
+    
+    
+    $('.search-btn').click(function(){
+    	table.draw();
+    })
+    
+    //清除数据表记录
+    $('.reset-btn').click(function() {
+    	$('input').val('');
+    	table.state.clear();
+    	window.location.reload();
+    })
+    
+    //搜索框下，按下ESC触发清除搜索框
+    $("#keyword").keydown(function(event){
+    	
+    	if(event.keyCode == 13 ){ //enter
+    		$(".search-btn").click();
+    	}else if(event.keyCode == 27 ){//esc
+       		$("#keyword").val('');
+       	}
+    	
+	});
+    
+           
+</script>
+
+
+</body>
+</html>

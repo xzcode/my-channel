@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	
+	<meta th:include="common :: head_common" th:remove="tag"/>
+	
+	
+	<style type="text/css">
+	
+	.cc_container .cc_item .ci_txt{
+		border-bottom: none;
+	}
+	</style>
+	
+</head>
+<body>
+
+
+<div th:include="common :: header_common" th:remove="tag"></div>
+
+
+<div id="body"> 
+
+
+<section class="i_banner" style="top: -1px;"  th:if="${#lists.size(bannerInfos) > 0 and bannerInfos != null}">
+  <ul class="ib_slider">
+  
+    <li th:each="item,state : ${bannerInfos}" th:class="|ibs${state.index + 1}|" th:style="|background:url('${item.pictureUrl}');background-size: 100%;|">
+    </li>
+    
+    <li th:if="${#lists.size(bannerInfos) == 1}" th:each="item,state : ${bannerInfos}" class="ibs2" th:style="|background:url('${item.pictureUrl}') no-repeat center|"></li>
+    
+    
+    
+  </ul>
+  
+  <ul class="ib_mark slidesjs-pagination clear">
+  
+    <li th:each="item,state : ${bannerInfos}" class="slidesjs-pagination-item"><a href="javascript:void(0)" th:attr="data-slidesjs-item=${state.index}, html=${state.index + 1}" ><div class="im_active"></div><div class="im_progress"></div></a>
+    </li>
+    
+    <li  th:if="${#lists.size(bannerInfos) == 1}" th:each="item,state : ${bannerInfos}" class="slidesjs-pagination-item"><a href="javascript:void(0)" data-slidesjs-item="1" html="2" ><div class="im_active"></div><div class="im_progress"></div></a>
+    </li>
+  </ul>
+  
+</section>
+
+<section class="i_solution clear">
+  <a href="/solution/house_solution.html" class="is_item1">
+    <div>
+      <i></i>
+      <h4>智慧家庭</h4>
+      <p>轻松打造更舒适、便捷、安全的全宅智能生活</p>
+      <img src="/static/guanwang_second/front/images/new/index/solution1.png" alt="智慧家庭">
+    </div>
+  </a>
+  <a href="/solution/office_solution.html" class="is_item2">
+    <div>
+      <i></i>
+      <h4 style="margin-top:14px;">智慧办公</h4>
+      <p>为办公环境提供更节能、更高效的智能体验，节省高达41%的能源开支</p>
+      <img src="/static/guanwang_second/front/images/new/index/solution2.png" alt="智慧办公">
+    </div>
+  </a>
+  <a href="/solution/house_solution.html" class="is_item3">
+    <div>
+      <i></i>
+      <h4 style="margin-top:18px">旧宅改造</h4>
+      <p>体验全新科技智能化家庭，享受极致生活</p>
+      <img src="/static/guanwang_second/front/images/new/index/solution3.png" >
+    </div>
+  </a>
+</section>
+
+
+<section class="i_pro" th:if="${productCategories != null and #lists.size(productCategories) > 0}">
+  <h2>产品中心</h2>
+  <div class="clear ip_slides">
+  
+  <ul class="clear">
+    <li th:each="item,state : ${productCategories}" th:start="0" th:style="|${state.count == 4 ? 'margin-right:0;' : ''}|">
+      <a th:href="|/product/product_list.html#${item.uid}|">
+      
+      <img th:src="${item.indexPicUrl}" th:alt="${item.indexShowTitle}">
+      <p class="ip_title" th:text="${item.indexShowTitle}">产品分类</p>
+      
+      </a>
+    </li>
+  </ul>
+  
+  <ul class="clear">
+  	<li th:each="item,state : ${productCategories}"  th:if="${state.count > 3}" th:style="|${state.last ? 'margin-right:0;' : ''}|">
+      <a th:href="|/product/product_list.html#${item.uid}|">
+      
+      <img th:src="${item.indexPicUrl}" th:alt="${item.indexShowTitle}">
+      <p class="ip_title" th:text="${item.indexShowTitle}">产品分类</p>
+      
+      </a>
+    </li>
+  </ul>
+  
+  
+  <a href="javascript:void(0)" class="slidesjs-previous slidesjs-navigation disabled"></a>
+  <a href="javascript:void(0)" class="slidesjs-next slidesjs-navigation"></a>
+  </div>
+</section>
+
+
+
+<section class="i_sec" style="background: #fff;" th:if="${successfulCases != null and #lists.size(successfulCases) > 0}">
+  <h2>成功案例</h2>
+  
+  <section class="case_sec clear" style="min-height: 500px; height: 500px; padding-bottom: 10px;">
+	<div class="cc_container clear" style="min-height: auto;">
+	
+		<div th:each="item,state : ${successfulCases}" class="cc_item cc_one" style="cursor: pointer;"  th:onclick="|window.open('/usercase/user_case_detail/${item.uid}.html', '_blank')|">
+			<img th:src="${item.coverUrl}" th:alt="${item.title}" style="object-fit: cover;">
+			<div class="ci_home_content" style="">
+				<p class="ci_title" th:text="${item.title}">案例标题</p>
+				<p class="ci_txt" th:text="${item.intro}">案例简介</p>
+			</div>
+		</div>
+		
+		</div>
+</section>
+
+<a href="/usercase/user_case.html" class="is_more" style="display: block;" >
+    更多案例 &gt;&gt;
+  </a>
+
+  
+</section>
+
+
+<section class="index_news" th:if="${infos != null and #lists.size(infos) > 0}">
+        <div class="in_con">
+            <div class="in_container">
+                <div class="in_title"><span>行业资讯</span></div>
+                <ul>
+                    
+				<li th:each="item,state : ${infos}" >
+	            <a th:href="|/info/info_detail/${item.uid}.html|" class="clear" target="_blank">
+	            <img th:src="${item.coverUrl}" th:alt="${item.title}" class="ic_first" style="object-fit: cover;">
+	            
+	            <div class="ic_item">
+	              <div class="ii_time">
+	                <p class="it_day" th:text="${@thHelper.getStringDay(item.createDate)}">26</p>
+	                <p class="it_year" th:text="|${@thHelper.getStringYear(item.createDate)}.${@thHelper.getStringMonth(item.createDate)}|">2017.10</p>
+	              </div>
+	              <div class="ii_content">
+	                <p class="ic_title" th:text="${item.title}">资讯标题 </p>
+	                <p class="ic_txt" th:text="|${item.intro}...|"></p>
+	              </div>
+	            </div>
+	            
+	            </a>
+	          </li>
+		
+              </ul>
+          </div>
+      </div>
+  </section>
+  
+  
+  </div>
+    
+
+
+
+<div th:include="common :: footer_common" th:remove="tag"></div>
+
+<div th:include="common :: script_common" th:remove="tag"></div>
+
+<script type="text/javascript" src="/static/guanwang_second/front/js/jquery.slides.js?v=1529046969038"></script>
+	
+
+  
+<script>
+!(function($){
+    var w_width = $(window).width();
+    var target_height = 700/1920*w_width;
+    $(".i_banner").height(target_height);
+    $(".ib_slider").height(target_height);
+    $(".ib_slider li").height(target_height);
+   
+    var isAnimate = true;
+    var slider = new $('.ib_slider').slidesjs({
+        height: target_height,
+        event:"click",
+        play: {
+            active: false,
+            auto: true,
+            interval: 5000,
+            restartDelay: 5000,
+            swap: true
+        },
+        navigation: {
+            active: false
+        },
+        pagination: {
+            active: true
+        },
+        effect: {
+            slide: {
+                speed: 1200
+            }
+        },
+        callback:{
+          complete:function(index){
+            var bef = 0;
+            if (isAnimate){
+              if (index == 1){
+                bef = $(".ib_mark .slidesjs-pagination-item").length - 1
+              } else {
+                bef = index - 2
+              }
+              $(".ib_mark .slidesjs-pagination-item").eq(bef).find(".im_progress").css({"width":"0"})
+              $(".ib_mark .slidesjs-pagination-item").each(function(){
+                var aEle = $(this).find("a");
+                if (parseInt(aEle.attr("html")) == index){
+                  startAnimate(index-1,"im_progress","im_active");
+                }
+              });
+            }
+          }
+        }
+    });
+    var slider1 = new $('.ip_slides').slidesjs({
+        height: 320,
+        play: {
+            active: false,
+            auto: false,
+            swap: true,
+        },
+        navigation: {
+            active: false
+        },
+        pagination: {
+            active: false
+        },
+        effect: {
+            slide: {
+                speed: 1200
+            }
+        },
+        callback:{
+          complete:function(index){
+            if (index == 1){
+              $(".slidesjs-previous").addClass('disabled')
+              $(".slidesjs-next").removeClass('disabled')
+            } else if (index == 2){
+              $(".slidesjs-previous").removeClass('disabled')
+              $(".slidesjs-next").addClass('disabled')
+            }
+          }
+        }
+    });
+    function startAnimate(index,className1,className2){
+      var speed = 4500;
+      if (index == undefined || className1 == undefined || className2 == undefined){
+        return false;
+      }
+      if (typeof index != "number" && typeof index != "string"){
+        return false;
+      }
+      if (typeof index == "string"){
+        index = parseInt(index);
+        if (index == NaN){
+          return false;
+        }
+      }
+      var ele1 = $(".ib_mark .slidesjs-pagination-item").eq(index).find("."+className1);
+      var ele2 = $(".ib_mark .slidesjs-pagination-item").eq(index).find("."+className2);
+      if (ele1 == undefined || ele2 == undefined){
+        return false;
+      }
+      ele1.stop(true,true).animate({width:"50px"}, speed);
+    }
+    startAnimate(0,"im_progress","im_active");
+    $(".slidesjs-pagination-item a").click(function(){
+      var ele1 = $(".slidesjs-pagination-item a").find(".im_progress");
+      var ele2 = $(".slidesjs-pagination-item a").find(".im_active");
+      ele1.stop(true,true).css({"width":"0"});
+      ele2.css({"width":"50px"});
+      $(this).find(".im_progress").stop(true,true).css({"width":"50px"});
+      $(this).find(".im_active").css({"width":"0"});
+      isAnimate = false;
+    });
+    $(".ic_tab li").mouseenter(function(event) {
+      $(".ic_tabs li").hide();
+      $("#"+$(this).attr("data-tab")).show();
+    });
+    $(".ic_normal a").click(function(){
+      $(".ic_more").slideDown(300);
+      $(".ic_normal").slideUp(300);
+    })
+    $(".ic_more a").click(function(){
+      $(".ic_normal").slideDown(300);
+      $(".ic_more").slideUp(300);
+    })
+    $(".is_more").click(function(){
+      $(".i_sec ul").fadeOut(100);
+      $(this).fadeOut(100);
+      $(".ism_container").fadeIn();
+    })
+    $(".ismc_close").click(function(){
+      $(".ism_container").fadeOut(100);
+      $(".is_more").fadeIn(100);
+      $(".i_sec ul").fadeIn();
+    })
+    $(".ii_content .ic_txt").each(function() {
+        var lineHeight = Number($(this).css("line-height").split("px")[0]);
+        var txt = $(this).text() + "...";
+        while ($(this).height() > 2 * lineHeight) {
+            txt = $(this).text();
+            $(this).text(txt.substr(0, txt.length - 4) + "...");
+        }
+    });
+      
+       $(".slidesjs-slide").css("background-size","100%")
+       $(window).resize(function(){
+          var w_width = $(window).width();
+          var target_height = 700/1920*w_width;
+          $(".i_banner").height(target_height);
+          $(".ib_slider").height(target_height);
+          $(".ib_slider li").height(target_height);
+        $(".slidesjs-slide").css("background-size","100%")
+       })
+})(jQuery);
+</script>
+</body>
+</html>

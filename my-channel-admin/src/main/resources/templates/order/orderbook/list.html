@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- jdbclink code generator - 2018-05-21 11:50:04 -->
+<head>
+<title th:text="#{app.title}">管理系统</title>
+
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+	
+</head>
+<body th:with="baseReqPath='/order/orderbook'">
+
+
+	<ol class="breadcrumb">
+	  <li>图书借阅订单管理</li>
+	  <li>图书借阅订单列表</li>
+	</ol>
+	
+    
+    <div class="panel panel" style="margin-bottom: 5px;">
+   	  <div class="panel-heading">
+	         筛选条件
+	  </div>
+	  <div class="panel-body">
+	    <form class="form-inline search-form" onsubmit="return false">
+		  <div class="form-group ">
+		    <label for="keyword">搜索:</label>
+		    <input type="text" class="form-control" id="keyword" name="keyword" placeholder="搜索关键字"/>
+		  </div>
+		  <div class="form-group " style="display: none;">
+		    <label for="keyword">隐藏字段:</label>
+		    
+		  </div>
+		  
+	      
+		  <!--
+		  <div class="form-group ">
+		    <label for="status" class="col-sm-1"> 借阅状态 : </label>
+		    <select class="form-control" name="status" id="status" >
+			  	<option value="">全部</option>
+		      	<option th:selected="${status == 0 }" value="0">已借阅</option>
+		      	<option th:selected="${status == 1 }" value="1">已归还</option>
+			</select>
+		  </div>
+		  <div class="form-group ">
+		    <label for="enabled" class="col-sm-1"> 启用状态 : </label>
+		    <select class="form-control" name="enabled" id="enabled" >
+			  	<option value="">全部</option>
+		      	<option th:selected="${enabled == 0 }" value="0">禁用</option>
+		      	<option th:selected="${enabled == 1 }" value="1">启用</option>
+			</select>
+		  </div>
+		  -->
+		  
+		  <button type="button" class="btn btn-primary search-btn"><i class="icon icon-search"></i> 搜索</button>
+		  <button type="button" class="btn reset-btn"> 重置</button>
+		</form>
+	  </div>
+	</div>
+	
+	
+	
+	<div class="panel panel" style="margin-bottom: 5px;">
+	  <div class="panel-body">
+		  <a type="button" th:href="@{|${baseReqPath}/view/add|}" class="btn btn-primary">
+		  <i class="icon icon-plus-sign" style="vertical-align: middle;"></i>
+		  	添加
+		  </a>
+	  </div>
+	</div>
+	
+	<div style="padding: 10px;" class="dataTables_wrapper">
+	
+		<table id="data_table" class="display" style="width:100%;"></table>
+
+	</div>
+	
+
+<script type="text/javascript" th:inline="javascript">
+//Thymeleaf内联区
+var baseReqPath = [[${baseReqPath}]];
+</script>
+
+<script type="text/javascript" th:inline="none">
+	
+	
+	
+	var dataTableUrl = baseReqPath + '/ajax/list';
+    
+    var table = 
+   	DataTableErrorHandle($('#data_table'))
+    .DataTable(
+    		DataTableOperation.initDatatablesOptions({
+    			ajax: function (data, callback, settings) {
+    				DataTableOperation.datatableAjax(dataTableUrl, data, callback);
+    			},
+    		   stateSave: true,//是否保存当前表状态
+        	   order: [[ 0, 'desc' ]],//默认排序
+               columns : [
+                   {//id列，默认隐藏
+                	   title: "uid",//表头标题
+                       data:"uid", //数据对应key
+                       name : "uid", //对应字段名称
+                       visible: false, //是否可视
+                       orderable: true, //是否可排序
+                       render : function(data, type, row) { //渲染单元格
+                           return data;
+                       },
+                   },
+                   {//序号列
+                	   title: "#", 
+                       width: 30,
+                       visible: true, 
+                       orderable: false,
+                       render : function(data, type, row, meta) { //渲染单元格
+                    	   //console.log(meta)
+                    	   return meta.row + 1 + meta.settings._iDisplayStart;
+                       },
+                   },
+           		   {
+           		   
+           		       title: "用户名",
+					
+					   data:"username", 
+                       name : "username",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data;
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "图书标识", 
+					
+					   data:"bookId", 
+                       name : "bookId",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data;
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "图书名称，最多64个字（记录）", 
+					
+					   data:"bookName", 
+                       name : "bookName",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data;
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "作者（记录）", 
+					
+					   data:"bookAuthor", 
+                       name : "bookAuthor",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data;
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "书号，唯一标识（记录）", 
+					
+					   data:"bookISBN", 
+                       name : "bookISBN",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data;
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "配图（记录）", 
+					
+					   data:"bookFigureUrl", 
+                       name : "bookFigureUrl",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return `
+                      		<a href="${Util.emptyDefault(data, 'javascript:;')}" target="_blank">
+                      			<img src="${Util.getMiniPic(data)}" width="50px" height="50px" class=""/>
+                      		</a>
+                      		`;
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "借出价格（分）（记录）", 
+					
+					   data:"lendPrice", 
+                       name : "lendPrice",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data && Util.toYuan(data) || '';
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "可借阅时长（天）（记录）", 
+					
+					   data:"lendTime", 
+                       name : "lendTime",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data;
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "续借价格（分）（记录）", 
+					
+					   data:"renewPrice", 
+                       name : "renewPrice",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data && Util.toYuan(data) || '';
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "续借时长（记录）", 
+					
+					   data:"renewTime", 
+                       name : "renewTime",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data;
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "可续借次数（记录）", 
+					
+					   data:"canRenewNum", 
+                       name : "canRenewNum",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data;
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "借阅记录号", 
+					
+					   data:"orderNo", 
+                       name : "orderNo",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data;
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "支付借阅金额", 
+					
+					   data:"payBorrowAmount", 
+                       name : "payBorrowAmount",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data && Util.toYuan(data) || '';
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "已续借次数", 
+					
+					   data:"renewNum", 
+                       name : "renewNum",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data;
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "支付续借总费用", 
+					
+					   data:"payRenewAmount", 
+                       name : "payRenewAmount",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data && Util.toYuan(data) || '';
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "总支付金额", 
+					
+					   data:"payAmount", 
+                       name : "payAmount",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return data && Util.toYuan(data) || '';
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "理论归还时间（借阅时间+借阅时长+续借时长）", 
+					
+					   data:"returnDate", 
+                       name : "returnDate",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+                           return Util.longToDateTime(data);
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "实际归还时间", 
+					
+					   data:"actualReturnDate", 
+                       name : "actualReturnDate",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+                           return Util.longToDateTime(data);
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "借阅状态", 
+					
+					   data:"status", 
+                       name : "status",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return `
+					      		${!(data === 0)?"":`<span class="label label-badge label-info" >已借阅</span>`}
+					      		${!(data === 1)?"":`<span class="label label-badge label-info" >已归还</span>`}
+					      	`;
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "创建时间", 
+					
+					   data:"createDate", 
+                       name : "createDate",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+                           return Util.longToDateTime(data);
+						},
+                   },
+                   
+           		   {
+           		   
+					   title: "启用状态", 
+					
+					   data:"enabled", 
+                       name : "enabled",
+                       visible: true,                       
+                       width: 100,
+                       orderable: false,
+                       //responsivePriority: 1,
+                       render : function(data, type, row, meta) {
+							return `
+					      		${!(data === 0)?"":`<span class="label label-badge label-info" >禁用</span>`}
+					      		${!(data === 1)?"":`<span class="label label-badge label-info" >启用</span>`}
+					      	`;
+						},
+                   },
+                   
+                   
+                   {
+                	   title: "操作",
+                       data:"uid", 
+                       name : "uid",
+                       width: 100,
+                       visible: true,
+                       responsivePriority: 1,
+                       orderable: false,
+                       render : function(data, type, row) {
+                    	   return `
+	                           ${!true ? '' : `<a class="btn btn-mini btn-primary" href="${baseReqPath}/view/edit?uid=${row.uid}">编辑</a>`}
+	                           <br/>
+	                           ${!row.enabled == 1  ? '' : `<a class="btn btn-mini btn-danger " onclick="clickToUpdateStatus(this)" data-uid="${row.uid}"  data-value="0"  data-url="${baseReqPath}/ajax/delete">禁用</a>`}
+	                           ${!row.enabled == 0  ? '' : `<a class="btn btn-mini btn-success " onclick="clickToUpdateStatus(this)" data-uid="${row.uid}"  data-value="1"  data-url="${baseReqPath}/ajax/delete">启用</a>`}
+	                           <br/>
+                           `
+                       },
+                       
+                   },
+                ]
+           			
+           })
+           );
+    
+    
+    $('.search-btn').click(function(){
+    	table.draw();
+    })
+    
+    //清除数据表记录
+    $('.reset-btn').click(function() {
+    	$('input').val('');
+    	table.state.clear();
+    	window.location.reload();
+    })
+    
+    //搜索框下，按下ESC触发清除搜索框
+    $("#keyword").keydown(function(event){
+    	
+    	if(event.keyCode == 13 ){ //enter
+    		$(".search-btn").click();
+    	}else if(event.keyCode == 27 ){//esc
+       		$("#keyword").val('');
+       	}
+    	
+	});
+    
+           
+</script>
+
+
+</body>
+</html>

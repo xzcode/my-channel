@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+>
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/system/systemmessage'">
+	<ol class="breadcrumb">
+	  <li><a th:href="@{/home}"><i class="icon icon-home"></i>首页</a></li>
+	  <li>系统消息表</li>
+	  <li>编辑</li>
+	</ol>
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/edit/save|}">
+		
+		
+		<div class="form-group hide">
+			<label for="uid" class="col-sm-1">  隐藏字段: </label>
+			<div class="col-md-4 col-sm-10">
+		      <input type="text" class="form-control" name="uid" id="uid"  required="required" th:value="${editObj.uid}"/>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="payload" class="col-sm-1"> 消息内容 : </label>
+			<div class="col-md-4 col-sm-10">
+			
+				<input type="text" class="form-control" name="payload" id="payload"   />
+				
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="title" class="col-sm-1">通知标题 : </label>
+			<div class="col-md-4 col-sm-10">
+		      <input type="text" class="form-control" name="title" id="title"  required="required" th:value="${editObj.title}"/>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="description" class="col-sm-1"> 通知描述 : </label>
+			<div class="col-md-4 col-sm-10">
+		      <input type="text" class="form-control" name="description" id="description"   th:value="${editObj.description}"/>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="createDate" class="col-sm-1"> 创建时间 : </label>
+			<div class="col-md-4 col-sm-10">
+	  			<input type="text" disabled="disabled" class="form-control" name="createDate" id="createDate"   th:value="${editObj.createDate != null ? #dates.format(editObj.createDate, 'yyyy-MM-dd HH:mm:ss') : ''}"/>
+		    </div>
+		</div>
+	  
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-10">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+	    </div>
+	  </div>
+	  
+	</form>
+	
+
+</body>
+
+
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+
+		
+	
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+		
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                
+                if(result.success){
+            		Msg.success('操作成功!',null,function(){
+	            		location.href = referer;                		
+                	});
+				}else{
+					Msg.error('提示消息：操作失败!');
+					setTimeout(function(){
+						formValidationPlugin.disableSubmitButtons(false);
+					},1000);
+				}
+                
+            }, 'json');
+        });
+    
+	
+	/*
+	var options = {
+   		    staticFiles: [], 		 
+			file_data_name: 'file', //上传文件name，对应controller的字段名称
+			limitFilesCount: 1,//限制上传文件数
+			//removeUploaded: false,//上传成功后自动从界面上移除
+			deleteActionOnDone: function(file, doRemoveFile){doRemoveFile(file)},//删除上传成功的文件
+			//rename: false, //是否可以重命名
+			filters:{
+			    // 只允许上传图片或图标（.ico）
+			    mime_types: [
+			        {title: '图片', extensions: 'jpg,gif,png'}
+			    ],
+			    // 最大上传文件为 1MB
+			    max_file_size: '4mb',
+			    // 不允许上传重复文件
+			    prevent_duplicates: true
+			},
+			multi_selection: false, // 多选文件
+			responseHandler: function(responseObject, file){
+				if(responseObject.status == 200){
+					var resp = JSON.parse(responseObject.response);
+					$("#avatar").attr('value',resp.data.url);
+					//$('.edit-form').data('formValidation').validate();
+					//setTimeout(1000,function(){$('.edit-form').data('formValidation').revalidateField('avatar');})
+				}
+			},
+			multipart_params: {} //	multipart 附加参数
+	};
+	
+	$('#uploader').uploader(options);
+	var uploader = $('#uploader').data('zui.uploader');
+	
+	*/	
+	
+	
+	$(function(){
+		$('#updateDate').attr('disabled','disabled');
+		$('#createDate').attr('disabled','disabled');
+		//$('#updateUserName').attr('disabled','disabled');
+		//$('#createUserName').attr('disabled','disabled');
+	})
+/*]]>*/
+</script>
+
+</html>

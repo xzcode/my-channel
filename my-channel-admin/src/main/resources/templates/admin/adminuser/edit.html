@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+>
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/admin/adminuser'">
+	<ol class="breadcrumb">
+	  <li><a th:href="@{/home}"><i class="icon icon-home"></i>首页</a></li>
+	  <li>系统用户</li>
+	  <li>编辑</li>
+	</ol>
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/edit/save|}">
+		
+		
+		<div class="form-group hide">
+			<label for="uid" class="col-sm-1"> 自增主键 : </label>
+			<div class="col-md-4 col-sm-10">
+		      <input type="text" class="form-control" name="uid" id="uid"  required="required" th:value="${editObj.uid}"/>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="username" class="col-sm-1"> 用户帐号 : </label>
+			<div class="col-md-4 col-sm-10">
+		      <input type="text" class="form-control" name="username" id="username"  required="required" th:value="${editObj.username}"/>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="password" class="col-sm-1"> 密码 : </label>
+			<div class="col-md-4 col-sm-10">
+		      <input type="password" class="form-control" name="password" id="password" />
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="password" class="col-sm-1"> 角色选择 : </label>
+			<div class="col-md-4 col-sm-10">
+		      <select class="form-control" name="roleId" id="roleId">
+		      	 <option th:selected="${roleId == item.uid}" th:each="item,state : ${roles}" th:value="${item.uid}" th:text="${item.roleName}"></option>
+	    	  </select>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="mobile" class="col-sm-1"> 手机号码 : </label>
+			<div class="col-md-4 col-sm-10">
+		      <input type="text" class="form-control" name="mobile" id="mobile"   th:value="${editObj.mobile}"/>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="realname" class="col-sm-1"> 真实姓名 : </label>
+			<div class="col-md-4 col-sm-10">
+		      <input type="text" class="form-control" name="realname" id="realname"   th:value="${editObj.realname}"/>
+		    </div>
+		</div>
+		
+		
+		<div class="form-group ">
+			<label for="createDate" class="col-sm-1"> 创建日期 : </label>
+			<div class="col-md-4 col-sm-10">
+	  			<input type="text" disabled="disabled" class="form-control" name="createDate" id="createDate"   th:value="${editObj.createDate == null ? '' : #dates.format(editObj.createDate, 'yyyy-MM-dd HH:mm:ss')}"/>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="updateDate" class="col-sm-1"> 更新日期 : </label>
+			<div class="col-md-4 col-sm-10">
+	  			<input type="text"  class="form-control" name="updateDate" id="updateDate"   th:value="${editObj.updateDate == null ? '' : #dates.format(editObj.updateDate, 'yyyy-MM-dd HH:mm:ss')}"/>
+		    </div>
+		</div>
+		
+		<div class="form-group ">
+			<label for="delFlag" class="col-sm-1"> 启用状态: </label>
+			<div class="col-md-4 col-sm-10">
+		      	  <select name="enabled" id="enabled" class="form-control">
+			      	<option th:selected="${editObj.enabled == 0 }" value="0">禁用</option>
+			      	<option th:selected="${editObj.enabled == 1 }" value="1">启用</option>
+			      </select>
+		    </div>
+		</div>
+		
+		
+	  
+	
+	  
+	  <!--
+	  <div class="form-group">
+	    <label for="avatar" class="col-sm-1">头像</label>
+	    <div class="col-md-4 col-sm-10">
+	      
+	      <div id='uploader' class="uploader" data-ride="uploader" data-url="/file/uploadFile">
+		    <div class="uploader-message text-center">
+			  <div class="content"></div>
+			  <button type="button" class="close">×</button>
+			</div>
+			<div class="uploader-files file-list file-list-grid">
+			
+						<div class="file" id="file-o_1" data-status="done" th:if="${!#strings.isEmpty(editObj.avatar)}">
+						<script>
+						$(function(){
+								$("#file-o_1").data('file', {status: 1, static: true, id: 'o_1'});
+						})
+						</script>
+							<div class="file-progress-bar" style="width: 100%;"></div>
+							<div class="file-wrapper">
+								<div class="file-icon" style="color: rgb(111, 174, 30);">
+									<a target="_blank" th:href="${editObj.avatar}">
+										<div class="file-icon-image" th:attr="style=|background-image: url(${editObj.avatar})|"></div>
+									</a>
+								</div>
+								
+								
+								<div class="actions">
+									<div class="file-status" data-toggle="tooltip" data-original-title="已上传" title="">
+										<i class="icon"></i> <span class="text"></span>
+									</div>
+									<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-delete-file" data-original-title="移除">
+										<i class="icon icon-trash text-danger"></i>
+									</button>
+								</div>
+							</div>
+							
+							
+						</div>
+
+					</div>
+			<div>
+			  <hr class="divider"/>
+			  <button type="button" class="btn btn-link uploader-btn-browse"><i class="icon icon-plus"></i> 选择文件</button>
+			  <button type="button" class="btn btn-link uploader-btn-start"><i class="icon icon-cloud-upload"></i> 开始上传</button>
+			  <div class="uploader-status text-muted"></div>
+			</div>
+			</div>
+	      
+	      
+	    </div>
+	  </div>
+	  
+	  -->
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-10">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+	    </div>
+	  </div>
+	  
+	</form>
+	
+
+</body>
+
+
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+
+		
+	
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+		
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                
+            	if(result.success){
+            		Msg.success('操作成功!',null,function(){
+	            		location.href = referer;                		
+                	});
+				}else{
+					Msg.error('提示消息：操作失败!');
+					setTimeout(function(){
+						formValidationPlugin.disableSubmitButtons(false);
+					},1000);
+				}
+                
+            }, 'json');
+        });
+    
+	
+	/*
+	var options = {
+   		    staticFiles: [], 		 
+			file_data_name: 'file', //上传文件name，对应controller的字段名称
+			limitFilesCount: 1,//限制上传文件数
+			//removeUploaded: false,//上传成功后自动从界面上移除
+			deleteActionOnDone: function(file, doRemoveFile){doRemoveFile(file)},//删除上传成功的文件
+			//rename: false, //是否可以重命名
+			filters:{
+			    // 只允许上传图片或图标（.ico）
+			    mime_types: [
+			        {title: '图片', extensions: 'jpg,gif,png'}
+			    ],
+			    // 最大上传文件为 1MB
+			    max_file_size: '4mb',
+			    // 不允许上传重复文件
+			    prevent_duplicates: true
+			},
+			multi_selection: false, // 多选文件
+			responseHandler: function(responseObject, file){
+				if(responseObject.status == 200){
+					var resp = JSON.parse(responseObject.response);
+					$("#avatar").attr('value',resp.data.url);
+					//$('.edit-form').data('formValidation').validate();
+					//setTimeout(1000,function(){$('.edit-form').data('formValidation').revalidateField('avatar');})
+				}
+			},
+			multipart_params: {} //	multipart 附加参数
+	};
+	
+	$('#uploader').uploader(options);
+	var uploader = $('#uploader').data('zui.uploader');
+	
+	*/	
+	
+	
+	$(function(){
+		$('#updateDate').attr('disabled','disabled');
+		$('#createDate').attr('disabled','disabled');
+		//$('#updateUserName').attr('disabled','disabled');
+		//$('#createUserName').attr('disabled','disabled');
+	})
+/*]]>*/
+</script>
+
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+>
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+
+</head>
+<body  th:with="baseReqPath='/admin/adminrole'">
+	<ol class="breadcrumb">
+	  <li><a th:href="@{/home}"><i class="icon icon-home"></i>首页</a></li>
+	  <li>管理员角色</li>
+	  <li>添加</li>
+	</ol>
+	
+	<form class="form-horizontal edit-form" th:action="@{|${baseReqPath}/ajax/add/save|}">
+		
+	  <div class="form-group hide">
+	    <label for="uid" class="col-sm-1">隐藏参数</label>
+	    <div class="col-md-4 col-sm-10">
+	      <input type="text" class="form-control" name="uid" id="uid"/>
+	      
+	      <input type="text" class="form-control" name="nodes" id="nodes"/>
+	      
+	    </div>
+	  </div>
+	
+	   
+				<div class="form-group ">
+					<label for="role" class="col-sm-1"> 角色编码 : </label>
+					<div class="col-md-4 col-sm-10">
+					      <input type="text" class="form-control" name="role" id="role"  required="required" />
+				    </div>
+				</div>
+				
+	   
+				<div class="form-group ">
+					<label for="roleName" class="col-sm-1"> 角色名称 : </label>
+					<div class="col-md-4 col-sm-10">
+					      <input type="text" class="form-control" name="roleName" id="roleName"  required="required" />
+				    </div>
+				</div>
+				
+				<div class="form-group ">
+					<label for="roleName" class="col-sm-1"> 权限配置 : </label>
+					<div class="col-md-4 col-sm-10">
+				      <div  id="menu_tree" class="ztree" style="border: 1px solid #ccc"></div>
+				    </div>
+				</div>
+				
+	   
+				<div class="form-group ">
+					<label for="remark" class="col-sm-1"> 备注 : </label>
+					<div class="col-md-4 col-sm-10">
+					      <input type="text" class="form-control" name="remark" id="remark"   />
+				    </div>
+				</div>
+				
+		
+	  
+	  
+	 
+	  <div class="form-group">
+	    <div class="col-sm-offset-1 col-sm-10">
+	      <button type="submit" class="btn btn-primary">保存</button>
+	      
+	      <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+	    </div>
+	  </div>
+	</form>
+	
+
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+	
+	
+		var setting = {
+				 data: {
+					 simpleData: {
+							enable: true,
+							idKey: "uid",
+							pIdKey: "parentId",
+							rootPId: "0"
+						},
+						keep: {
+			                    parent: true,
+			                    leaf: true
+			                },
+						key:{
+							name:"permissionName"
+						}
+				 },
+				 callback: {
+			  		onClick: onNodeClick,
+			  		onCheck: nocheckNode
+				 },
+				 view: {
+				 	selectedMulti: false
+				 },
+	    		 check: {
+					enable: true,
+					nocheckInherit: true
+				 }
+			};
+	
+		var menuTree;
+		
+		$.ajax({
+			type : "GET",
+			url : [[@{|/admin/adminpermission/ajax/list/all|}]],
+			dataType : "json",
+			async : true,
+			success : function(result) {
+				var data = result.data;
+				//data.push({name: "根节点", uid: "0"});
+				menuTree = $.fn.zTree.init($("#menu_tree"), setting, data); 
+				menuTree.expandAll(true);
+				
+				$("#nodes").val().split(",").forEach(x => {
+					menuTree.checkNode(menuTree.getNodeByParam("uid", x, null),true,false,true);
+				})
+			},
+			error : function() {
+				
+			}
+		});
+	
+		function nocheckNode(e) {
+			var nodes = menuTree.getCheckedNodes(true);
+			if(nodes){
+				$("#nodes").val(nodes.map(x => x.uid).join(","));
+			}
+			
+		}	
+		
+		function onNodeClick(event, treeId, treeNode) {
+			
+			menuTree.checkNode(treeNode,true,true,true);
+			
+		}
+	
+		
+		var referer = [[${#httpServletRequest.getHeader('Referer')}]];
+	
+        var formValidation = $('.edit-form').formValidation();
+        
+        var formValidationPlugin = $('.edit-form').data('formValidation');
+        
+        formValidation.on('success.form.fv', function(e, data) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            var bv = $form.data('formValidation');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+            	if(result.success){
+            		location.href = referer;
+				}else{
+					new $.zui.Messager('提示消息：操作失败!', {
+					    type: 'danger' // 定义颜色主题
+					}).show();
+					setTimeout(function(){
+						formValidationPlugin.disableSubmitButtons(false);
+					},1000);
+				}
+            }, 'json');
+        });
+    
+        
+        
+
+	
+	var options = {
+			file_data_name: 'file', //上传文件name，对应controller的字段名称
+			limitFilesCount: 1,//限制上传文件数
+			//removeUploaded: false,//上传成功后自动从界面上移除
+			deleteActionOnDone: function(file, doRemoveFile){doRemoveFile()},//删除上传成功的文件
+			filters:{
+			    // 只允许上传图片或图标（.ico）
+			    mime_types: [
+			        {title: '图片', extensions: 'jpg,gif,png'}
+			    ],
+			    // 最大上传文件为 1MB
+			    max_file_size: '4mb',
+			    // 不允许上传重复文件
+			    prevent_duplicates: true
+			},
+			multi_selection: false, // 多选文件
+			responseHandler: function(responseObject, file){
+				if(responseObject.status == 200){
+					var resp = JSON.parse(responseObject.response);
+					$("#avatar").attr('value',resp.data.url);
+				}
+			},
+			multipart_params: {} //	multipart 附加参数
+	};
+	
+	
+	$('#uploader').uploader(options);
+	var uploader = $('#uploader').data('zui.uploader');
+	
+	
+/*]]>*/
+</script>
+
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta th:include="common :: head_common" th:remove="tag"/>
+
+<link rel="stylesheet" type="text/css"
+	href="/css/style_9_common.css?J78">
+<link rel="stylesheet" type="text/css"
+	href="/css/style_9_portal_list.css?J78">
+<link rel="stylesheet" type="text/css"
+	href="/css/list.css">
+
+</head>
+<body>
+
+
+	<div th:include="common :: header_common" th:remove="tag"></div>
+
+	<div id="wp" class="wp time_wp cl">
+
+		<div class="wp">
+			<!--[diy=diy1]-->
+			<div id="diy1" class="area"></div>
+			<!--[/diy]-->
+		</div>
+		<div id="ct" class="ct2 wp inside_box cl" style="margin: 25px 0 0 0;">
+			<div style="float: left; width: 810px; box-shadow: none;">
+				<div class="mn cl"
+					style="float: none; padding: 0; margin: 0; background: none;">
+					<div class="tit_top cl">
+						<h3>行业资讯</h3>
+						<div class="cl"
+							style="float: left; min-width: 200px; min-height: 30px;">
+							<!--[diy=diy_info]-->
+							<div id="diy_info" class="area"></div>
+							<!--[/diy]-->
+						</div>
+					</div>
+
+					<!--[diy=listcontenttop]-->
+					<div id="listcontenttop" class="area"></div>
+					<!--[/diy]-->
+					<div class="bm" style="margin: 0; background: none;">
+						<!-- 文章列表 begin -->
+						<div class="list_new Framebox cl" style="padding: 0;">
+							<div class="box recommend_article">
+								<div class="removeline cl">
+									<ul id="itemContainer">
+
+										<div th:each="item,state : ${page.items}" class="mbox_list recommend_article_list cl">
+											<a
+												th:href="|/info/info_detail/${item.uid}.html|"
+												class="recommend_article_list_pic">
+												<img
+												th:src="${item.coverUrl}"
+												th:alt="${item.title}"
+												>
+											</a>
+											<div class="recommend_article_list_content">
+												<h3 class="list_title">
+													<a
+														th:href="|/info/info_detail/${item.uid}.html|"
+														target="_blank" style="" th:text="${item.title}">标题</a>
+												</h3>
+												<div class="recommend_article_list_info">
+														<span style="font-family: Arial, Helvetica, sans-serif;" th:text="${@thHelper.dateTimeFormat(item.createDate)}">2016-11-17 21:11</span>
+												</div>
+												<div class="recommend_article_list_simple" th:text="${item.intro}">简介</div>
+											</div>
+										</div>
+
+
+
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- 文章列表 end -->
+					</div>
+
+				</div>
+				
+				<div class="pgs cl" style="margin-top: 0;">
+					<ul id="pagination" class="pagination-sm" th:attr="data-total=${page.total},data-pagesize=${page.pageSize},data-pageno=${page.pageNo}"></ul>
+				</div>
+			</div>
+			<div class="sd pph" style="box-shadow: none;">
+
+				
+				<!-- 推荐阅读 -->
+				<div class="sbody cl" style="margin: 0;">
+					<!--[diy=sbody]-->
+					<div id="sbody" class="area">
+						<div id="frameUdZ9PY" class="frame move-span cl frame-1">
+							<div id="frameUdZ9PY_left" class="column frame-1-c">
+								<div id="frameUdZ9PY_left_temp" class="move-span temp"></div>
+								<div id="portal_block_27" class="block move-span">
+									<div id="portal_block_27_content" class="dxb_bc">
+										<div class="box-moder hot-article cl"
+											style="margin: 30px 0 0 0;">
+											<h3>
+												<span class="span-mark span-mark2"></span><b>热文排行</b>
+											</h3>
+											<ul>
+												<li th:each="item,state : ${hots}">
+											<div class="hot-article-img">
+												<a
+													th:href="|/info/info_detail/${item.uid}.html|"
+													target="_blank"> <img
+													th:src="${item.coverUrl}"
+													width="280" height="158">
+												</a>
+											</div> 
+											<a th:href="|/info/info_detail/${item.uid}.html|"
+											class="transition" target="_blank" th:text="${item.title}">标题</a>
+										</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--[/diy]-->
+				</div>
+
+				<div class="drag">
+					<!--[diy=diy2]-->
+					<div id="diy2" class="area"></div>
+					<!--[/diy]-->
+				</div>
+			</div>
+		</div>
+		<div class="wp mtn">
+			<!--[diy=diy3]-->
+			<div id="diy3" class="area"></div>
+			<!--[/diy]-->
+		</div>
+	</div>
+ 
+
+	<div th:include="common :: footer_common" th:remove="tag"></div>
+
+	<div th:include="common :: script_common" th:remove="tag"></div>
+	<script src="https://cdn.bootcss.com/simplePagination.js/1.6/jquery.simplePagination.min.js"></script>
+	<link href="https://cdn.bootcss.com/simplePagination.js/1.6/simplePagination.min.css" rel="stylesheet">
+	
+	<script type="text/javascript">
+	$("#pagination").pagination({
+        items: $('#pagination').data('total'),
+        itemsOnPage: $('#pagination').data('pagesize'),
+        currentPage: $('#pagination').data('pageno'),
+        cssStyle: 'dark-theme',
+        prevText: '上一页',
+        nextText: '下一页',
+        onPageClick: function(pageNumber, event){
+        	location = '/info/info_list.html?pageNo=' + pageNumber;
+        },
+    });
+	</script>
+</body>
+</html>

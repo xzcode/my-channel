@@ -1,0 +1,102 @@
+	buildscript {
+	/*
+		ext {
+			springBootVersion = '2.0.3.RELEASE'
+		}
+	*/
+		repositories {
+			maven {url "${nexusPublicUrl}"}
+			mavenCentral()
+			mavenLocal()
+		}
+		dependencies {
+			classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		}
+	}
+	
+	repositories {
+	    maven {
+	        url 'http://repo.spring.io/milestone'
+	        url 'https://repo.spring.io/libs-snapshot'
+	    }
+	}
+	
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'org.springframework.boot'
+	
+	dependencyManagement {
+	  imports {
+	    mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	  }
+	}
+	
+	dependencies {
+	
+		//compile 'org.springframework.cloud:spring-cloud-starter-config'
+    	compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+    	compile 'org.springframework.boot:spring-boot-starter-security'
+		
+	}
+	
+	version="1.0.0"
+	
+	
+	def docker_test_registy = "common.host:8085"
+
+	def docker_prod_registy = "registry.cn-shenzhen.aliyuncs.com/xx/xx-xx"
+	
+	def docker_public_registy = "common.host:8091"
+	
+	
+
+	/*******************docker build test - start*********************/
+	
+	task dockerBuildTest(type:Exec) {
+	  dependsOn build
+	  commandLine 'cmd', '/c', 'docker', 'build', 
+	  				"-f", "./src/main/resources/docker/DockerFile_test",
+	  				"--build-arg", "JAR_FILE=./build/libs/${jar.archiveName}",
+	  				"--tag", "${docker_test_registy}/${jar.baseName}:${version}",
+	  				"./"
+	}
+	
+	task dockerPushTest(type:Exec) {
+	  commandLine 'cmd', '/c', 'docker', 'push',"${docker_test_registy}/${jar.baseName}:${version}"
+	}
+	
+	task dockerBuildAndPushTest() {
+		dependsOn dockerBuildTest
+		dependsOn dockerPushTest
+		doLast {
+			println "Task dockerBuildAndPushTest completed !!"
+		}
+	}
+	
+	/*******************docker build test - end*********************/
+	
+	
+	/*******************docker build prod - start*********************/
+	
+	task dockerBuildProd(type:Exec) {
+	  dependsOn build
+	  commandLine 'cmd', '/c', 'docker', 'build', 
+	  				"-f", "./src/main/resources/docker/DockerFile_prod",
+	  				"--build-arg", "JAR_FILE=./build/libs/${jar.archiveName}",
+	  				"--tag", "${docker_prod_registy}:${version}",
+	  				"./"
+	}
+	
+	task dockerPushProd(type:Exec) {
+	  commandLine 'cmd', '/c', 'docker', 'push',"${docker_prod_registy}:${version}"
+	}
+	
+	task dockerBuildAndPushProd() {
+		dependsOn dockerBuildProd
+		dependsOn dockerPushProd
+		doLast {
+			println "Task dockerBuildAndPushProd completed !!"
+		}
+	}
+	
+	/*******************docker build prod - end*********************/
+		

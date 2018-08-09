@@ -1,0 +1,677 @@
+@charset "utf-8";
+/**
+ *
+ * CSS File,created by wangliuzhan, on 06.12 2016
+ *
+ * 最后编辑人：wangliuzhan  (每次修改本文件)
+ *
+ */
+/*----------- smart_controller wangliuzhan [[ --------------------*/
+.sc_page{height: 950px;width: 100%;}
+/* .first_page img.fp_left{float: left;height: 100%;width: 34.4%;} */
+.first_page img.fp_left{position: absolute;z-index:2;}
+.fourth_page,.seventh_page{overflow: hidden;}
+/* .first_page div.fp_right{position:relative;float: right;height: 100%;width:65.6%;background: url("/static/html/images/products/smart_controller/page_one2.jpg") no-repeat center center;} */
+.first_page div.fp_right{position:absolute;float: right;height: 950px;width:1258px;background: url("/static/html/images/products/smart_controller/page_one2.jpg") no-repeat center center;right: 0; z-index: 1} 
+.first_page div.fp_back{position: absolute;left: 0;top: 0;width: 100%;height: 100%;filter:alpha(opacity=40);-moz-opacity:0.4;opacity:0.4;z-index: 99;background-color: #000;z-index: 99;}
+/* .first_page div.fp_content{position: absolute;top: 388px;left: 298px;z-index: 100;width: 310px;text-align: center;} */
+.first_page div.fp_content{position: absolute;top: 388px;right: 50%;z-index: 100;width: 310px;text-align: center;margin-right: -155px}
+@media screen and (max-width:1600px){
+  .first_page div.fp_content{right: 34%}
+}
+.first_page div.fp_content p.title{font-size: 44px;color: #fff;}
+.first_page div.fp_content p.tip{font-size: 18px;margin-top: 36px;color: #fff;}
+.first_page div.fp_content a{display:block;margin: 86px auto 0 auto;font-size: 18px;line-height:50px;color: #fff;width: 208px;height: 52px;border-radius: 50px;background-color: #12cd3e;border:1px solid #12cd3e;}
+.second_page{position: relative;}
+.second_page .bg,.ds_second .bg,.energy_second .bg{position: absolute;z-index: 99;top: 0;left: 0;width: 100%;height: 100%;background-color: #333;}
+.second_page div.sp_item.animate,.energy_second .es_item.animate{animation:fadeInUpBig 1s .2s ease both;-moz-animation:fadeInUpBig 1s .2s ease both;}
+.second_page div.sp_item .si_content{opacity: 0;filter:alpha(opacity=0);position:absolute;top: 50%;left: 62px;}
+.second_page div.sp_item .si_content div.si_line{margin-left: 8px;width: 40px;height: 4px;background-color: #fff;}
+.second_page div.sp_item .si_content p{margin-top: 30px;font-size: 18px;color: #fff;}
+.second_page div.sp_item .si_content.animate,.second_page div.sp_title.animate,.energy_second p.animate,.energy_second em{animation:fadeIn 1s 1s ease both;-moz-animation:fadeIn 1s 1s ease both;}
+.second_page div.sp_title.animate,.energy_second p.animate,.energy_second em{animation-delay:2s;-moz-animation-delay:2s;}
+@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
+@-moz-keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
+/*@keyframes fadeInLight{0%{opacity:0.3}100%{opacity:1}}
+@-moz-keyframes fadeInLight{0%{opacity:0.3}100%{opacity:1}}*/
+@keyframes fadeOut{0%{opacity:1}100%{opacity:0.3}}
+@-moz-keyframes fadeOut{0%{opacity:1}100%{opacity:0.3}}
+@keyframes fadeInOut{0%{opacity:0}50%{opacity:1}100%{opacity: 0}}
+@-moz-keyframes fadeInOut{0%{opacity:0}50%{opacity:1}100%{opacity: 0;}}
+@keyframes fadeInUpBig{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
+@-moz-keyframes fadeInUpBig{0%{opacity:0;-moz-transform:translateY(20px)}100%{opacity:1;-moz-transform:translateY(0)}}
+.second_page div.sp_item.one{background: url("/static/html/images/products/smart_controller/page_two1.jpg") no-repeat center center;}
+.second_page div.sp_item.two{background: url("/static/html/images/products/smart_controller/page_two2.jpg") no-repeat center center;}
+.second_page div.sp_item.three{background: url("/static/html/images/products/smart_controller/page_two3.jpg") no-repeat center center;}
+.second_page div.sp_item.four{background: url("/static/html/images/products/smart_controller/page_two4.jpg") no-repeat center center;}
+.second_page div.sp_item,.energy_second .es_item{float: left;width: 25%;height: 100%;opacity:0;filter:alpha(opacity=100);position: relative;z-index: 100;}
+.second_page div.sp_title{opacity: 0;filter:alpha(opacity=100);position: absolute;z-index: 100;width: 100%;height: 76px;bottom: 38px;left: 0;background: url("/static/html/images/products/smart_controller/page_two_pic.png") no-repeat center center;}
+.second_page div.sp_title div.st_green{position: absolute;width: 480px;height: 60px;left: 50%;margin-left: -240px;top: 16px;z-index: 99px;background: url("/static/html/images/products/smart_controller/page_two_green.png") no-repeat center center;}
+.second_page div.sp_title div.st_green.animate{animation: fadeInOut 4s ease-in-out infinite ;-moz-animation: fadeInOut 4s ease-in-out infinite;}
+.second_page div.sp_title p{position: absolute;z-index: 100;font-size: 18px;color: #fff;line-height: 60px;top: 16px;width: 100%;text-align: center;}
+
+.third_page{position:relative;width: 100%;background: url("/static/html/images/products/smart_controller/page_three-bg.jpg") no-repeat center center;}
+.third_page p.tp_title{font-size:30px;color: #fff;width: 100%;text-align: center;padding-top: 148px;}
+.third_page .tp_content{width: 1190px;margin: 196px auto 0 auto;}
+.third_page .tp_content div.tp_item{float: left;width: 20%;position:relative;}
+.third_page .tp_content div.tp_item div.ti_circle,.third_page .tp_content div.tp_item div.tc_img,
+.fourth_page .fp_left .fl_icon,.fl_content .fc_txt1 .ft_line,.fl_content .fc_txt2 .ft_line,.fl_content .fc_txt3 .ft_line,
+.fifth_page .fc_right div.fr_title div,.fifth_page .fc_right div.fr_item div div,.sixth_page .sp_icon,.seventh_page .sc_left .sl_icon,
+.eighth_page .ep_container div,.ninth_page div.nc_icon,.ninth_page div.nc_item div,.ten_page .tc_line
+{background:url("/static/html/images/products/smart_controller/smc_icons.png") no-repeat center center;}
+.third_page .tp_content div.tp_item div.ti_circle{width:130px;height:130px;margin:0 auto;transform:rotate(-60deg);}
+.third_page .tp_content div.tp_item div.ti_circle.animate{animation:rotateDeg .5s .5s ease-in-out both;-moz-animation:rotateDeg .5s .5s ease-in-out both;}
+.third_page .tp_content div.tp_item.one div.ti_circle.animate{animation-delay:1s;-moz-animation-delay:1s;}
+.third_page .tp_content div.tp_item.two div.ti_circle.animate{animation-delay:1.5s;-moz-animation-delay:1.5s;}
+.third_page .tp_content div.tp_item.three div.ti_circle.animate{animation-delay:2s;-moz-animation-delay:2s;}
+.third_page .tp_content div.tp_item.four div.ti_circle.animate{animation-delay:2.5s;-moz-animation-delay:2.5s;}
+.third_page .tp_content div.tp_item.five div.ti_circle.animate{animation-delay:3s;-moz-animation-delay:3s;}
+@keyframes rotateDeg{0%{transform:rotate(-60deg);}100%{transform:rotate(0deg);}}
+@-moz-keyframes rotateDeg{0%{-moz-transform:rotate(-60deg)}100%{-moz-transform:rotate(0deg)}}
+.third_page .tp_content div.tp_item.one div.ti_circle{background-position:-137px -65px;}
+.third_page .tp_content div.tp_item.two div.ti_circle{background-position:0 -67px;}
+.third_page .tp_content div.tp_item.three div.ti_circle{background-position:-273px -67px;}
+.third_page .tp_content div.tp_item.four div.ti_circle{background-position:-562px -82px;}
+.third_page .tp_content div.tp_item.five div.ti_circle{background-position:-416px -71px;}
+.third_page .tp_content div.tp_item div.tc_img{position:absolute;left: 50%;}
+.third_page .tp_content div.tp_item.one div.tc_img{width:61px;height:60px;top:35px;margin-left:-30px;background-position:-608px 0;}
+.third_page .tp_content div.tp_item.two div.tc_img{width:60px;height:51px;top:40px;margin-left:-30px;background-position:-368px 0;}
+.third_page .tp_content div.tp_item.three div.tc_img{width:60px;height:38px;top:46px;margin-left:-30px;background-position:-548px 0;}
+.third_page .tp_content div.tp_item.four div.tc_img{width:40px;height:60px;top:35px;margin-left:-20px;background-position:-37px 0;}
+.third_page .tp_content div.tp_item.five div.tc_img{width:60px;height:36px;top:47px;margin-left:-30px;background-position:-428px 0;}
+.third_page .tp_content div.tp_item p{margin-top: 42px;font-size: 18px;color: #fff;text-align: center;width: 100%;}
+.third_page a.tp_arrow{display:block;position: absolute;left: 50%;bottom: 38px;height:20px;width:41px;margin-left: -20px;animation:mymove 1s infinite;-webkit-animation:mymove 1s infinite;background: url("/static/html/images/products/smart_controller/smc_icons.png") no-repeat center center;background-position:-117px 0;}
+@keyframes mymove{0%{bottom: 48px}50%{bottom: 38px}100%{bottom: 48px}}
+
+.fourth_page{background-color: #f7f7f7;}
+.fourth_page .fp_container,.fifth_page .fp_container,.sixth_page .sx_container,.seventh_page .sp_container,.eighth_page .ep_container,.ninth_page .np_container,.ten_page .tp_container{width: 1190px;margin:0 auto;height: 100%;position:relative;}
+.fourth_page .fp_left{float: left;width: 50%;margin-top: 262px;}
+.fourth_page .fp_left .fl_icon{width: 60px;height: 38px;background-position:-308px 0;}
+.fourth_page .fp_left p.fl_title{margin-top: 16px;font-size: 30px;color: #333;line-height: 42px;}
+.fourth_page .fp_left p.fl_txt{width: 90%;font-size: 18px;line-height: 24px;margin-top: 56px;color: #333;}
+.fourth_page .fp_left .fl_content{position:relative;width: 430px;height: 250px;margin-left: 50px;}
+.fl_content .fc_product{margin-top: 80px;}
+.fl_content .fc_product .fp_icon{float: left;margin-left: -50px;background: url("/static/html/images/products/smart_controller/sc_product.png") no-repeat center center;}
+.fl_content .fc_product .fp_icon.eight{width: 34px;height: 89px;margin-top:28px;margin-left:-30px;background-position:-10px 0;}
+.fl_content .fc_product .fp_icon.seven{width: 51px;height: 158px;background-position:-171px 0;}
+.fl_content .fc_product .fp_icon.six{width: 37px;height: 117px;margin-top:22px;background-position:-44px 0;}
+.fl_content .fc_product .fp_icon.five{width: 10px;height: 24px;margin-top:62px;margin-left:-40px;background-position:0 0;}
+.fl_content .fc_product .fp_icon.four{width: 57px;height: 34px;margin-top:56px;background-position:-222px 0;}
+.fl_content .fc_product .fp_icon.three{width: 45px;height: 136px;margin-top:18px;background-position:-81px 0;}
+.fl_content .fc_product .fp_icon.two{width: 45px;height: 86px;margin-top:28px;background-position:-126px 0;}
+.fl_content .fc_product .fp_icon.one{width: 75px;height: 151px;margin-top:8px;margin-left:150px;background-position:-279px 0;}
+.fl_content .fc_tip{position: absolute;opacity: 0;}
+.fl_content .fc_txt2.animate{animation-delay:.5s;-moz-animation-delay:.5s;}
+.fl_content .fc_txt3.animate{animation-delay:1s;-moz-animation-delay:1s;}
+.fl_content .fc_txt1{top:94px;left: 50px;width: 108px;height: 102px;}
+.fl_content .fc_txt1 .ft_line{position:absolute; top:0;right:0;width: 62px;height: 79px;background-position:-669px 0;}
+.fl_content .fc_txt1 p{position: absolute;top:92px;}
+.fl_content p{font-size: 12px;color: #888;}
+.fl_content .fc_txt2{top:-40px;left: 226px;width: 178px;height: 66px;}
+.fl_content .fc_txt2 .ft_line{position:absolute; top:20px;left:0;width: 30px;height: 35px;background-position:-7px 0;}
+.fl_content .fc_txt2 p{position: absolute;left:8px;top: -6px;}
+.fl_content .fc_txt3{top:118px;left: 326px;width: 60px;height: 82px;}
+.fl_content .fc_txt3 .ft_line{position:absolute; top:0;left:24px;width: 7px;height: 58px;background-position:0 0;}
+.fl_content .fc_txt3 p{position: absolute;bottom: 0;}
+.fourth_page .fp_right{opacity:0;filter:alpha(opacity=100);position:absolute;bottom:0;right:-100px;width:717px;height:865px;background: url("/static/html/images/products/smart_controller/three_phone.jpg") no-repeat center center;}
+.fourth_page .fp_right.animate{animation:fadeInUpBig 1s .2s ease both;-moz-animation:fadeInUpBig 1s .2s ease both;}
+
+.fifth_page .fc_left{float: left;width: 500px;height: 481px;background: url("/static/html/images/products/smart_controller/five_pic.jpg") no-repeat center center;margin-top: 235px;}
+.fifth_page .fc_left p{font-size: 14px;color: #fff;float: left;width: 50%;text-align: center;margin-top: 230px;line-height: 20px;}
+.fifth_page .fc_right{float: right;margin-top: 220px;width: 536px;}
+.fifth_page .fc_right div.fr_title div{width: 64px;height: 63px;background-position:-857px 0;}
+.fifth_page .fc_right div.fr_title p{color: #333;font-size: 30px;line-height: 42px;margin-top: 28px;}
+.fifth_page .fc_right div.fr_content{margin-top: 50px;}
+.fifth_page .fc_right div.fr_item{margin-top: 30px;}
+.fifth_page .fc_right div.fr_item div span{margin-left: 2px;font-size: 18px;color: #333;line-height: 40px;}
+.fifth_page .fc_right div.fr_item p{font-size: 16px;color: #888;margin-top: 16px;line-height: 26px;}
+.fifth_page .fc_right div.fr_item div div{float:left;display:block;height:40px;width:50px;}
+.fifth_page .fc_right div.fr_item.one div div{background-position:-208px 0;}
+.fifth_page .fc_right div.fr_item.two div div{background-position:-258px 0;}
+.fifth_page .fc_right div.fr_item.three div div{background-position:-158px 0;}
+
+.sixth_page{background: url("/static/html/images/products/smart_controller/six_bg.jpg") no-repeat center center;}
+.sixth_page .sx_container{padding-top: 60px;}
+.sixth_page .sp_icon{width: 40px;height: 60px;margin:0 auto;background-position:-37px 0;}
+.sixth_page p.sp_title{width: 490px;margin: 20px auto 0 auto;text-align: center;font-size: 30px;color: #fff;line-height: 42px;}
+.sixth_page p.sp_txt{font-size: 18px;color: #fff;margin-top: 32px;text-align: center;width: 100%;}
+.sixth_page div.sp_phone{position:absolute;opacity:0;filter:alpha(opacity=100);width: 684px;height: 631px;bottom: 60px;left: 50%;margin-left: -342px;background: url("/static/html/images/products/smart_controller/six_phone.jpg") no-repeat center center;}
+.sixth_page div.sp_phone.animate,.seventh_page div.sc_right.animate{animation:fadeInUpBig 1s .2s ease both;-moz-animation:fadeInUpBig 1s .2s ease both;}
+
+.seventh_page{position:relative;background: url("/static/html/images/products/smart_controller/seven_bg.jpg") no-repeat center center;background-size: 100% 100%;}
+
+.seventh_page .sc_left{float: left;margin-top: 286px;}
+.seventh_page .sc_left .sl_icon{width: 60px;height: 51px;background-position:-488px 0;}
+.seventh_page .sc_left p.scl_title{font-size: 30px;color: #fff;margin-top: 20px;line-height: 42px;text-align: left;}
+.seventh_page .sc_left p.scl_txt{font-size: 18px;color: #fff;margin-top: 52px;line-height: 24px;width: 540px;}
+.seventh_page .sc_right{float: right;opacity:0;filter:alpha(opacity=100);margin-top: 70px;margin-right:-100px;width: 573px;height: 907px;background: url("/static/html/images/products/smart_controller/seven_phone.png") no-repeat center center;}
+
+.eighth_page{position:relative;background: url("/static/html/images/products/smart_controller/eight_bg.jpg") no-repeat center center;background-size: 100% 100%;}
+.eighth_page .ep_container{z-index: 100;padding-top: 96px;height: auto;}
+.eighth_page .ep_container p{font-size: 30px;color: #fff;width: 100%;text-align: center;}
+.eighth_page .ep_container div{margin: 76px auto 0 auto;width: 381px;height: 251px;background-position:-718px -87px;}
+
+.ninth_page{background-color: #f7f7f7;}
+.ninth_page .np_container{text-align: center;width: 100%;padding-top: 136px;height: auto;}
+.ninth_page p.nc_title,.ten_page p.tc_title{font-size: 30px;color: #333;}
+.ninth_page div.nc_icon{width: 1010px;height: 311px;margin: 34px auto 0 auto;background-position:-2159px 0;}
+.ninth_page div.nc_items{width: 1190px;margin: 0 auto;}
+.ninth_page div.nc_item{float: left;margin-top: 34px;width: 195px;text-align: center;margin-left: 53px;}
+.ninth_page div.nc_item.one{margin-left: 0;}
+.ninth_page div.nc_item div{width: 64px;height: 56px;margin: 0 auto;}
+.ninth_page div.nc_item.one div{background-position:-921px 0;}
+.ninth_page div.nc_item.two div{background-position:-794px 0;}
+.ninth_page div.nc_item.three div{background-position:-985px 0;}
+.ninth_page div.nc_item.four div{background-position:-731px 0;}
+.ninth_page div.nc_item.five div{background-position:-1049px 0;}
+.ninth_page div.nc_item p.ni_title{font-size: 18px;color: #333;line-height: 24px;margin-top: 24px;}
+.ninth_page div.nc_item p.ni_txt{font-size: 16px;color: #888;line-height: 24px;width: 100%;text-align: center;margin: 0 auto;}
+
+.ten_page{background-color: #fff;}
+.ten_page .tp_container{text-align: center;padding-top: 136px;height: auto;}
+.ten_page p.tc_title{margin-bottom: 46px;}
+.ten_page .tc_line{display:block;width: 1150px;height: 9px;clear: both;background-position:-3169px 0;}
+.tc_content_title{width: 100%;}
+.tc_content_title .tct_item{float: left;width: 50%;height: 200px;padding: 24px 0;}
+.tc_content_title .tct_item > p{color: #333;font-size: 18px;float: left;margin-left: 86px;}
+.tc_content_title .tct_item .icon{width: 150px;text-align: center;}
+.tc_content_title .tct_item.one .icon{float: right;margin-right: 76px;}
+.tc_content_title .tct_item.two .icon{float: left;margin-left: 76px;}
+.tc_content_title .tct_item .icon div{display: block;width: 78px;height: 166px;margin: 0 auto;background: url("/static/html/images/products/smart_controller/sc_product.png") no-repeat center center;}
+.tc_content_title .tct_item.one .icon div{background-position:-431px 0;}
+.tc_content_title .tct_item.two .icon div{background-position:-354px 0;}
+.tc_content_title .tct_item .icon p{font-size: 16px;color: #666;margin-top: 10px;}
+.ten_page .tc_table .tt_left,.ten_page .tc_table .tt_right{float: left;width: 50%;}
+.ten_page .tc_table p{font-size: 18px;color: #333;line-height: 48px;text-align: left;}
+.ten_page .tc_table p.left{padding-left: 92px;}
+.ten_page .tc_table p.right{padding-left: 148px;}
+.ten_page .tc_table p em{color: #888;}
+
+/*----------- smart_controller wangliuzhan ]] --------------------*/
+
+
+
+/*----------- xiaofang wangliuzhan [[ ------------------------*/
+.xf_page{height: 950px;width: 100%;}
+.ds_first,.xf_first_en{background: url("//osimg.orvibo.com/html/images/products/xiaofang/xf_en_bg1.jpg") no-repeat center center;}
+.xf_first_en{height: 1366px;}
+.xf_first_en .xf_container{height: 1366px;}
+.xf_first{height: 1352px;background: url("../images/products/xiaofang/xf_bg1.jpg") no-repeat center center;}
+.xf_first p,.xf_first_en p.xfe_title{position:absolute;font-size: 44px;color: #fff;top: 420px;left: -66px;}
+.xf_first a,.ds_ninth a,.xf_first_en a{position:absolute;top:512px;left:34%;display:block;margin: 166px auto 0 auto;font-size: 18px;line-height:50px;color: #fff;width: 208px;height: 52px;border-radius: 50px;background-color: #12cd3e;border:1px solid #12cd3e;text-align: center;}
+.xf_second{position: relative;}
+.xf_second .bg{position: absolute;z-index: 99;top: 0;left: 0;width: 100%;height: 100%;background-color: #333;}
+div.xs_item.animate,.ds_second .ds_item.animate{animation:fadeInUpBig 1s .2s ease both;-moz-animation:fadeInUpBig 1s .2s ease both;}
+div.xs_item .xi_content{opacity: 0;filter:alpha(opacity=100);position:absolute;top: 390px;left: 17.7%;}
+div.xs_item .xi_content div.xi_icon,.xf_third .xt_content .xc_item div,.xf_fourth div.xf_pic,.xf_fifth .xf_right div,.xf_sixth .xs_left div,
+.xf_seventh .xs_right div,.xf_eighth div.xe_icon,.xf_eighth div.xe_item div,.xf_ninth .xn_item div,.xf_ninth div.xn_line,.xf_ten .xt_line,
+.s20c_ninth .sn_line,.xt_content_title .icon div,.ds_ten .dt_line,.s31_nine .sn_line,.jiaquan_sec_12 .jq_line{background: url("/static/html/images/products/xiaofang/xf_icons.png") no-repeat center center;}
+div.xs_item.one .xi_content div.xi_icon{width: 40px;height: 40px;background-position:-74px 0;}
+div.xs_item.two .xi_content div.xi_icon{width: 40px;height: 45px;background-position:-114px 0;}
+div.xs_item.three .xi_content div.xi_icon{width: 34px;height: 40px;background-position:0 0;}
+div.xs_item.four .xi_content div.xi_icon{width: 40px;height: 40px;background-position:-34px 0;}
+div.xs_item.five .xi_content div.xi_icon{width: 40px;height: 46px;background-position:-154px 0;}
+div.xs_item .xi_content p,.ds_second .ds_item p{margin-top: 30px;font-size: 18px;color: #fff;width: 80%;text-align: justify;}
+div.xs_item .xi_content.animate,.ds_second .ds_item p.animate{animation:fadeIn 1s 1s ease both;-moz-animation:fadeIn 1s 1s ease both;}
+div.xs_item,.ds_second .ds_item{float: left;width: 20%;height: 100%;opacity:0;filter:alpha(opacity=0);position: relative;z-index: 100;}
+div.xs_item.one{background: url("/static/html/images/products/xiaofang/xf_two1.jpg") no-repeat center center;}
+div.xs_item.two{background: url("/static/html/images/products/xiaofang/xf_two2.jpg") no-repeat center center;}
+div.xs_item.three{background: url("/static/html/images/products/xiaofang/xf_two3.jpg") no-repeat center center;}
+div.xs_item.four{background: url("/static/html/images/products/xiaofang/xf_two4.jpg") no-repeat center center;}
+div.xs_item.five{background: url("/static/html/images/products/xiaofang/xf_two5.jpg") no-repeat center center;}
+
+.xf_third{background: url("/static/html/images/products/xiaofang/xf_bg3.jpg") no-repeat center center;}
+.xf_container{width: 1190px;margin:0 auto;position:relative;text-align: center;}
+.xf_third .xf_container{padding-top: 166px;}
+.xf_third p.xt_title,.xf_fourth p.xf_title{font-size: 30px;color: #333;}
+.xf_third p.xt_txt,.xf_fourth p.xf_txt{font-size: 18px;color: #333;line-height: 28px;margin: 20px auto 0 auto;width: 768px;text-align: center;}
+.xf_third .xt_content,.s31_eight .sc_items{width: 100%;margin-top: 170px;}
+.xf_third .xt_content .xc_item,.s31_eight .sc_items .sc_item{width: 20%;text-align: center;float: left;}
+.xf_third .xt_content .xc_item div,.s31_eight .sc_items .sc_item div{width: 130px;height: 130px;margin:0 auto;}
+.xf_third .xt_content .xc_item p,.s31_eight .sc_items .sc_item p{font-size: 18px;color: #333;margin-top: 26px;}
+.xf_third .xt_content .xc_item.one div{background-position:0 -114px;}
+.xf_third .xt_content .xc_item.two div{background-position:-546px -110px;}
+.xf_third .xt_content .xc_item.three div{background-position:-406px -113px;}
+.xf_third .xt_content .xc_item.four div{background-position:-272px -114px;}
+.xf_third .xt_content .xc_item.five div{background-position:-135px -115px;}
+
+.xf_second{overflow: hidden;}
+.xf_fourth{background-color: #f7f7f7;}
+.xf_fourth .xf_container{padding-top: 136px;height: auto;}
+.xf_fourth div.xf_pic{width: 821px;height: 597px;background-position:0 -1145px;margin: 68px auto 0 auto;}
+
+.xf_fifth{background: url("/static/html/images/products/xiaofang/xf_bg4.jpg") no-repeat center center;}
+.xf_fifth .xf_left{display:block;opacity:0;filter:alpha(opacity=100);background: url("/static/html/images/products/xiaofang/xf_five_phone.png") no-repeat center center;width: 325px;height: 651px;float: left;margin-top: 136px;margin-left: 30px;}
+.xf_fifth .xf_left.animate,.xf_sixth .xs_right.animate{animation:fadeInUpBig 1s .2s ease both;-moz-animation:fadeInUpBig 1s .2s ease both;}
+.xf_fifth .xf_right,.xf_seventh .xs_right{float: right;}
+.xf_fifth .xf_right p.xf_title,.xf_sixth .xs_left p.xs_title,.xf_seventh .xs_right p.xs_title{font-size: 30px;color: #fff;margin-top: 326px;text-align: left;}
+.xf_fifth .xf_right p.xf_txt,.xf_sixth .xs_left p.xs_txt,.xf_seventh .xs_right p.xs_txt{font-size: 18px;color: #fff;width: 500px;text-align: left;line-height: 28px;margin-top: 28px;}
+.xf_fifth .xf_right div,.xf_sixth .xs_left div{margin-top: 64px;width: 380px;height: 60px;}
+.xf_fifth .xf_right div{background-position:-429px -593px;}
+
+.xf_sixth{background: url("/static/html/images/products/xiaofang/xf_bg5.jpg") no-repeat center center;}
+.xf_sixth .xs_right{float: right;display: block;opacity:0;filter:alpha(opacity=100);background: url("/static/html/images/products/xiaofang/xf_six_phone.png") no-repeat center center;width: 325px;height: 651px;margin-top: 136px;margin-right: 30px;}
+.xf_sixth .xs_left{float: left;}
+.xf_sixth .xs_left p{text-align: right;}
+.xf_sixth .xs_left div{background-position:-423px -526px;}
+
+.xf_seventh{background: url("/static/html/images/products/xiaofang/xf_bg6.jpg") no-repeat center center;}
+.xf_seventh .xs_left{position:relative;float:left;background: url("/static/html/images/products/xiaofang/xf_seven_phone.png") no-repeat center center;width: 430px;height: 642px;margin-top: 136px;}
+.xf_seventh .xs_left .xl_slider{position: absolute;width: 275px;height: 490px;top: 69px;left: 78px;overflow:hidden;float:left;}
+.xf_seventh .xs_right p.xs_title{margin-top: 248px}
+.xf_seventh .xl_slider_txt{position: absolute;top: 720px;left:370px;font-size: 18px;color: #fff;}
+.xf_seventh .xs_right div{margin-top: 64px;width: 380px;height: 260px;background-position:-22px -519px;}
+.slider_arrow{position:absolute;left:10px;z-index:2;cursor:pointer;top: 321px;}
+.slider_arrow.slidesjs-next{left:auto;right:10px;top: 321px;}
+
+.xf_eighth{background-color: #fff;}
+.xf_eighth p.xe_title,.xf_ninth p.xn_title,.xf_ten p.xt_title,.s20c_eighth p.se_title,.s20c_ninth p.sn_title,
+.ds_eighth p.de_title,.ds_ninth p.dn_title,.ds_ten p.dt_title,.s31_nine p.sn_title{font-size: 30px;color: #333;}
+.xf_eighth .xf_container,.s20c_eighth .sp_container,.jiaquan_sec_12 .jq_container{padding-top: 136px;width: auto;}
+.xf_eighth div.xe_icon{width: 1010px;height: 303px;margin: 34px auto 0 auto;background-position:0 -832px;}
+.xf_eighth div.xe_items,.s20c_eighth div.se_items,.ds_eighth div.de_items{width: 1190px;margin: 0 auto;}
+.xf_eighth div.xe_item,.s20c_eighth div.se_item,.ds_eighth div.de_item{float: left;margin-top: 34px;width: 195px;text-align: center;margin-left: 53px;}
+.xf_eighth div.xe_item.one,.s20c_eighth div.se_item.one,.ds_eighth div.de_item.one{margin-left: 0;}
+.xf_eighth div.xe_item div,.s20c_eighth div.se_item div,.ds_eighth div.de_item div{margin: 0 auto;}
+.xf_eighth div.xe_item.one div{height:87px;width:85px;background-position:-302px 0;}
+.xf_eighth div.xe_item.two div{height:87px;width:88px;background-position:-483px 0;}
+.xf_eighth div.xe_item.three div{height:87px;width:88px;background-position:-392px 0;}
+.xf_eighth div.xe_item.four div{height:87px;width:88px;background-position:-573px 0;}
+.xf_eighth div.xe_item.five div{height:87px;width:85px;background-position:-206px -2px;}
+.xf_eighth div.xe_item p.xi_title,.s20c_eighth div.se_item p.si_title,.ds_eighth div.de_item p.di_title{font-size: 18px;color: #333;line-height: 24px;margin-top: 24px;}
+.xf_eighth div.xe_item p.xi_txt,.s20c_eighth div.se_item p.si_txt,.ds_eighth div.de_item p.di_txt{font-size: 14px;color: #888;line-height: 24px;width: 90%;text-align: center;margin: 0 auto;}
+
+.xf_ninth{background: url("/static/html/images/products/xiaofang/xf_bg7.jpg");}
+.xf_ninth .xf_container{padding-top: 194px;height: auto;}
+.xf_ninth .xn_item{float: left;margin: 166px 68px 0 68px;}
+.xf_ninth .xn_item div{width: 200px;height: 210px;}
+.xf_ninth .xn_item p{font-size: 18px;color: #575757;margin-top: 20px;}
+.xf_ninth .xn_item.one{margin-left: 44px;}
+.xf_ninth .xn_item.one div{background-position:0 -269px;}
+.xf_ninth .xn_item.two div{background-position:-414px -266px;}
+.xf_ninth .xn_item.three div{background-position:-208px -266px;}
+.xf_ninth div.xn_line{float:left;width: 100px;height: 10px;margin-top: 276px;background-position:-664px 0;}
+
+.xf_ten,.s20c_ninth,.s31_nine{background-color: #fff;}
+.xf_ten .xf_container,.s20c_ninth .sp_container,.ds_ten .dt_container,.s31_nine .sn_container{text-align: center;padding-top: 136px;height: auto;}
+.xf_ten,.s20c_ninth{background-color: #fff;}
+.xf_ten .xf_container,.s20c_ninth .sp_container,.ds_ten .dt_container,.jiaquan_sec_12 .jq_container{text-align: center;padding-top: 136px;height: auto;}
+
+.xf_ten .xt_line,.s20c_ninth .sn_line,.ds_ten .dt_line,.ds_ten .dt_line,.jiaquan_sec_12 .jq_line,.s31_nine .sn_line{display:block;width: 1150px;height: 9px;clear: both;background-position:-22px -493px;}
+.xt_content_title,.sn_content_title,.ds_ten .dt_content_title,.jiaquan_sec_12 .dt_content_title{float: left;width: 100%;height: 200px;padding: 24px 0;}
+.xt_content_title > p,.sn_content_title > p,.ds_ten .dt_content_title > p{color: #333;font-size: 18px;float: left;margin-left: 86px;}
+.xt_content_title .icon, .sn_content_title .icon,.ds_ten .dt_content_title .icon{width: 236px;margin: 0 auto;}
+.xt_content_title .icon div,.sn_content_title .icon div,.ds_ten .dt_content_title .icon div{width: 236px;height: 180px;margin: 0 auto;background-position:-627px -287px;}
+.xt_content_title .icon p,.sn_content_title .icon p,.ds_ten .dt_content_title .icon p{font-size: 16px;color: #666;margin-top: 10px;}
+.xf_ten .xt_table .xt_left,.xf_ten .xt_table .xt_right,.s20c_ninth .sn_table .sn_left,
+.s20c_ninth .sn_table .sn_right,.ds_ten .dt_table .dt_right,.ds_ten .dt_table .dt_left,.s31_nine .sn_left{float: left;width: 50%;}
+.xf_ten .xt_table p,.s20c_ninth .sn_table p,.ds_ten .dt_table p,.s31_nine .sn_table p{font-size: 18px;color: #333;line-height: 48px;text-align: left;}
+.xf_ten .xt_table p.left,.s20c_ninth .sn_table p.left,.ds_ten .dt_table p.left,.s31_nine .sn_table p.left{padding-left: 92px;}
+.xf_ten .xt_table p.right,.s20c_ninth .sn_table p.right,.ds_ten .dt_table p.right,.s31_nine .sn_table p.right{padding-left: 148px;}
+.xf_ten .xt_table p em,.s20c_ninth .sn_table p em,.ds_ten .dt_table p em,.s31_nine .sn_table p em{color: #888;}
+/*----------- xiaofang wangliuzhan ]] ------------------------*/
+
+/*----------- s20c wangliuzhan [[ -----------------*/
+.s20c_page,.suit_page,.ds_page{height: 950px;width: 100%;}
+.s20c_first{background: url("/static/html/images/products/s20c/s20c_bg1.jpg") no-repeat center center;text-align: center;}
+.s20c_first p{font-size: 44px;color: #fff;padding-top: 186px;}
+.s20c_first a,.suit_first a,.ds_first a{display:block;margin: 46px auto 0 auto;font-size: 18px;line-height:50px;color: #fff;width: 208px;height: 52px;border-radius: 50px;background-color: #12cd3e;border:1px solid #12cd3e;text-align: center;}
+
+div.ss_item{float: left;width: 20%;height: 100%;position: relative;}
+div.ss_item.one{background: url("/static/html/images/products/s20c/s20c_two_pic1.jpg") no-repeat center center;}
+div.ss_item.two{background: url("/static/html/images/products/s20c/s20c_two_pic2.jpg") no-repeat center center;}
+div.ss_item.three{background: url("/static/html/images/products/s20c/s20c_two_pic3.jpg") no-repeat center center;}
+div.ss_item.four{background: url("/static/html/images/products/s20c/s20c_two_pic4.jpg") no-repeat center center;}
+div.ss_item.five{background: url("/static/html/images/products/s20c/s20c_two_pic5.jpg") no-repeat center center;}
+div.ss_item p{position:absolute;font-size: 18px;color: #fff;text-align: center;width: 80%;left: 10%;}
+div.ss_item p.sc_top{top:222px;}
+div.ss_item p.sc_bottom{top:698px;}
+div.ss_item.five p{left: 5%;width: 90%;top: 50%;margin-top: -9px;}
+.s20c_third{background: url("/static/html/images/products/s20c/s20c_bg2.jpg") no-repeat center center;}
+.sp_container{width: 1190px;margin:0 auto;height: 100%;position:relative;text-align: center;}
+.s20c_third .sp_container{padding-top: 166px;height: auto;}
+.s20c_third p.st_title,.s20c_fourth p.sf_title,.s20c_fiveth p.sf_title,.s20c_sixth p.ss_title,.s20c_seventh p.ss_title,
+.suit_fourth p.sf_title,.suit_fifth p.sf_title,.suit_sixth p.ss_title,.suit_seventh p.ss_title,.ds_third .dt_title,
+.ds_fourth .df_title,.ds_fifth .df_title,.ds_sixth .ds_title,.ds_seventh .ds_title{font-size: 30px;color: #333;}
+.s20c_third p.st_txt,.s20c_fourth p.sf_txt,.s20c_fiveth p.sf_txt,.s20c_sixth p.ss_txt,.s20c_seventh p.ss_txt,
+.suit_fourth p.sf_txt,.suit_fifth p.sf_txt,.suit_sixth p.ss_txt,.suit_seventh p.ss_txt,.ds_third .dt_txt,
+.ds_fourth .df_txt,.ds_fifth .df_txt,.ds_sixth .ds_txt,.ds_seventh .ds_txt{font-size: 18px;color: #333;line-height: 28px;margin: 20px auto 0 auto;width: 80%;text-align: center;}
+.s20c_third .st_content{width: 100%;margin-top: 170px;}
+.s20c_third .st_content .sc_item{width: 25%;text-align: center;float: left;}
+.s20c_third .st_content .sc_item div{width: 130px;height: 130px;margin:0 auto;}
+.s20c_third .st_content .sc_item div,.s20c_fiveth div.sf_pic,.s20c_eighth div.se_icon,
+.s20c_eighth div.se_item div,.s20c_ninth .sn_content_title .icon div{background:url("/static/html/images/products/s20c/s20c_icons.png") no-repeat center center;}
+.s20c_third .st_content .sc_item p{font-size: 18px;color: #333;margin-top: 26px;}
+.s20c_third .st_content .sc_item.one div{background-position:-603px 0;}
+.s20c_third .st_content .sc_item.two div{background-position:-458px 0;}
+.s20c_third .st_content .sc_item.three div{background-position:-745px 0;}
+.s20c_third .st_content .sc_item.four div{background-position:-1016px 0;}
+.s20c_third .st_content .sc_item.five div{background-position:-880px 0;}
+
+.s20c_fourth{background: url("/static/html/images/products/s20c/s20c_bg3.jpg") no-repeat center center;}
+.s20c_fourth p.sf_title,.s20c_fiveth p.sf_title,.s20c_sixth p.ss_title,.s20c_seventh p.ss_title,
+.suit_fourth p.sf_title,.suit_fifth p.sf_title,.suit_sixth p.ss_title,.suit_seventh p.ss_title,
+.ds_fourth .df_title,.ds_fifth .df_title,.ds_sixth .ds_title,.ds_seventh .ds_title{padding-top: 166px;color: #fff;}
+.s20c_fourth p.sf_txt,.s20c_fiveth p.sf_txt,.s20c_sixth p.ss_txt,.s20c_seventh p.ss_txt,
+.suit_fourth p.sf_txt,.suit_fifth p.sf_txt,.suit_sixth p.ss_txt,.suit_seventh p.ss_txt,
+.ds_fourth .df_txt,.ds_fifth .df_txt,.ds_sixth .ds_txt,.ds_seventh .ds_txt{color: #fff;}
+.s20c_fourth div.sf_phone,.suit_fourth div.sf_phone,.suit_fifth div.sf_phone{position:absolute;opacity:0;filter:alpha(opacity=100); width: 322px;height: 477px;bottom: 0;left: 50%;margin-left: -161px;background: url("/static/html/images/products/s20c/s20c_phone1.png") no-repeat center center;}
+.s20c_fourth div.sf_phone.animate,.s20c_seventh div.ss_phone.animate,.suit_fourth div.sf_phone.animate,.suit_fifth div.sf_phone.animate{animation:fadeInUpBig 1s .2s ease both;-moz-animation:fadeInUpBig 1s .2s ease both;}
+
+.s20c_fiveth{background: url("/static/html/images/products/s20c/s20c_bg4.jpg") no-repeat center center;}
+.s20c_fiveth div.sf_pic,.s20c_sixth div.ss_pic{width:342px;height:342px;margin: 126px auto 0 auto;}
+.s20c_fiveth div.sf_pic{background-position:-484px -172px;}
+.s20c_sixth .ss_bg{width:100%;height:950px;position:absolute;z-index:2;background: url("/static/html/images/products/s20c/s20c_bg5.jpg") no-repeat center center;opacity: 0.3;}
+/*.s20c_sixth .ss_bg.animate{animation:fadeInLight 1s .2s ease both;-moz-animation:fadeInLight 1s .2s ease both;}
+.s20c_sixth .ss_bg.animateOut{animation:fadeOut 1s .2s ease both;-moz-animation:fadeOut 1s .2s ease both;}*/
+.s20c_sixth{background-color: #000;}
+.s20c_sixth .sp_container{z-index: 3;opacity: 0;}
+.s20c_sixth .sp_container a{display:block;width: 106px;height: 106px;position: absolute;top:500px;left: 50%;margin-left: -53px;z-index: 4;}
+/*.s20c_sixth .sp_container.animate{animation:fadeIn 1s 1s ease both;-moz-animation:fadeIn 1s 1s ease both;}*/
+.s20c_sixth div.ss_pic{background: url("/static/html/images/products/s20c/s20c_pic.png") no-repeat center center;}
+.s20c_seventh{background: url("/static/html/images/products/s20c/s20c_bg6.jpg") no-repeat center center;}
+.s20c_seventh div.ss_phone{position:absolute;opacity:0;filter:alpha(opacity=100);width: 325px;height: 480px;bottom: 0;left: 50%;margin-left: -162px;background: url("/static/html/images/products/s20c/s20c_phone2.png") no-repeat center center;}
+.s20c_eighth{background-color: #f7f7f7}
+.s20c_eighth div.se_icon{width: 1010px;height: 303px;margin: 34px auto 0 auto;background-position:0 -532px;}
+.s20c_eighth div.se_item.one div{width: 92px;height: 86px;background-position:-264px 0;}
+.s20c_eighth div.se_item.two div{width: 86px;height: 86px;background-position:0 0;}
+.s20c_eighth div.se_item.three div{width: 90px;height: 86px;background-position:-174px 0;}
+.s20c_eighth div.se_item.four div{width: 86px;height: 86px;background-position:-356px 0;margin-left: 47px;}
+.s20c_eighth div.se_item.five div{width: 89px;height: 86px;background-position:-86px 0;}
+.s20c_ninth .sn_content_title .icon div{height:176px;width:123px;margin: 0 auto;background-position:0 -174px;}
+
+/*----------- s20c wangliuzhan ]] -----------------*/
+
+/*----------- suit wangliuzhan [[ -----------------*/
+.suit_first{background: url("/static/html/images/products/suite/bg7.jpg") no-repeat center center;text-align: center;position: relative;height: 897px;}
+.suit_first .sf_title{font-size:30px;color: #fff;padding-top: 158px;margin-bottom: 56px;}
+.suit_first .sf_center{width:444px;margin: 0 auto;}
+.suit_first .sf_center .sc_item{float: left;width: 33.3%;}
+.suit_first .sf_center .sc_item div{width: 60px;height: 60px;margin: 0 auto;}
+.suit_first .sf_center .sc_item div,.suit_second .ss_icon,.suit_third .st_icon div,
+.suit_seventh div.ss_pic,.suit_sixth .ss_content{background: url("/static/html/images/products/suite/suite_icons.png") no-repeat center center;}
+.suit_first .sf_center .sc_item p{font-size: 18px;color: #fff;margin-top: 16px;}
+.suit_first .sf_center .sc_item.one div{background-position:-120px 0;}
+.suit_first .sf_center .sc_item.two div{background-position:-60px 0;}
+.suit_first .sf_center .sc_item.three div{background-position:0 0;}
+.suit_first a{position: absolute;left: 50%;margin-left: -104px;bottom: 128px;}
+.suit_second{background: url("/static/html/images/products/suite/bg1.jpg") no-repeat center center;}
+.suit_second .ss_container{padding-top: 332px;height: auto;}
+.suit_second .ss_icon{width:90px;height:90px;background-position:-180px 0;margin: 0 auto;}
+.suit_second p.ss_txt{width: 750px;margin: 44px auto 0 auto;font-size: 24px;color: #fff;line-height: 44px;text-align: center;}
+.suit_third{background: url("/static/html/images/products/suite/bg2.jpg") no-repeat center center;}
+.st_container,.sf_container,.ss_container,.se_container,.sn_container{width: 1190px;margin: 0 auto;text-align: center;}
+.suit_third p.st_title{font-size: 30px;color: #333;padding-top: 176px;}
+.suit_third p.st_txt{font-size: 18px;color: #333;margin-top: 26px;}
+.suit_third .st_icons{margin-top: 148px;}
+.suit_third .st_icon{width: 33.3%;float: left;text-align: center;}
+.suit_third .st_icon div{width: 130px;height: 130px;margin: 0 auto;}
+.suit_third .st_icon.one div{background-position:-400px 0;}
+.suit_third .st_icon.two div{background-position:-530px 0;}
+.suit_third .st_icon.three div{background-position:-270px 0;}
+.suit_third .st_icon p{font-size: 18px;color: #333;margin-top: 28px;}
+.suit_fourth{background: url("/static/html/images/products/suite/bg3.jpg") no-repeat center center;position: relative;}
+.suit_fourth div.sf_phone{height: 498px;background: url("/static/html/images/products/suite/phone1.png") no-repeat center center;}
+.suit_fifth{background: url("/static/html/images/products/suite/bg4.jpg") no-repeat center center;position: relative;}
+.suit_fifth div.sf_phone{height: 492px;width:325px;background: url("/static/html/images/products/suite/phone2.png") no-repeat center center;}
+.suit_sixth{background: url("/static/html/images/products/suite/bg5.jpg") no-repeat center center;}
+.suit_sixth .ss_content{width: 700px;height: 60px;margin: 192px auto 0 auto;background-position:0 -505px;}
+.ss_tips,.ds_fourth .df_tips,.ds_fifth .df_tips,.ds_sixth .ds_tips{width: 800px;margin: 18px auto 0 auto;}
+.ss_tips p,.ds_fourth .df_tips p,.ds_fifth .df_tips p,.ds_sixth .ds_tips p{width: 20%;text-align: center;float: left;font-size: 18px;color: #fff;}
+.suit_seventh{background: url("/static/html/images/products/suite/bg6.jpg") no-repeat center center;}
+.suit_seventh div.ss_pic{width: 342px;height: 342px;margin: 96px auto 0 auto;background-position:0 -140px;}
+.suit_eighth{background-color: #f7f7f7;text-align: center;}
+.suit_eighth p.se_title,.suit_ninth p.sn_title{font-size: 30px;color: #231815;padding-top: 115px;}
+.suit_eighth .sc_line1{width: 880px;margin: 98px auto 0 auto;}
+.suit_eighth .sc_item{width: 33.3%;float: left;text-align: center;}
+.suit_eighth .sc_line2{width: 620px;margin: 98px auto 0 auto;}
+.suit_eighth .sc_line2 .sc_item{width: 50%;}
+.suit_eighth .sc_item div{margin: 0 auto;}
+.suit_eighth .sc_item div,.suit_ninth .sn_item div{background: url("/static/html/images/products/suite/suite_products.png") no-repeat center center;}
+.suit_eighth .sc_item p.si_title{font-size: 18px;color: #231815;}
+.suit_eighth .sc_item p.si_txt{font-size: 14px;color: #888;line-height: 28px;}
+.suit_eighth .sc_item.one div{width: 155px;height: 160px;background-position:-258px 0;}
+.suit_eighth .sc_item.two div{width: 117px;height: 160px;background-position:0 0;}
+.suit_eighth .sc_item.three div{width: 141px;height: 160px;background-position:-117px 0;}
+.suit_eighth .sc_item.four div{width: 174px;height: 160px;background-position:-413px 0;}
+.suit_eighth .sc_item.five div{width: 186px;height: 160px;background-position:-587px 0;}
+.suit_ninth{background-color: #fff;text-align: center;}
+.suit_ninth .sn_content{margin-top: 180px;}
+.suit_ninth .sn_item{width: 33.3%;float: left;text-align: center;}
+.suit_ninth .sn_item div{margin: 0 auto;height: 289px;}
+.suit_ninth .sn_item.one div{width: 274px;background-position:0 -167px;}
+.suit_ninth .sn_item.two div{width: 313px;background-position:-579px -172px;}
+.suit_ninth .sn_item.three div{width: 275px;background-position:-293px -173px;}
+.suit_ninth .sn_item p{font-size: 18px;color: #333;margin-top: 46px;}
+
+/*----------- suit wangliuzhan ]] -----------------*/
+
+/*----------- door_sensor wangliuzhan [[ ----------------*/
+.ds_first{background: url("/static/html/images/products/suite/door_bg1.jpg") no-repeat center center;text-align: center;}
+.ds_first p{font-size: 44px;color: #fff;padding-top: 368px;}
+.ds_first a{margin-top: 56px;}
+.ds_second{position: relative;}
+.ds_second .ds_item.one{background: url("/static/html/images/products/suite/door_two_pic1.jpg") no-repeat center center;}
+.ds_second .ds_item.two{background: url("/static/html/images/products/suite/door_two_pic2.jpg") no-repeat center center;}
+.ds_second .ds_item.three{background: url("/static/html/images/products/suite/door_two_pic3.jpg") no-repeat center center;}
+.ds_second .ds_item.four{background: url("/static/html/images/products/suite/door_two_pic4.jpg") no-repeat center center;}
+.ds_second .ds_item.five{background: url("/static/html/images/products/suite/door_two_pic5.jpg") no-repeat center center;}
+.ds_second .ds_item p{opacity:0;filter:alpha(opacity=100);text-align: center;width: 60%;position: absolute;top:50%;margin-top: -30px;left: 20%;}
+.ds_third{background: url("/static/html/images/products/suite/door_bg2.jpg") no-repeat center center;text-align: center;}
+.dt_container,.df_container,.ds_container,.de_container,.dn_container,.dt_container{position: relative;width: 1190px;margin: 0 auto;}
+.ds_third .dt_title{padding-top: 166px;}
+.ds_third .dt_pic,.ds_fourth .df_content,.ds_fifth .df_content,.ds_sixth .ds_content,.ds_seventh .ds_pic,.ds_eighth div.de_icon{background: url("/static/html/images/products/suite/door_pics.png") no-repeat center center;}
+.ds_third .dt_pic{width: 321px;height: 325px;margin: 96px auto 0 auto;background-position:0 0;}
+.ds_fourth{background: url("/static/html/images/products/suite/door_bg3.jpg") no-repeat center center;text-align: center;}
+.ds_fourth .df_content,.ds_fifth .df_content,.ds_sixth .ds_content{width: 382px;height: 60px;margin: 192px auto 0 auto;}
+.ds_fourth .df_content{background-position:-328px 0;}
+.ds_fourth .df_tips,.ds_fifth .df_tips{width: 488px;}
+.ds_fourth .df_tips p,.ds_fifth .df_tips p{width: 33.3%;}
+.ds_fifth{background: url("/static/html/images/products/suite/door_bg4.jpg") no-repeat center center;text-align: center;}
+.ds_fifth .df_content{background-position:-736px 0;}
+.ds_sixth{background: url("/static/html/images/products/suite/door_bg5.jpg") no-repeat center center;text-align: center;}
+.ds_sixth .ds_content{width: 542px;background-position:0 -389px;}
+.ds_sixth .ds_tips{width: 645px;}
+.ds_sixth .ds_tips p{width: 25%;}
+.ds_seventh{background: url("/static/html/images/products/suite/door_bg6.jpg") no-repeat center center;text-align: center;}
+.ds_seventh .ds_pic{width: 450px;height: 301px;margin: 92px auto 0 auto;background-position:-342px -74px;}
+.ds_eighth{background-color: #fff;text-align: center;}
+.ds_eighth p.de_title,.ds_ninth p.dn_title{padding-top: 136px;}
+.ds_eighth div.de_icon{width: 1010px;height: 307px;margin: 34px auto 0 auto;background-position:0 -453px;}
+.ds_eighth div.de_item div{margin-top: 50px;height: 41px;}
+.ds_eighth div.de_item div,.ds_ninth .dn_icons .dn_icon div,.ds_ten .dt_content_title .icon div{background: url("/static/html/images/products/suite/door_icons.png") no-repeat center center;}
+.ds_eighth div.de_item.one div{width: 38px;background-position:0 0;}
+.ds_eighth div.de_item.two div{width: 40px;background-position:-78px 0;}
+.ds_eighth div.de_item.three div{width: 43px;background-position:-118px 0;}
+.ds_eighth div.de_item.four div{width: 76px;background-position:-341px 0;}
+.ds_eighth div.de_item.five div{width: 40px;background-position:-38px 0;}
+.ds_ninth{background-color: #f7f7f7;text-align: center;}
+.ds_ninth .dn_icons{margin: 110px auto 0 auto;width: 550px;}
+.ds_ninth .dn_icons .dn_icon{float: left;width: 33.3%;text-align: center;}
+.ds_ninth .dn_icons .dn_icon div{width: 60px;height: 60px;margin: 0 auto;}
+.ds_ninth .dn_icons .dn_icon.one div{background-position:-281px 0;}
+.ds_ninth .dn_icons .dn_icon.two div{background-position:-161px 0;}
+.ds_ninth .dn_icons .dn_icon.three div{background-position:-221px 0;}
+.ds_ninth .dn_icons .dn_icon p{font-size: 18px;margin-top: 20px;color: #888;}
+.ds_ninth a{left:50%;margin-left: -104px;} 
+.ds_ten{background-color: #fff;}
+.ds_ten .dt_content_title .icon div{width:139px;margin: 0 auto;background-position:-417px 0;}
+
+/*----------- door_sensor wangliuzhan ]] ----------------*/
+
+/*------------- energy wangliuzhan [[ -------------------*/
+.energy_one{width: 100%;height: 850px;background: url("/static/html/images/products/energy/energy_bg1.jpg") no-repeat center center;}
+.energy_one .eo_container{padding-top: 308px;}
+.energy_one .eo_content{width: 574px;height: 254px;margin: 0 auto;border: 5px solid #31b675;text-align: center;padding-top: 60px;position: relative;}
+.energy_one .eo_content .ec_title{font-size: 72px;color: #161616;}
+.energy_one .eo_content .ec_txt{font-size: 24px;color: #161616;margin-top: 20px;}
+.energy_one .eo_content a{position: absolute;display: block;width: 204px;height: 50px;font-size: 28px;color: #fff;line-height: 50px;text-align:center;bottom: -25px;left:50%;margin-left: -102px;background-color: #31b675;border-radius: 25px;}
+.energy_second{position: relative;height: 850px;}
+.energy_second .es_item{text-align: center;}
+.energy_second .es_item.one{background:url("/static/html/images/products/energy/energy_banner1.jpg") no-repeat center center;}
+.energy_second .es_item.two{background:url("/static/html/images/products/energy/energy_banner2.jpg") no-repeat center center;}
+.energy_second .es_item.three{background:url("/static/html/images/products/energy/energy_banner3.jpg") no-repeat center center;}
+.energy_second .es_item.four{background:url("/static/html/images/products/energy/energy_banner4.jpg") no-repeat center center;}
+.energy_second .es_item p.ec_title{font-size: 36px;color: #fff;padding-top: 350px;}
+.energy_second .es_item em{display: block;margin: 24px auto 0 auto;width: 107px;height: 5px;background-color: #fff;}
+.energy_second .es_item p.ec_txt{width: 60%;font-size: 20px;color: #fff;margin: 36px auto 0 auto;text-align: center;}
+.energy_third{height: 850px;background: url("/static/html/images/products/energy/energy_bg2.jpg") no-repeat center center;width: 100%;}
+.energy_third .et_container{padding-top: 135px;text-align: center;}
+.energy_third .ec_title{font-size: 48px;color: #fff;}
+.energy_third .ec_txt{margin: 20px auto 0 auto;width: 460px;text-align: center;font-size: 24px;color: #fff;}
+.energy_fourth{height: 598px;width: 100%;background: url("/static/html/images/products/energy/energy_bg3.jpg") no-repeat center center;}
+.energy_fourth .ef_right,.energy_fifth .ef_left,.energy_sixth .es_right,.energy_seventh .es_left{width: 50%;padding-top: 210px;}
+.energy_fourth .ef_right,.energy_sixth .es_right{margin-left: 50%;}
+.energy_fourth p.er_title,.energy_fifth p.el_title,.energy_sixth .er_title,.energy_seventh .el_title{padding-left: 150px;font-size: 40px;color: #000;}
+.energy_fourth p.er_txt,.energy_fifth p.el_txt,.energy_sixth .er_txt,.energy_seventh .el_txt{padding-left: 150px;color: #aaa;margin-top: 35px;font-size: 18px;line-height: 32px;}
+.energy_fifth{height: 599px;width: 100%;background: url("/static/html/images/products/energy/energy_bg4.jpg") no-repeat center center;}
+.energy_fifth p.el_title,.energy_fifth p.el_txt{padding-left: 266px;}
+.energy_sixth{height: 600px;width: 100%;background: url("/static/html/images/products/energy/energy_bg5.jpg") no-repeat center center;}
+.energy_seventh{height: 600px;width: 100%;background: url("/static/html/images/products/energy/energy_bg6.jpg") no-repeat center center;}
+.energy_seventh .el_title,.energy_seventh .el_txt{padding-left: 240px;}
+.energy_eighth{height: 850px;background-color: #f6f7f6;width: 100%;}
+.energy_eighth .ee_container{width: 1190px;margin: 0 auto;padding-top: 100px;text-align: center;}
+.energy_eighth .ec_title p{font-size: 48px;color: #282f39}
+.energy_eighth .ec_title em{display: block;width: 123px;height: 3px;margin: 16px auto 0 auto;background-color: #34c37d;}
+.energy_eighth .ec_item{float: left;padding: 18px 18px 30px 18px;background-color: #fff;position: relative;margin-top: 76px;text-align: left;}
+.energy_eighth .ec_item a{display: block;}
+.energy_eighth .ec_item a.ec_link p.ei_title{font-size: 24px;color: #464646;margin-top: 26px;}
+.energy_eighth .ec_item a.ec_link:hover p.ei_title{color: #34c37d;}
+.energy_eighth .ec_item a.ec_link p.ei_txt{font-size: 14px;color: #b4b4b4;margin-top: 10px;}
+.energy_eighth .ec_item.right{float: right;}
+.energy_eighth .ec_item a.ec_details{position: absolute;right: 88px;bottom: 30px;}
+.energy_eighth .ec_item a.ec_buy{position: absolute;right: 18px;bottom: 30px;}
+
+/*------------- energy wangliuzhan ]] -------------------*/
+
+
+/*------------- xiaofang_en wangliuzhan [[ ---------------------*/
+.xf_first_en p.xfe_txt{font-size: 22px;color: #fff;position: absolute;top: 500px;left: 104px; text-align: right;}
+.xf_first_en a{top: 580px;}
+.xf_second_en{position: relative;background-color: #313233;height: 1050px;}
+.xf_second_en .xc_title{padding-top: 96px;text-align: center;font-size: 44px;color: #fff;}
+.xf_second_en .xc_txt{margin-top: 30px;text-align: center;font-size: 22px;color: #fff;position: absolute;z-index: 2;top: 164px;width: 100%;}
+.xc_content{position: relative;width: 1513px;margin: 0 auto;}
+.xc_content .xc_air{position: absolute;top: 39%;left: 11%;width: 90px;height: 153px;}
+.xc_content .xc_air img.xa_wind,.xc_content .xc_fan img.xf_wind{filter:alpha(opacity=0);-moz-opacity:0;opacity:0;transition:all 2s linear;-webkit-transition:all 2s linear;}
+.xc_content .xc_air img.xa_wind.wind_animate,.xc_content .xc_fan img.xf_wind.wind_animate{filter:alpha(opacity=100);-moz-opacity:1;opacity:1;/*-webkit-animation:demo_box 3s ease;animation:demo_box 3s ease;*/}
+@-webkit-keyframes demo_box{0%{-webkit-transform:rotateX(90deg);-webkit-transform-origin:0% 0%;}100%{-webkit-transform:rotateX(0deg);-webkit-transform-origin:0% 0%;} }
+@keyframes demo_box{0%{transform:rotateX(90deg);transform-origin:0% 0%;}100%{transform:rotateX(0deg);transform-origin:0% 0%;} }
+.xc_content .xc_air img.xa_light{position: absolute;top: 40px;right: 14px;filter:alpha(opacity=0);-moz-opacity:0;opacity:0;transition:all 0.8s linear;-webkit-transition:all 0.8s linear;}
+.xc_content .xc_air img.xa_light.light_animate,.xc_content .xc_stb img.xs_dot.dot_animate,.xc_content .xc_tv img.xt_logo_active.logo_animate,.xc_content .xc_tv img.xt_light.light_animate,
+.xc_content .xc_box img.xb_light.light_animate,.xc_sound img.xs_light.light_animate,.xc_content .xc_fan img.xf_dot.dot_animate{filter:alpha(opacity=100);-moz-opacity:1;opacity:1;}
+.xc_content .xc_tv{position: absolute;left: 50%;margin-left: -120px;top: 35.3%;height: 30%;}
+.xc_content .xc_tv img.xt_logo{filter:alpha(opacity=100);-moz-opacity:1;opacity:1;position: absolute;transition:all 0.8s linear;-webkit-transition:all 0.8s linear;top: 0;left: 0;}
+.xc_content .xc_tv img.xt_logo.logo_animate{filter:alpha(opacity=0);-moz-opacity:0;opacity:0;}
+.xc_content .xc_tv img.xt_logo_active{filter:alpha(opacity=0);-moz-opacity:0;opacity:0;transition:all 1.5s 0.4s linear;-webkit-transition:all 1.5s 0.4s linear;position: absolute;top: 0;left: 0;}
+.xc_content .xc_tv img.xt_light{position: absolute;bottom: 5%;left: 140px;filter:alpha(opacity=0);-moz-opacity:0;opacity:0;transition:all 0.8s linear;-webkit-transition:all 0.8s linear;}
+.xc_content .xc_stb{position: absolute;left: 70%;top: 72%;}
+.xc_content .xc_stb img.xs_circle{position: absolute;top:-62px;left: 14px;filter:alpha(opacity=0);-moz-opacity:0;opacity:0;}
+.xc_content .xc_stb img.xs_circle.circle_animate,.xc_content .xc_box img.xb_circle.circle_animate{-webkit-animation: sh-ripple 2s ease infinite;animation: sh-ripple 2s ease infinite;}
+.xc_content .xc_stb img.xs_dot,.xc_content .xc_fan img.xf_dot{filter:alpha(opacity=0);-moz-opacity:0;opacity:0;transition:all 0.8s linear;-webkit-transition:all 0.8s linear;}
+@-webkit-keyframes sh-ripple{0%{-webkit-transform:scale(0);-webkit-transform-origin:0% 100%;}50%{opacity:1;filter:alpha(opacity=100)\9}100%{-webkit-transform:scale(1);transform:scale(1);-webkit-transform-origin:0% 100%;opacity:0;filter:alpha(opacity=0)\9}}
+@keyframes sh-ripple{0%{transform:scale(0);transform-origin:0% 100%;}50%{opacity:1;filter:alpha(opacity=100)\9}100%{transform:scale(1);opacity:0;filter:alpha(opacity=0)\9;transform-origin:0% 100%;}}
+.xc_content .xc_box{position: absolute;top: 71%;left: 35%;}
+.xc_content .xc_box img.xb_circle{position: absolute;top:-62px;left: 24px;filter:alpha(opacity=0);-moz-opacity:0;opacity:0;}
+.xc_content .xc_box img.xb_light{filter:alpha(opacity=0);-moz-opacity:0;opacity:0;transition:all 0.8s linear;-webkit-transition:all 0.8s linear;}
+.xc_content .xc_box img.xb_light.light_animate{filter:alpha(opacity=100);-moz-opacity:1;opacity:1;}
+.xc_sound .xs_left{position: absolute;top: 30%;left: 20%;height: 41.8%} 
+.xc_sound .xs_right{position: absolute;left:72.7%;top: 30%;height: 41.8%;}
+.xc_sound img.xs_music{display: none;}
+.xc_sound img.xs_music.music_animate{display:block;-webkit-animation:shake 1s .2s ease both infinite;-moz-animation:shake 1s .2s ease both infinite;animation:shake 1s .2s ease both infinite;}
+@-webkit-keyframes shake{0%,100%{-webkit-transform:translate(0,0);}10%,30%,50%,70%,90%{-webkit-transform:translate(-7px,0);}20%,40%,60%,80%{-webkit-transform:translate(7px,0);}}
+@keyframes shake{0%,100%{transform:translate(0,0);}10%,30%,50%,70%, 90%{transform:translate(-7px,0);}20%,40%,60%,80%{transform:translate(7px,0);}}
+.xc_sound img.xs_light{position: absolute;bottom: 5%;left: 72px;filter:alpha(opacity=0);-moz-opacity:0;opacity:0;transition:all 0.8s linear;-webkit-transition:all 0.8s linear;}
+.xc_content .xc_fan{position: absolute;left: 84.7%;top: 49%;}
+.xc_content .xc_fan img.xf_dot{position: absolute;top: 80px;left: 40px;}
+.xf_second_en .xc_phone{position: absolute;left: 50%;margin-left: -134px;bottom: -224px;width: 268px;height: 571px;background: url("/static/html/images/products/xiaofang/xf_phone.png") no-repeat center center;background-size: 100% 100%;z-index: 99;}
+.xf_second_en .xc_phone a{position: absolute;display: block;width: 120px;height: 120px;background-color: transparent;filter:alpha(opacity=20);-moz-opacity:0.2;opacity:0.2}
+.xf_second_en .xc_phone a.xp_active{background-color: #000;}
+.xf_second_en .xc_phone a.xp_tv{top: 108px;left: 14px;}
+.xf_second_en .xc_phone a.xp_stb{top: 108px;left: 134px;}
+.xf_second_en .xc_phone a.xp_air{left: 14px;top: 228px;}
+.xf_second_en .xc_phone a.xp_fan{left: 134px;top: 228px;}
+.xf_second_en .xc_phone a.xp_sound{left: 14px;top: 348px;}
+.xf_second_en .xc_phone a.xp_box{left: 134px;top: 348px;}
+.mouse_img{width: 379px;height: 42px;background: url("http://osjpg.orvibo.com/html/images/products/xiaofang/xf_click.png") no-repeat center center;margin-top: 90px;position: absolute;left: 50%;margin-left: -515px;}
+@media screen and (max-width:1512px) {
+  .xc_content{width: 100%;}
+  .xc_content > img {width: 100%;height: auto;}
+}
+.xf_fourth_en{height: 1200px;}
+.xf_fourth_en .xf_container{padding-top: 300px;}
+.xf_fourth_en div.xf_pic{width: 880px;height: 540px;background: url("http://osjpg.orvibo.com/html/images/products/xiaofang/xf_en_pic.png") no-repeat center center;background-position: 0 0;}
+.xf_third_en .xt_content div.xc_item{width: 25%;}
+.xf_section_en{width: 100%;position: relative;overflow: hidden;height: 2850px;}
+.xf_section_en .xse_item{width: 100%;position: absolute;top: 0;opacity: 0;filter:alpha(opacity=0);height: 950px;}
+.xf_section_en .xse_item.xse_one{background: url("http://osjpg.orvibo.com/html/images/products/xiaofang/xf_section1_en.jpg") no-repeat center center;z-index: 3;}
+.xf_section_en .xse_item.xse_two{background: url("http://osjpg.orvibo.com/html/images/products/xiaofang/xf_section2_en.jpg") no-repeat center center;z-index: 2;}
+.xf_section_en .xse_item.xse_three{background: url("http://osjpg.orvibo.com/html/images/products/xiaofang/xf_section3_en.jpg") no-repeat center center;z-index: 1;}
+.xf_section_en .xse_item.xse_curr{position: fixed;top: 0;left: 0;}
+/*.xf_section_en .xse_item.xse_show{opacity: 1;filter:alpha(opacity=100);}
+.xf_section_en .xse_three.xse_show{top: 1900px;}*/
+.xse_item .xo_content{width: 1190px;margin:0 auto;padding-top: 350px;}
+.xse_item .xo_content p.xc_title{font-size: 44px;color: #fff;width: 700px;float: right;}
+.xse_item .xo_content p.xc_txt{font-size: 22px;color: #fff;margin-top: 10px;width: 700px;float: right;}
+.xse_item .xo_content div.xc_img{width: 700px;height: 60px;margin-top: 58px;background: url("http://osjpg.orvibo.com/html/images/products/xiaofang/xf_icon1_en.png") no-repeat center left;float: right;}
+.xse_two .xo_content p.xc_title,.xse_two .xo_content p.xc_txt,.xse_two .xo_content div.xc_img{float: left;}
+.xf_ten_en{width: 100%;height: 950px;text-align: center;background: url("http://osjpg.orvibo.com/html/images/products/xiaofang/life_with_bg.jpg") no-repeat center center;text-align: center;}
+.xf_ten_en p.xte_title{font-size: 44px;color: #333;padding-top: 84px;}
+.xf_ten_en p.xte_txt{font-size: 22px;color: #333;margin-top: 36px;}
+.xf_ninth_en .xn_item{float: left;margin: 166px 28px 0 28px;width: 280px}
+.xf_ninth_en .xn_item div{width: 200px;height: 210px;margin: 0 auto;}
+.xf_ninth_en .xn_item p{font-size: 18px;color: #575757;margin-top: 20px;}
+.xf_ninth_en .xn_item.one{margin-left: 4px;}
+
+/*------------- xiaofang_en wangliuzhan ]] ---------------------*/
+
+
+/*------------ s31 wangliuzhan [[ --------------------*/
+.s31_one{width: 100%;height: 1367px;background: url("http://osjpg.orvibo.com/html/images/products/s31/s31_bg1.jpg") no-repeat center center;}
+.s31_one .so_content,.s31_two .st_content,.s31_three .st_content,.s31_four .sf_content,.s31_five .sf_content,.s31_six .ss_content,
+.s31_seven .ss_content,.s31_eight .se_content,.s31_last .sl_content,.s31_ten .st_content{width: 1190px;margin: 0 auto;text-align: center;}
+.s31_one .so_content .sc_title{padding-top: 150px;font-size: 46px;color: #fff;}
+.s31_one .so_content a{display: block;width: 210px;height: 50px;border-radius: 25px;background-color: #12cd3e;font-size: 22px;color: #fff;margin: 94px auto 0 auto;line-height: 50px;font-weight: normal;}
+.s31_one .so_content .sc_txt{font-size: 16px;color: #fff;margin-top: 48px;}
+.s31_two{width: 100%;height: 987px;background: url("http://osjpg.orvibo.com/html/images/products/s31/s31_bg2.jpg") no-repeat center center;}
+.s31_two .st_content .sc_title{padding-top: 450px;font-size: 36px;color: #fff;text-align: left;margin-left: 220px;}
+.s31_two .st_content .sc_txt{margin-top: 64px;font-size: 24px;color: #fff;text-align: left;margin-left: 220px;}
+.s31_three{width: 100%;height: 986px;background: url("http://osjpg.orvibo.com/html/images/products/s31/s31_bg3.jpg") no-repeat center center;}
+.s31_three .sc_title,.s31_four .sc_title,.s31_six .sc_title,.s31_seven .sc_title,.s31_last .sc_title{padding-top: 86px;font-size: 36px;color: #fff;width: 90%;margin: 0 auto;text-align: center;}
+.s31_three .sc_txt,.s31_four .sc_txt,.s31_six .sc_txt,.s31_seven .sc_txt,.s31_last .sc_txt{font-size: 24px;color: #fff;width: 70%;margin: 42px auto;text-align: center;}
+.s31_four{width: 100%;height: 986px;background: url("http://osjpg.orvibo.com/html/images/products/s31/s31_bg4.jpg") no-repeat center center;}
+.s31_three .sc_title,.s31_three .sc_txt{color: #333;}
+.s31_five{width: 100%;height: 987px;background: url("http://osjpg.orvibo.com/html/images/products/s31/s31_bg5.jpg") no-repeat center center;}
+.s31_five .sc_title{padding-top: 700px;text-align: left;font-size: 36px;color: #fff;width: 720px;}
+.s31_five .sc_txt{margin-top: 30px;color: #fff;font-size: 24px;text-align: left;}
+.s31_six{width: 100%;height: 986px;background: url("http://osjpg.orvibo.com/html/images/products/s31/s31_bg6.jpg") no-repeat center center;}
+.s31_seven{width: 100%;height: 987px;background: url("http://osjpg.orvibo.com/html/images/products/s31/s31_bg7.jpg") no-repeat center center;}
+.s31_eight{width: 100%;height: 951px;background: url("http://osjpg.orvibo.com/html/images/products/s31/s31_bg8.jpg") no-repeat center center;}
+.s31_six .sc_title,.s31_seven .sc_title,.s31_six .sc_txt,.s31_seven .sc_txt{width: 100%;}
+.s31_eight{width: 100%;height: 950px;background: url("http://osjpg.orvibo.com/html/images/products/s31/s31_bg8.jpg") no-repeat center center;}
+.s31_eight .sc_title{font-size: 36px;color: #333;padding-top: 90px;}
+.s31_eight .sc_items .one div{background: url("http://osjpg.orvibo.com/html/images/products/s31/s31_icon1.png") no-repeat center center;}
+.s31_eight .sc_items .two div{background: url("http://osjpg.orvibo.com/html/images/products/s31/s31_icon2.png") no-repeat center center;}
+.s31_eight .sc_items .three div{background: url("http://osjpg.orvibo.com/html/images/products/s31/s31_icon3.png") no-repeat center center;}
+.s31_eight .sc_items .four div{background: url("http://osjpg.orvibo.com/html/images/products/s31/s31_icon4.png") no-repeat center center;}
+.s31_eight .sc_items .five div{background: url("http://osjpg.orvibo.com/html/images/products/s31/s31_icon5.png") no-repeat center center;}
+.s31_nine{height: 950px;}
+.s31_nine .sn_content_title{height: auto;padding-bottom: 0;}
+.s31_nine .sn_content_title .icon{margin-bottom: 66px;}
+.s31_nine .sn_content_title .icon{width: 863px;margin-top: 32px;}
+.s31_nine .sn_content_title .icon div{height: 98px;background: url("http://osjpg.orvibo.com/html/images/products/s31/s31.png") no-repeat center center;background-position: 0 0;width: 863px;}
+.s31_last{width: 100%;height: 950px;background: url("http://osjpg.orvibo.com/html/images/products/s31/s31_bg9.jpg") no-repeat center center;}
+.s31_last .sc_title{color: #333;}
+.s31_last .sc_txt{color: #333;font-size: 16px;}
+.s31_four .sc_title{padding-top: 400px;}
+.s31_ten{width: 100%;height: 960px;background: url("http://osjpg.orvibo.com/html/images/products/s31/s31_bg10.jpg") no-repeat center;position: relative;}
+.s31_ten .st_content{padding-top: 282px;}
+.s31_ten .st_pic{width: 308px;height: 135px;background: url("http://osjpg.orvibo.com/html/images/products/s31/pic.png") no-repeat center;font-size: 18px;color: #fff;text-align: left;padding: 20px 0 0 24px;line-height: 30px;}
+.s31_ten .st_text{width: 716px;position: absolute;top: 86px;right: 24px;}
+.s31_ten .st_text h2{font-size: 36px;color: #fff;font-weight: 500;}
+.s31_ten .st_text p{font-size: 24px;color: #fff;margin-top: 50px;width: 100%;text-align: left;}
+.s31_ten .st_pic.animate{-webkit-animation:fadeInUp 1s .6s ease both;-moz-animation:fadeInUp 1s .6s ease both;animation:fadeInUp 1s .6s ease both;filter:alpha(opacity=100);}
+@-webkit-keyframes fadeInUp{0%{opacity:0;-webkit-transform:translateY(20px)}100%{opacity:1;-webkit-transform:translateY(0)}}
+@-moz-keyframes fadeInUp{0%{opacity:0;-moz-transform:translateY(20px)}100%{opacity:1;-moz-transform:translateY(0)}}
+@keyframes fadeInUp{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
+/*------------ s31 wangliuzhan ]] --------------------*/

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+>
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+	
+	<script th:include="common :: script_common" th:remove="tag"></script>
+	
+	<style type="text/css">
+		#content-frame{
+			width: 100%;
+	    	height: 100%;
+	    	border: 0px;
+	    	margin: 0px;
+		}
+		
+		
+		@media (min-width: 992px){
+			.edit-panel {
+				margin-left: 10px;	
+			}
+		}
+	</style>
+	
+</head>
+<body th:with="baseReqPath='/admin/adminpermission'">
+
+
+	<ol class="breadcrumb">
+	  <li><a th:href="@{/home}"><i class="icon icon-home"></i>首页</a></li>
+	  <li>权限管理</li>
+	</ol>
+	
+	<div class="panel panel">
+	  <div class="panel-body">
+		  <a type="button" href="javascript:;" class="btn btn-primary add-node">
+		  		<i class="icon icon-plus-sign" style="vertical-align: middle;"></i>
+		  		新增节点
+		  </a>
+		  
+		   <a type="button" href="javascript:;" class="btn btn-danger delete-node">
+			  	<i class="icon icon-minus-sign" style="vertical-align: middle;"></i>
+	  	     	删除节点
+		  </a>
+	  </div>
+	  
+	  <div class="panel-body">
+	  		<!-- ztree -->
+		  <div class="panel panel tree-panel col-xs-12 col-md-5" style="height: 650px;overflow: scroll;">
+		  	 <div id="menu_tree" class="ztree"></div>
+		  </div>
+		  
+		  <!-- permission form -->
+		  <div class="panel edit-panel col-xs-12 col-md-5" style="height: 650px; display: none;">
+		  	 
+		  	 <iframe id="content-frame" name="content-frame"></iframe>
+		  	 
+		  </div>
+	  
+	  </div>
+	  
+	 
+	  
+	</div>
+	
+	
+	
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+	
+	var setting = {
+				 data: {
+					 simpleData: {
+							enable: true,
+							idKey: "uid",
+							pIdKey: "parentId",
+							rootPId: "0"
+						},
+						keep: {
+			                    parent: true,
+			                    leaf: true
+			                },
+						key:{
+							name:"permissionName"
+						}
+				 },
+				 callback: {
+			  		onClick: onNodeClick
+				 },
+				 view: {
+				 	selectedMulti: false
+				 } 
+			};
+	
+	var menuTree;
+	
+	$.ajax({
+		type : "GET",
+		url : [[@{|${baseReqPath}/ajax/list/all|}]],
+		dataType : "json",
+		async : true,
+		success : function(result) {
+			var data = result.data;
+			//data.push({name: "根节点", uid: "0"});
+			menuTree = $.fn.zTree.init($("#menu_tree"), setting, data); 
+			menuTree.expandAll(true);
+		},
+		error : function() {
+			
+		}
+	});
+	
+	$(".add-node").on('click', function(e){
+		var treeNodes = menuTree.getSelectedNodes();
+		if(alertForNotSelected(treeNodes)){
+			return;
+		}
+		var parentNode = treeNodes[0];
+		
+		var url = [[@{|${baseReqPath}/view/add|}]];
+		
+		editShow();
+		$("#content-frame").attr("src", url + "?parentId="+parentNode.uid);
+		
+	})
+	
+	$(".delete-node").on('click', function(e){
+		
+		var treeNodes = menuTree.getSelectedNodes();
+		if(alertForNotSelected(treeNodes)){
+			return;
+		}
+		var node = treeNodes[0];
+		if(node.uid == 0){
+			Msg.error("无法删除根级菜单!");
+			return;
+		}
+		Msg.confirm('确定要删除该节点吗？',null,function(){
+			var url = [[@{|${baseReqPath}/ajax/delete|}]];
+			$.get(
+					url,
+					{uid: node.uid},
+					function(result){
+						if(result.success){
+							Msg.success("删除成功!", null, function(){
+								location.reload();
+							});
+						}
+					}
+					
+			);
+		});
+			
+	})
+	
+	
+	function alertForNotSelected(treeNodes){
+		if(treeNodes == null || treeNodes.length == 0){
+			Msg.alert("请选择一个节点!");
+			return true;
+		}
+		return false;
+	}
+	
+	
+	function onNodeClick(event, treeId, treeNode) {
+		//console.log(treeNode);
+		if(treeNode.uid == '1'){
+			editHide();
+			return;
+		}
+		
+		initEditData(treeNode);
+		
+		editShow();
+		
+	}
+	
+	function initEditData(treeNode){
+		editShow();
+		$("#content-frame").attr("src", [[@{|${baseReqPath}/view/edit|}]] + "?uid="+treeNode.uid);
+	}
+	
+	
+	function editShow(){
+		$(".edit-panel").show();
+	}
+	
+	function editHide(){
+		$(".edit-panel").hide();
+	}
+	
+	
+/*]]>*/
+</script>
+
+<script th:replace="common :: delete_script_common(url=@{|${baseReqPath}/ajax/delete|})" th:remove="tag"></script>
+
+</body>
+</html>

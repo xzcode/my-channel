@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>网站后台管理系统</title>
+<meta charset="utf-8" />
+	<meta th:include="common :: head_common" th:remove="tag"></meta>
+	
+	<style th:include="common :: css_common" th:remove="tag"></style>
+
+</head>
+<body>
+
+
+	<ol class="breadcrumb">
+	  <li>首页</li>
+	</ol>
+	
+	
+	<div class="alert alert-success">
+    <strong>欢迎登录管理系统!</strong> 
+  </div>
+
+
+<div th:include="common :: script_common" th:remove="tag"></div>
+
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+		
+	
+/*]]>*/
+</script>
+
+<script th:replace="common :: delete_script_common(url=@{|${baseReqPath}/ajax/delete|})" th:remove="tag"></script>
+
+</body>
+</html>
