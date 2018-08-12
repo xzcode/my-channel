@@ -22,6 +22,10 @@
 	
 	
 	dependencies {
+		
+		// https://mvnrepository.com/artifact/net.logstash.logback/logstash-logback-encoder
+		compile group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '5.2'
+		
 	
 		compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 	

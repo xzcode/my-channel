@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Controller;
@@ -100,26 +101,6 @@ public class CallbackController {
 		response.setStatus(200);
 	}
 	
-	@RequestMapping("/on_record_done")
-	public void on_record_done(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("on_record_done :" + request.getRequestURI());
-		showParams(request);
-		response.setStatus(200);
-	}
-	
-	@RequestMapping("/on_record_done")
-	public void on_record_done(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("on_record_done :" + request.getRequestURI());
-		showParams(request);
-		response.setStatus(200);
-	}
-	
-	@RequestMapping("/on_record_done")
-	public void on_record_done(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("on_record_done :" + request.getRequestURI());
-		showParams(request);
-		response.setStatus(200);
-	}
 	
 	
 	
