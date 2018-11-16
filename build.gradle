@@ -20,7 +20,7 @@
 	        	//url 'https://repo.spring.io/libs-snapshot'
 			}
 			
-			mavenLocal()
+			//mavenLocal()
 		}
 		
 		

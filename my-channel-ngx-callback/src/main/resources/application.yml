@@ -15,13 +15,16 @@ eureka:
     serviceUrl:
       defaultZone: http://admin:7461501b884a4e60a059d2fc43366677@localhost:8761/eureka/ 
 
-
 spring: 
   application:
     name: ${server.appname}
   security: 
     basic: 
       enabled: false
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: myGroup
   gson: 
     date-format: yyyy-MM-dd HH:mm:ss
   jackson: 

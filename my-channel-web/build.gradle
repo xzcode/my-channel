@@ -18,6 +18,12 @@
 	apply plugin: 'org.springframework.boot'
 	
 	
+	dependencyManagement {
+	  imports {
+	    mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	  }
+	}
+	
 	dependencies {
 	
 		compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
